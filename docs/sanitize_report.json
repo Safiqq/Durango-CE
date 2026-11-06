@@ -1,0 +1,56 @@
+{
+  "input_sha256": "c0a0a48b16846b6a6bdbb4ca61953266df4b281ae35191e1e8e0846f7a2252ef",
+  "patches": [
+    {
+      "method": "Durango.Logic.Clusters.OffServerHardwareId::AddTo",
+      "rva": "0x2cb3a8",
+      "file_offset": "0x2c95b4",
+      "old_byte": "0x28",
+      "status": "patched",
+      "why": "stops registry MachineGuid + SMBIOS UUID + deviceUniqueIdentifier fingerprint ('hw' form field)"
+    },
+    {
+      "method": "Durango.Development.TestBridge::StartListener",
+      "rva": "0x2d4784",
+      "file_offset": "0x2d2990",
+      "old_byte": "0x2",
+      "status": "patched",
+      "why": "stops the unauthenticated 127.0.0.1 TCP remote-control server (testbridge=<port>)"
+    },
+    {
+      "method": "RavenClient::CaptureUntiyLog",
+      "rva": "0xa0403",
+      "file_offset": "0x9e604",
+      "old_byte": "0x7e",
+      "status": "patched",
+      "why": "stops Unity log capture + gzip upload to Sentry"
+    },
+    {
+      "method": "RavenClient::Send",
+      "rva": "0xa04ac",
+      "file_offset": "0x9e6b8",
+      "old_byte": "0x2",
+      "status": "patched",
+      "why": "stops Sentry HTTP POST"
+    },
+    {
+      "method": "RavenClient::.cctor",
+      "rva": "0xa0594",
+      "file_offset": "0x9e795",
+      "old_byte": "0x72",
+      "status": "patched",
+      "why": "stops parsing the hard-coded Sentry DSN"
+    },
+    {
+      "string": "slack-webhook",
+      "status": "patched",
+      "why": "Nexon Slack incoming-webhook URL (secret) -> dead loopback URL"
+    },
+    {
+      "string": "sentry-dsn",
+      "status": "patched",
+      "why": "Nexon Sentry DSN incl. secret key -> dead loopback DSN"
+    }
+  ],
+  "output_sha256": "7535931f4fc14ed03f09960c2976a04847667d6b0cbf349c64e6f8886a717ab2"
+}
