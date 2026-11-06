@@ -99,11 +99,18 @@ public class WebServer
 	{
 		GetRoute = new Dictionary<string, RouteFunction>();
 		PostRoute = new Dictionary<string, RouteFunction>();
-		_listener = new HttpListener();
-		// SANITIZED: bind the embedded gateway to loopback only, not every interface.
-		_listener.Prefixes.Add($"http://127.0.0.1:{port}/");
-		_listener.Start();
-		Listen();
+		try
+		{
+			_listener = new HttpListener();
+			// SANITIZED: bind the embedded gateway to loopback only, not every interface.
+			_listener.Prefixes.Add($"http://127.0.0.1:{port}/");
+			_listener.Start();
+			Listen();
+		}
+		catch (Exception ex)
+		{
+			UnityEngine.Debug.LogWarning($"[WebServer] HttpListener start skipped: {ex.Message}");
+		}
 		_knockListener = new UdpClient(new IPEndPoint(IPAddress.Loopback, port + 1));
 		ListenKnock();
 	}

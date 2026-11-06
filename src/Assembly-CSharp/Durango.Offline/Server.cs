@@ -4,7 +4,9 @@ using System.IO;
 using System.Linq;
 using Durango.Logic.Clusters;
 using Durango.Utils;
+using Durango.Utils.Extensions;
 using UnityEngine;
+using PlayerInfo = Durango.Logic.Clusters.PlayerInfo;
 
 namespace Durango.Offline;
 
@@ -15,6 +17,14 @@ public class Server
 	private static GameServer _gameServer;
 
 	private static PlayerContext _localPlayer;
+
+	private static WorldContext _localWorld;
+
+	public static GameServer CurrentGameServer => _gameServer;
+
+	public static PlayerContext CurrentPlayer => _localPlayer;
+
+	public static WorldContext CurrentWorld => _localWorld;
 
 	public string Key { get; private set; }
 
@@ -127,7 +137,108 @@ public class Server
 		EndServer();
 		_gameServer = new GameServer(worldCtx, playerCtx);
 		_gateway = new Gateway(_gameServer, worldCtx, playerCtx);
+		_localWorld = worldCtx;
 		_localPlayer = playerCtx;
+	}
+
+	public static void EnsureLocalServer()
+	{
+		if (_gameServer != null)
+		{
+			return;
+		}
+
+		try
+		{
+			string key = "offline";
+			string worldPath = WorldContext.MakePath(0, key);
+			string playerPath = PlayerContext.MakePath(0, key);
+
+			WorldContext worldContext = null;
+			if (File.Exists(worldPath))
+			{
+				worldContext = WorldContext.Load(worldPath);
+			}
+			if (worldContext == null)
+			{
+				worldContext = new WorldContext();
+				worldContext.Initialize(worldPath);
+				worldContext.PlayerSlot = 0;
+			}
+
+			PlayerContext playerContext = null;
+			if (File.Exists(playerPath))
+			{
+				playerContext = PlayerContext.Load(playerPath);
+			}
+			if (playerContext == null)
+			{
+				playerContext = new PlayerContext();
+				playerContext.Initialize(playerPath);
+				playerContext.PlayerSlot = 0;
+			}
+
+			_gameServer = new GameServer(worldContext, playerContext);
+			_localWorld = worldContext;
+			_localPlayer = playerContext;
+			Debug.Log("[EmbeddedGameServer] Local GameServer listening on port 8191");
+		}
+		catch (Exception ex)
+		{
+			Debug.LogWarning($"[EmbeddedGameServer] Failed to start local GameServer: {ex.Message}");
+		}
+	}
+
+	public static void UpdatePlayerFromPost(Dictionary<string, string> postData)
+	{
+		if (_localPlayer == null || _localWorld == null)
+		{
+			EnsureLocalServer();
+		}
+		if (_localPlayer == null || _localWorld == null)
+		{
+			return;
+		}
+
+		try
+		{
+			string name = postData.Get("name");
+			if (!string.IsNullOrEmpty(name))
+			{
+				_localPlayer.PlayerInfo.PlayerName = name;
+			}
+			List<string> regionTemplateIds = Yaml.Util.Singleton<Yaml.Constants>.Instance.PersonalRegion.RegionTemplateIds;
+			if (regionTemplateIds != null && regionTemplateIds.Count > 0)
+			{
+				int index = UnityEngine.Random.Range(0, regionTemplateIds.Count);
+				string text = postData.Get("region");
+				_localWorld.TerrainId = ((string.IsNullOrEmpty(text) || !regionTemplateIds.Contains(text)) ? regionTemplateIds[index] : text);
+			}
+			Gateway.UpdateAppearPlayer(_localPlayer, postData);
+			string[] bodyColor = _localPlayer.AppearPlayer.Display.BodyColor;
+			string[] array = new string[8] { "clothes_engineer", "clothes_officeworker", "clothes_student", "clothes_farmer", "clothes_waiter", "clothes_soldier", "clothes_homeworker", "clothes_jobless" };
+			int value = postData.Get("job").ToInt();
+			value = Mathf.Clamp(value, 0, array.Length - 1);
+			Messages.Item? item = Cheats.MakeItem(array[value], 1);
+			if (item.HasValue)
+			{
+				Messages.Item value2 = item.Value;
+				if (bodyColor != null && bodyColor.Length >= 3)
+				{
+					value2.ColorR = bodyColor[0];
+					value2.ColorG = bodyColor[1];
+					value2.ColorB = bodyColor[2];
+				}
+				_localPlayer.InventoryItems.Add(value2);
+				_localPlayer.EquippedItems["body"] = value2.Id;
+			}
+			_localWorld.Save();
+			_localPlayer.Save();
+		}
+		catch (Exception ex)
+		{
+			Debug.LogWarning($"[Server] UpdatePlayerFromPost error: {ex.Message}");
+		}
 	}
 
 	public static void EndServer()
@@ -178,6 +289,6 @@ public class Server
 		cluster.Mode = Mode.Offline;
 		GameManager.ConnectCluster = cluster;
 		GameManager.Emigrated = GameManager.EmigratedType.Explore;
-		Singleton<GameManager>.Instance().MoveToTitle();
+		Durango.Utils.Singleton<GameManager>.Instance().MoveToTitle();
 	}
 }

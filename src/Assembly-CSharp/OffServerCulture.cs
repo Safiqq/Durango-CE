@@ -9,5 +9,6 @@ public static class OffServerCulture
 	{
 		CultureInfo currentCulture = (CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture);
 		Thread.CurrentThread.CurrentCulture = currentCulture;
+		Durango.Offline.LocalGatewayServer.EnsureStarted();
 	}
 }

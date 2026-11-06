@@ -319,6 +319,7 @@ public class GameManager : Singleton<GameManager>
 		Connections.Frontend.Process();
 		Connections.Radiotower.Process();
 		Connections.Radiotower.MaybeSendKeepalive();
+		Durango.Offline.Server.Process();
 		if (Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.Return))
 		{
 			ScreenInfo.ToggleScreenMode();
@@ -336,6 +337,8 @@ public class GameManager : Singleton<GameManager>
 
 	private void OnApplicationQuit()
 	{
+		Durango.Offline.LocalGatewayServer.Stop();
+		Durango.Offline.Server.EndServer();
 		if (Used)
 		{
 			IsSceneClosing = true;

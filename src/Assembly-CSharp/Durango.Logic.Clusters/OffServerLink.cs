@@ -896,6 +896,7 @@ public static class OffServerLink
 			string.IsNullOrEmpty(_gateway);
 			OffServerLog.Info("[OffServer] gateway=" + _gateway + " account=" + _account + " localServers=" + _localServers.Count + " resolved account_id=" + AccountId);
 			EnsureCacheRoots();
+			Durango.Offline.LocalGatewayServer.EnsureStarted();
 		}
 		catch (Exception ex2)
 		{

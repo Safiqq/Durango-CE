@@ -114,7 +114,7 @@ public class Gateway
 		_webServer.UnhandledUrl += UnhandledUrl;
 	}
 
-	private static void UpdateAppearPlayer(PlayerContext player, Dictionary<string, string> postData)
+	public static void UpdateAppearPlayer(PlayerContext player, Dictionary<string, string> postData)
 	{
 		bool flag = postData.Get("gender") == "male";
 		player.AppearPlayer.EntityType = (ushort)((!flag) ? 1001u : 1000u);
