@@ -168,6 +168,31 @@ def assemble(out_dir):
             shutil.copy2(config_json_src, dst)
         n += 1
 
+    server_exe_src = os.path.join(ROOT, "build", "server", "DurangoServer.exe")
+    if os.path.exists(server_exe_src):
+        dst = os.path.join(out_dir, "DurangoServer.exe")
+        try:
+            os.link(server_exe_src, dst)
+        except OSError:
+            shutil.copy2(server_exe_src, dst)
+        n += 1
+
+    server_json_src = os.path.join(ROOT, "config", "server.json")
+    if os.path.exists(server_json_src):
+        dst = os.path.join(out_dir, "server.json")
+        try:
+            os.link(server_json_src, dst)
+        except OSError:
+            shutil.copy2(server_json_src, dst)
+        n += 1
+
+    server_data_src = os.path.join(ROOT, "src", "Durango.Server", "data")
+    if os.path.exists(server_data_src):
+        dst = os.path.join(out_dir, "data")
+        if not os.path.exists(dst):
+            shutil.copytree(server_data_src, dst)
+            n += 1
+
     print(f"assembled {n} files -> {out_dir}")
 
 

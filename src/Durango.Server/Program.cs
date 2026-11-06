@@ -306,8 +306,31 @@ internal static class Program
         RegionCatalog.Load(Path.Combine(dataDir, "assets"));
 
         // ---- host + saves ----
-        // AppData (เซฟ .player/.world) อยู่ข้าง ๆ data เหมือนเกมเก็บ AppData ของมันเอง
-        AppData.BasePath = Path.GetFullPath(Path.Combine(dataDir, "..", "AppData-nx"));
+        // AppData (เซฟ .player/.world) อยู่ข้าง ๆ data หรือ fallback ไปที่ LocalAppData ถ้าเป็น read-only
+        string candidatePath = Path.GetFullPath(Path.Combine(dataDir, "..", "AppData-nx"));
+        bool writable = false;
+        try
+        {
+            Directory.CreateDirectory(candidatePath);
+            string testFile = Path.Combine(candidatePath, ".write-test");
+            File.WriteAllText(testFile, "ok");
+            File.Delete(testFile);
+            writable = true;
+        }
+        catch { }
+
+        if (!writable)
+        {
+            string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            if (string.IsNullOrEmpty(localAppData))
+            {
+                localAppData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".durango");
+            }
+            candidatePath = Path.Combine(localAppData, "DurangoServer", "AppData-nx");
+            Directory.CreateDirectory(candidatePath);
+        }
+        AppData.BasePath = candidatePath;
+        Console.WriteLine($"[boot] saves path = {AppData.BasePath}");
         var host = new Host(name);
         _host = host;
         // [5 ก.ย. 2026] ค่าพวกนี้ต้องตั้ง **ก่อน** host.Start() เพราะ Start เป็นคนสร้าง Gateway

@@ -25,8 +25,12 @@ export DOTNET_ROLL_FORWARD="${DOTNET_ROLL_FORWARD:-Major}"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DOTNET_NOLOGO=1
 
-echo "==> Building Durango Dedicated Server ($CONFIG) -> $OUT_DIR"
+echo "==> Building Durango Dedicated Server Linux ($CONFIG) -> $OUT_DIR"
 "$DOTNET" build src/Durango.Server/DurangoServer.csproj -c "$CONFIG" -o "$OUT_DIR" --nologo
+
+echo "==> Publishing Durango Dedicated Server Windows Single-File ($CONFIG)"
+"$DOTNET" publish src/Durango.Server/DurangoServer.csproj -r win-x64 -c "$CONFIG" --self-contained true -p:PublishSingleFile=true -o "$OUT_DIR/win-x64" --nologo
+cp "$OUT_DIR/win-x64/DurangoServer.exe" "$OUT_DIR/DurangoServer.exe"
 
 # Copy server configuration
 if [ -f config/server.json ]; then
@@ -35,6 +39,9 @@ fi
 
 echo
 echo "==> Durango Dedicated Server built successfully."
-echo "Binary: $OUT_DIR/DurangoServer"
-echo "To run:"
+echo "Linux Binary:   $OUT_DIR/DurangoServer"
+echo "Windows Binary: $OUT_DIR/DurangoServer.exe"
+echo "To run on Linux:"
 echo "  cd $OUT_DIR && DOTNET_ROOT=\${DOTNET_ROOT:-~/.dotnet} ./DurangoServer"
+echo "To run on Windows:"
+echo "  $OUT_DIR/DurangoServer.exe"
