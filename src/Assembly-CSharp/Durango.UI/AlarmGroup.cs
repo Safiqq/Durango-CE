@@ -14,7 +14,7 @@ using Durango.Utils;
 using Durango.Utils.Extensions;
 using L10N;
 using Messages;
-using OffServer;
+using Community;
 using Shared.Ability;
 using Shared.Accelerator;
 using Shared.Economy;
@@ -275,7 +275,7 @@ public class AlarmGroup : UIBase
 	private void OnAlarmNotify(AlarmNotify msg, PacketHeader header)
 	{
 		SeasonLevelClient.RequestRefresh();
-		if (!OffServerEventCalendar.Notify(msg))
+		if (!CommunityEventCalendar.Notify(msg))
 		{
 			ShowNotify(msg.Text, msg.Icon, major: false, (!msg.Duration.HasValue) ? 1.8f : msg.Duration.Value, delegate
 			{

@@ -77,7 +77,7 @@ public class AnimalFloatingGroup : UIBase
 			else
 			{
 				PetAI pet = animalFloatingControl.Pet;
-				string text = ((pet == null && OffServerLink.MhAnimalEmotes) ? animal.MhFeelingSprite : null);
+				string text = ((pet == null && CommunityLink.MhAnimalEmotes) ? animal.MhFeelingSprite : null);
 				if (text != null)
 				{
 					animalFloatingControl.SetStatusIcon(new SpriteData

@@ -64,7 +64,7 @@ public class MakeCheatGroup : UIBase
 
 	protected override bool TryOpen()
 	{
-		if (!OffServerLink.IsAdmin)
+		if (!CommunityLink.IsAdmin)
 		{
 			return false;
 		}

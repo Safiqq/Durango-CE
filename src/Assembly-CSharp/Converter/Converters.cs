@@ -7209,8 +7209,8 @@ public class Converters : JsonConverter
 			{
 				switch (text)
 				{
-				case "offserver_preview":
-					playerActionAttackInfo.OffServerPreview = (PlayerActionAttackInfo)ReadYaml_PlayerActionAttackInfo(reader, objectType, existingValue, serializer);
+				case "community_preview":
+					playerActionAttackInfo.CommunityPreview = (PlayerActionAttackInfo)ReadYaml_PlayerActionAttackInfo(reader, objectType, existingValue, serializer);
 					break;
 				case "damage_type":
 					playerActionAttackInfo.DamageType = (DamageType)Convert.ToInt32(reader.Value);

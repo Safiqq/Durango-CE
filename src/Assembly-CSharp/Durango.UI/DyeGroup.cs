@@ -151,22 +151,22 @@ public class DyeGroup : UIBase
 
 	private void OnUpdateTargetItem()
 	{
-		OffServerDyeUI.TargetChanged(this);
+		CommunityDyeUI.TargetChanged(this);
 	}
 
 	private void OnUpdateDyeItem()
 	{
-		OffServerDyeUI.DyeChanged(this);
+		CommunityDyeUI.DyeChanged(this);
 	}
 
 	private void RefreshDyeResult()
 	{
-		OffServerDyeUI.Refresh(this);
+		CommunityDyeUI.Refresh(this);
 	}
 
 	private void OnDyeApply()
 	{
-		OffServerDyeUI.Apply(this);
+		CommunityDyeUI.Apply(this);
 	}
 
 	public static void DyeItem(Artifact workbench, ItemData item, ItemData dye, ColorChannel channel)

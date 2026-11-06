@@ -31,7 +31,7 @@ internal static class CombatLoadout
 
 	private static readonly string[] actions = new string[6] { "s0", "s1", "s2", "s3", "s4", "s5" };
 
-	internal static bool Enabled => OffServerLink.CombatLoadout;
+	internal static bool Enabled => CommunityLink.CombatLoadout;
 
 	internal static string ProfileKey
 	{
@@ -163,7 +163,7 @@ internal static class CombatLoadout
 		{
 			return false;
 		}
-		if (!press || OffServerRanked.InMatch || PlayerBehavior.LocalPlayer == null || !PlayerBehavior.LocalPlayer.IsAlive || !button.IsClickable || OffServerHudLayout.BlocksInput || !GameManager.IsReady)
+		if (!press || CommunityRanked.InMatch || PlayerBehavior.LocalPlayer == null || !PlayerBehavior.LocalPlayer.IsAlive || !button.IsClickable || CommunityHudLayout.BlocksInput || !GameManager.IsReady)
 		{
 			return true;
 		}

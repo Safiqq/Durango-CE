@@ -42,16 +42,16 @@ public class PvpIslandGroup : UIBase
 
 	public override bool Open()
 	{
-		if (OffServerRanked.ReplacesBrawl)
+		if (CommunityRanked.ReplacesBrawl)
 		{
-			if (OffServerRanked.Available)
+			if (CommunityRanked.Available)
 			{
 				UIBase.CloseAllUI();
-				OffServerRankedUI.OpenLobby();
+				CommunityRankedUI.OpenLobby();
 			}
 			else
 			{
-				UIManager.SystemMsg(OffServerRanked.T("ดวลจ\u0e31ดอ\u0e31นด\u0e31บย\u0e31งไม\u0e48เป\u0e34ดตอนน\u0e35\u0e49", "Ranked duels are not open right now"), 2f);
+				UIManager.SystemMsg(CommunityRanked.T("ดวลจ\u0e31ดอ\u0e31นด\u0e31บย\u0e31งไม\u0e48เป\u0e34ดตอนน\u0e35\u0e49", "Ranked duels are not open right now"), 2f);
 			}
 			return false;
 		}

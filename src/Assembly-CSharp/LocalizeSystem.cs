@@ -272,7 +272,7 @@ public static class LocalizeSystem
 
 	private static Dictionary<string, string> _keyValueDict;
 
-	private static List<OffServerI18n.PackInfo> _packs;
+	private static List<CommunityI18n.PackInfo> _packs;
 
 	public static string[] AvailableLocales
 	{
@@ -281,7 +281,7 @@ public static class LocalizeSystem
 			if (_availableLocales == null)
 			{
 				List<string> list = Locales.Select((LocaleItem x) => x.Locale).ToList();
-				foreach (OffServerI18n.PackInfo pack in PackList)
+				foreach (CommunityI18n.PackInfo pack in PackList)
 				{
 					if (!list.Contains(pack.Locale))
 					{
@@ -294,13 +294,13 @@ public static class LocalizeSystem
 		}
 	}
 
-	private static List<OffServerI18n.PackInfo> PackList
+	private static List<CommunityI18n.PackInfo> PackList
 	{
 		get
 		{
 			if (_packs == null)
 			{
-				_packs = OffServerI18n.DiscoverPacks();
+				_packs = CommunityI18n.DiscoverPacks();
 			}
 			return _packs;
 		}
@@ -341,7 +341,7 @@ public static class LocalizeSystem
 
 	private static int PackIndex(string locale)
 	{
-		List<OffServerI18n.PackInfo> packList = PackList;
+		List<CommunityI18n.PackInfo> packList = PackList;
 		for (int i = 0; i < packList.Count; i++)
 		{
 			if (packList[i].Locale == locale)
@@ -506,16 +506,16 @@ public static class LocalizeSystem
 		Locale = locale;
 		LocaleLanguage = GetLocaleLanguage(locale);
 		Platform.Instance.SetLocale(locale);
-		string locale2 = OffServerI18n.SafeCultureLocale(locale);
+		string locale2 = CommunityI18n.SafeCultureLocale(locale);
 		T.InstallCatalog(locale2);
 		try
 		{
-			byte[] array = OffServerI18n.BuiltInCatalog(locale);
+			byte[] array = CommunityI18n.BuiltInCatalog(locale);
 			if (array == null && !IsBuiltInLocale(locale))
 			{
-				array = OffServerI18n.BuiltInCatalog("en_US");
+				array = CommunityI18n.BuiltInCatalog("en_US");
 			}
-			byte[] array2 = OffServerI18n.MergedClientCatalog(array, locale);
+			byte[] array2 = CommunityI18n.MergedClientCatalog(array, locale);
 			if (array2 != null)
 			{
 				using MemoryStream moFileStream = new MemoryStream(array2);
@@ -525,7 +525,7 @@ public static class LocalizeSystem
 		catch (Exception)
 		{
 		}
-		OffServerI18n.LoadServerCatalog(locale);
+		CommunityI18n.LoadServerCatalog(locale);
 		TextBuilder.WrapBySeperatorOnly = IsUsingSpace(locale);
 		return locale;
 	}
@@ -534,7 +534,7 @@ public static class LocalizeSystem
 	private static string NormalizeLocale(string locale)
 	{
 		int num = Locales.IndexOf((LocaleItem x) => x.Locale == locale);
-		if (num == -1 && locale != null && OffServerI18n.IsSafeLocale(locale) && PackIndex(locale) >= 0)
+		if (num == -1 && locale != null && CommunityI18n.IsSafeLocale(locale) && PackIndex(locale) >= 0)
 		{
 			return locale;
 		}

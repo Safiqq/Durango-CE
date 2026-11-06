@@ -32,9 +32,9 @@ public class WorldRoutesBeginnerStableArea : MonoBehaviour
 
 	private bool _isInit;
 
-	private const string OffServerAncoraRegionId = "tropical_event_ancora_01";
+	private const string CommunityAncoraRegionId = "tropical_event_ancora_01";
 
-	private const string OffServerSafehouseRegionId = "grass_company_safehouse_01";
+	private const string CommunitySafehouseRegionId = "grass_company_safehouse_01";
 
 	private void Init()
 	{

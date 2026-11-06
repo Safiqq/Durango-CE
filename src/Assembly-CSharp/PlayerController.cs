@@ -13,7 +13,7 @@ using Durango.Utils;
 using InteractionData;
 using L10N;
 using Messages;
-using OffServer.GatheringTiming;
+using Community.GatheringTiming;
 using Shared.Battle;
 using Shared.Region;
 using Shared.Teleport;
@@ -207,14 +207,14 @@ public class PlayerController : Durango.Utils.Singleton<PlayerController>
 		});
 		GameSystem<InputSystem>.Instance().On(InputCommand.MoveToPositionByDragging, delegate(InputCommandMessage message)
 		{
-			if (OffServerMobileMove.PickingWalkEnabled(message))
+			if (CommunityMobileMove.PickingWalkEnabled(message))
 			{
 				ProcessInputPickingMove(message, showMoveCursor: false);
 			}
 		});
 		GameSystem<InputSystem>.Instance().On(InputCommand.MoveToPosition, delegate(InputCommandMessage message)
 		{
-			if (OffServerMobileMove.PickingWalkEnabled(message))
+			if (CommunityMobileMove.PickingWalkEnabled(message))
 			{
 				ProcessInputPickingMove(message, showMoveCursor: true);
 			}
@@ -384,7 +384,7 @@ public class PlayerController : Durango.Utils.Singleton<PlayerController>
 
 	private void InputTouchPickingMove(InputCommandMessage message)
 	{
-		if (!Platform.Instance.UsePCUI && message.PickingTouchEvent != null && !message.PickingTouchEvent.IsNguiTouched && OffServerMobileMove.TapWalkEnabled(message.PickingTouchEvent))
+		if (!Platform.Instance.UsePCUI && message.PickingTouchEvent != null && !message.PickingTouchEvent.IsNguiTouched && CommunityMobileMove.TapWalkEnabled(message.PickingTouchEvent))
 		{
 			float dragThreshold = DragThreshold;
 			if (!((message.PickingTouchEvent.CurrentPos - message.PickingTouchEvent.BeginPos).sqrMagnitude > dragThreshold * dragThreshold) && !(InteractionUtil.PickingObject(null, message.PickingRay, message.PickingTouchEvent.CurrentPos, out var _, null) != null))

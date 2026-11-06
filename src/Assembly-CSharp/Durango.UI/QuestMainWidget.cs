@@ -45,7 +45,7 @@ public class QuestMainWidget : MonoBehaviour, IUIInitializable
 
 	public void Set(List<QuestToDo> quests, bool reset)
 	{
-		if (OffServerLink.Active && quests != null)
+		if (CommunityLink.Active && quests != null)
 		{
 			quests = quests.FindAll((QuestToDo quest) => !quest.Finished);
 		}

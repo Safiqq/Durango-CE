@@ -54,7 +54,7 @@ public class BottomMenuWidgetBase : MonoBehaviour
 	{
 		if (_quickChatButton != null)
 		{
-			OffServerHudLayout.Register("chat", _quickChatButton.transform, "แชท / Chat", "social");
+			CommunityHudLayout.Register("chat", _quickChatButton.transform, "แชท / Chat", "social");
 		}
 		GameSystem<SocialSystem>.Instance().Emotional.EmoticonNotification.Changed += UpdateEmotionNotifiaction;
 		GameSystem<SocialSystem>.Instance().Emotional.MotionNotification.Changed += UpdateEmotionNotifiaction;

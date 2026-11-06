@@ -6,7 +6,7 @@ using Durango.UI.Control;
 using Durango.UI.Popup;
 using Durango.Utils;
 using NestedPrefab;
-using OffServer.Rift;
+using Community.Rift;
 using Shared.Economy;
 using Shared.Season2;
 using UnityEngine;
@@ -33,7 +33,7 @@ public class WarpRushRewardPhaseWidget : MonoBehaviour
 
 	private Action[] _requestReward;
 
-	private OffServerSeasonPass.Tier _seasonTier;
+	private CommunitySeasonPass.Tier _seasonTier;
 
 	private int _seasonFirstClaimable;
 
@@ -51,8 +51,8 @@ public class WarpRushRewardPhaseWidget : MonoBehaviour
 	{
 		if (_seasonTier != null && WarpRushGroup.SeasonPassMode)
 		{
-			OffServerSeasonPass.Status current = OffServerSeasonPass.Current;
-			OffServerSeasonPass.Tier tier = current?.GetTier(_seasonTier.Number);
+			CommunitySeasonPass.Status current = CommunitySeasonPass.Current;
+			CommunitySeasonPass.Tier tier = current?.GetTier(_seasonTier.Number);
 			if (tier != null)
 			{
 				_seasonTier = tier;
@@ -151,13 +151,13 @@ public class WarpRushRewardPhaseWidget : MonoBehaviour
 		});
 	}
 
-	public void SetSeasonPass(OffServerSeasonPass.Tier tier, int firstClaimable)
+	public void SetSeasonPass(CommunitySeasonPass.Tier tier, int firstClaimable)
 	{
 		_seasonTier = tier;
 		_seasonFirstClaimable = firstClaimable;
 		_resourceType = ResourceType.Invalid;
 		_level = tier.Number;
-		_levelLabel.text = (OffServerSeasonPass.HasSeasonLevel ? RiftText.T("เลเวล {0}", "Level {0}", tier.Number) : OffServerSeasonPass.Text("tier_n", tier.Number));
+		_levelLabel.text = (CommunitySeasonPass.HasSeasonLevel ? RiftText.T("เลเวล {0}", "Level {0}", tier.Number) : CommunitySeasonPass.Text("tier_n", tier.Number));
 		RefreshSeasonPass();
 	}
 
@@ -186,7 +186,7 @@ public class WarpRushRewardPhaseWidget : MonoBehaviour
 		SetSeasonRow(WarpRushSystem.RewardType.Cash, _seasonTier.Special, box: false);
 	}
 
-	private void SetSeasonRow(WarpRushSystem.RewardType rewardType, OffServerSeasonPass.Reward reward, bool box)
+	private void SetSeasonRow(WarpRushSystem.RewardType rewardType, CommunitySeasonPass.Reward reward, bool box)
 	{
 		WarpRushRewardItem component = _reward[(int)rewardType].Object.GetComponent<WarpRushRewardItem>();
 		if (reward == null || reward.IsEmpty)
@@ -206,11 +206,11 @@ public class WarpRushRewardPhaseWidget : MonoBehaviour
 		component.Set(reward2);
 		if (box)
 		{
-			component.SetOverride("icon_warprush_reward", null, OffServerSeasonPass.Text("box_tooltip", _seasonTier.Number), reward.Describe());
+			component.SetOverride("icon_warprush_reward", null, CommunitySeasonPass.Text("box_tooltip", _seasonTier.Number), reward.Describe());
 		}
 		else if (reward.Items.Count > 1 || (reward.Items.Count > 0 && reward.TStone > 0))
 		{
-			component.SetOverride(null, reward.Items[0].GetCount().ToString(), OffServerSeasonPass.Text("row_special"), reward.Describe());
+			component.SetOverride(null, reward.Items[0].GetCount().ToString(), CommunitySeasonPass.Text("row_special"), reward.Describe());
 		}
 		WarpRushSystem.RewardState rewardState = _seasonTier.State switch
 		{
@@ -222,7 +222,7 @@ public class WarpRushRewardPhaseWidget : MonoBehaviour
 		int tierNumber = _seasonTier.Number;
 		component.Clicked = ((rewardState == WarpRushSystem.RewardState.Available) ? ((Action)delegate
 		{
-			OffServerSeasonPass.Claim(tierNumber);
+			CommunitySeasonPass.Claim(tierNumber);
 		}) : new Action(component.ShowTooltip));
 	}
 }

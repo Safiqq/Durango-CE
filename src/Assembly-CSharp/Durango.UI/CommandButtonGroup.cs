@@ -370,7 +370,7 @@ public class CommandButtonGroup : UIBase
 	private void OnCheatFlags(CheatFlags msg, PacketHeader header)
 	{
 		Dictionary<string, bool> dictionary = msg.Flags ?? new Dictionary<string, bool>();
-		OffServerLink.SetAdminFlags(dictionary);
+		CommunityLink.SetAdminFlags(dictionary);
 		dictionary["ar"] = Durango.Utils.Singleton<Commands>.Instance().GetAttackRangeState();
 		for (int i = 0; i < _panelContainers.Length; i++)
 		{
@@ -380,7 +380,7 @@ public class CommandButtonGroup : UIBase
 
 	protected override bool TryOpen()
 	{
-		if (!OffServerLink.IsAdmin)
+		if (!CommunityLink.IsAdmin)
 		{
 			return false;
 		}

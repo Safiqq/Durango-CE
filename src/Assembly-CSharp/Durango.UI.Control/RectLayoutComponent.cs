@@ -47,14 +47,14 @@ public class RectLayoutComponent : MonoBehaviour, IScreenResizeReceiver, RectLay
 	public Vector2 UpdateLayout()
 	{
 		Vector2 result = GetCurrentLayout().UpdateLayout();
-		OffServerHudLayout.Reapply(base.transform);
+		CommunityHudLayout.Reapply(base.transform);
 		return result;
 	}
 
 	public Vector2 UpdateLayout(float? width, float? height)
 	{
 		Vector2 result = GetCurrentLayout().UpdateLayout(width, height);
-		OffServerHudLayout.Reapply(base.transform);
+		CommunityHudLayout.Reapply(base.transform);
 		return result;
 	}
 

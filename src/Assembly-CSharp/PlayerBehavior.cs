@@ -550,7 +550,7 @@ public class PlayerBehavior : CharacterBehavior, IAnimationEventPlayable, ICostu
 
 	private void PrepareHitPose()
 	{
-		if (_hitPose == null && IsLocalPlayer && _rootBone != null && OffServerLink.MhHitStop)
+		if (_hitPose == null && IsLocalPlayer && _rootBone != null && CommunityLink.MhHitStop)
 		{
 			_hitPose = new MhHitPose(_rootBone);
 		}

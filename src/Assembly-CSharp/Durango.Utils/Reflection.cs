@@ -23,7 +23,7 @@ public static class Reflection
 		{
 			_loadableTypes = ex.Types.Where((Type t) => t != null).ToArray();
 			string text = ((ex.LoaderExceptions != null && ex.LoaderExceptions.Length != 0 && ex.LoaderExceptions[0] != null) ? ex.LoaderExceptions[0].Message : "?");
-			OffServerLog.Info("[OffServer] GetTypes: " + (ex.Types.Length - _loadableTypes.Length) + " types failed to load, first: " + text);
+			CommunityLog.Info("[Community] GetTypes: " + (ex.Types.Length - _loadableTypes.Length) + " types failed to load, first: " + text);
 		}
 		return _loadableTypes;
 	}

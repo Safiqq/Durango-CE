@@ -79,7 +79,7 @@ public class StatisticsSystem : GameSystem<StatisticsSystem>
 
 	public void RefreshAbilityUi()
 	{
-		if (!OffServerLink.Active || !GameManager.IsReady || GameManager.IsSceneClosing)
+		if (!CommunityLink.Active || !GameManager.IsReady || GameManager.IsSceneClosing)
 		{
 			return;
 		}

@@ -121,7 +121,7 @@ public class WarpRushSystem : GameSystem<WarpRushSystem>
 
 	public event Action RewardedRankingUpdated;
 
-	public static bool OffServerBrawlMenuEnabled(bool shutdown)
+	public static bool CommunityBrawlMenuEnabled(bool shutdown)
 	{
 		if (!shutdown)
 		{
@@ -211,7 +211,7 @@ public class WarpRushSystem : GameSystem<WarpRushSystem>
 		};
 		Action<bool> setWarpRushMenu = delegate(bool optionValue)
 		{
-			bool enable = (OffServerRanked.ReplacesBrawl ? OffServerRanked.Available : OffServerBrawlMenuEnabled(optionValue));
+			bool enable = (CommunityRanked.ReplacesBrawl ? CommunityRanked.Available : CommunityBrawlMenuEnabled(optionValue));
 			GameSystem<MenuSystem>.Instance().EnableMenu(MenuType.PvpIsland, enable);
 		};
 		GameSystem<OptionSystem>.Instance().AddOnChange("shutdown.s02_warp_rush", setWarpRushMenu);

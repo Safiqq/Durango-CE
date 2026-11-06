@@ -46,7 +46,7 @@ public class InputMessageDispatcher
 
 	public void Dispatch(InputCommand key, InputCommandMessage message)
 	{
-		if (OffServerHudLayout.BlocksInput)
+		if (CommunityHudLayout.BlocksInput)
 		{
 			return;
 		}

@@ -113,11 +113,11 @@ public class DefaultLoadingCurtain : LoadingCurtainBase
 				_progressShown = true;
 				_continueLabel.gameObject.SetActive(value: true);
 				_peakPendingAssets = 0;
-				OffServerLoadProgress.EnterIsland();
+				CommunityLoadProgress.EnterIsland();
 			}
-			float value = OffServerLoadProgress.Tick(OffServerLoadProgress.Stage.Island, IslandLoadProgress());
+			float value = CommunityLoadProgress.Tick(CommunityLoadProgress.Stage.Island, IslandLoadProgress());
 			UpdateProgressBar(value);
-			_continueLabel.text = OffServerLoadProgress.Text();
+			_continueLabel.text = CommunityLoadProgress.Text();
 		}
 		else if (_progressShown)
 		{
@@ -169,7 +169,7 @@ public class DefaultLoadingCurtain : LoadingCurtainBase
 			_progressBar.spriteName = spriteName;
 			_progressBar.type = UIBasicSprite.Type.Sliced;
 			_progressBar.pivot = UIWidget.Pivot.BottomLeft;
-			_progressBar.color = OffServerLoadProgress.BarColor;
+			_progressBar.color = CommunityLoadProgress.BarColor;
 		}
 		UIPanel uIPanel = NGUITools.FindInParents<UIPanel>(base.gameObject);
 		if (!(uIPanel == null))
@@ -208,14 +208,14 @@ public class DefaultLoadingCurtain : LoadingCurtainBase
 			_continueLabel.gameObject.SetActive(value: true);
 			_continueLabel.text = ContinueText();
 			_continueOriginalText = _continueLabel.text;
-			OffServerTransition.Prepare();
+			CommunityTransition.Prepare();
 			_isTap = false;
 			while (!_isTap)
 			{
 				yield return null;
 			}
 			bool covered = false;
-			OffServerTransition.Cover(delegate
+			CommunityTransition.Cover(delegate
 			{
 				covered = true;
 			});
@@ -226,13 +226,13 @@ public class DefaultLoadingCurtain : LoadingCurtainBase
 			SetState(LoadingState.Closing);
 			base.Widget.alpha = 0f;
 			SetState(LoadingState.Closed);
-			OffServerTransition.Reveal();
+			CommunityTransition.Reveal();
 		}
 	}
 
 	private static string ContinueText()
 	{
-		return OffServerDiscordLink.Lang switch
+		return CommunityDiscordLink.Lang switch
 		{
 			"th" => "แตะหน\u0e49าจอเพ\u0e37\u0e48อเข\u0e49าเกาะ",
 			"id" => "Ketuk layar untuk masuk ke pulau",

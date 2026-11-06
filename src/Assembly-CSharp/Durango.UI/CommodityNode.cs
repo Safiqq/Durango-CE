@@ -116,9 +116,9 @@ public class CommodityNode : SelectableWidget, IScreenResizeReceiver
 			Vector3 vector = component.localCorners[0];
 			_nameLabel.overflowWidth = component.width - (int)(position.x - vector.x) - 20;
 			_nameLabel.text = ((!item.Pet.HasValue) ? item.Name : item.Pet.Value.GetPetName(includeRank: true));
-			if (!string.IsNullOrEmpty(commodity.OffServerNameSuffix))
+			if (!string.IsNullOrEmpty(commodity.CommunityNameSuffix))
 			{
-				_nameLabel.text += commodity.OffServerNameSuffix;
+				_nameLabel.text += commodity.CommunityNameSuffix;
 			}
 		}
 		if (_prototypeLabel != null)
@@ -133,9 +133,9 @@ public class CommodityNode : SelectableWidget, IScreenResizeReceiver
 		{
 			_durabilityLabel.text = Util.LocalizedDurability(item.Durability.Get(), item.Durability.Max());
 		}
-		if (_priceLabel != null && commodity.OffServerPriceText != null)
+		if (_priceLabel != null && commodity.CommunityPriceText != null)
 		{
-			_priceLabel.text = commodity.OffServerPriceText;
+			_priceLabel.text = commodity.CommunityPriceText;
 		}
 		else if (_priceLabel != null)
 		{
@@ -150,9 +150,9 @@ public class CommodityNode : SelectableWidget, IScreenResizeReceiver
 				_priceLabel.text = Durango.Logic.Item.Inventory.CurrencyFormat(commodity.Price, commodity.CurrencyType);
 			}
 		}
-		if (_durationLabel != null && commodity.OffServerDurationText != null)
+		if (_durationLabel != null && commodity.CommunityDurationText != null)
 		{
-			_durationLabel.text = commodity.OffServerDurationText;
+			_durationLabel.text = commodity.CommunityDurationText;
 		}
 		else if (_durationLabel != null)
 		{
@@ -183,7 +183,7 @@ public class CommodityNode : SelectableWidget, IScreenResizeReceiver
 				break;
 			}
 			}
-			_durationLabel.text = text2 + (commodity.OffServerDurationSuffix ?? string.Empty);
+			_durationLabel.text = text2 + (commodity.CommunityDurationSuffix ?? string.Empty);
 		}
 		if (_nameLabel != null && _prototypeLabel != null)
 		{
@@ -233,7 +233,7 @@ public class CommodityNode : SelectableWidget, IScreenResizeReceiver
 	{
 		if (_receiveButton != null)
 		{
-			_receiveButton.Disabled = Data.State != ProductState.PaymentPending || (Data.OffServerReceive != null && (OffServerAuctionUI.IsBusy || OffServerAuctionUI.IsLoading));
+			_receiveButton.Disabled = Data.State != ProductState.PaymentPending || (Data.CommunityReceive != null && (CommunityAuctionUI.IsBusy || CommunityAuctionUI.IsLoading));
 		}
 	}
 
@@ -255,9 +255,9 @@ public class CommodityNode : SelectableWidget, IScreenResizeReceiver
 
 	private void ReceiveButton_Clicked()
 	{
-		if (Data != null && Data.OffServerReceive != null)
+		if (Data != null && Data.CommunityReceive != null)
 		{
-			Data.OffServerReceive();
+			Data.CommunityReceive();
 			return;
 		}
 		MarketSystem.Send(new MarketCollectPayment

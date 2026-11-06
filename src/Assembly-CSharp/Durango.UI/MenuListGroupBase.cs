@@ -110,7 +110,7 @@ public class MenuListGroupBase : UIBase
 		{
 			if (!string.IsNullOrEmpty(ip))
 			{
-				UIManager.SystemMsg("OffServer", T._("โหมด Online ไม\u0e48รองร\u0e31บการต\u0e48อเกาะเพ\u0e37\u0e48อนแบบ LAN"));
+				UIManager.SystemMsg("Community Server", T._("โหมด Online ไม\u0e48รองร\u0e31บการต\u0e48อเกาะเพ\u0e37\u0e48อนแบบ LAN"));
 			}
 		}
 	}
@@ -204,7 +204,7 @@ public class MenuListGroupBase : UIBase
 
 	public event Action<MenuType> MenuOpened;
 
-	protected bool OffServerPointerOnBanner()
+	protected bool CommunityPointerOnBanner()
 	{
 		if (_bannerList != null && _bannerList.gameObject.activeInHierarchy)
 		{
@@ -270,7 +270,7 @@ public class MenuListGroupBase : UIBase
 		_portraitMenuList.MenuClicked += OnMenuClick;
 		if (_bannerList == null)
 		{
-			_bannerList = OffServerPcBanner.Create(this);
+			_bannerList = CommunityPcBanner.Create(this);
 		}
 		if (_bannerList != null)
 		{
@@ -280,7 +280,7 @@ public class MenuListGroupBase : UIBase
 		_landscapeMenuList.LockClicked += ToggleLockMode;
 		_lockedMenuList.LockClicked += ToggleLockMode;
 		_lastActionButtonsPos = _lastActionButtons.transform.localPosition;
-		OffServerHudLayout.Register("menu", _menuBtn.transform, "เมน\u0e39 / Menu", "menu");
+		CommunityHudLayout.Register("menu", _menuBtn.transform, "เมน\u0e39 / Menu", "menu");
 		RefreshMenuLayout();
 		UpdateMenuBtnVisibleState();
 		base.TryOpen();
@@ -385,7 +385,7 @@ public class MenuListGroupBase : UIBase
 		return menuItem.transform;
 	}
 
-	public void OffServerRefreshMenuList()
+	public void CommunityRefreshMenuList()
 	{
 		RefreshMenuList();
 	}

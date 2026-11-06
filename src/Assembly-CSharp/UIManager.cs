@@ -247,12 +247,12 @@ public class UIManager : Singleton<UIManager>, IUriInvokable
 	{
 		UIRoot.gameObject.AddComponent<UIRootAnchor>();
 		InitUIGroups();
-		OffServerEventCalendar.Install(UIRoot.gameObject);
+		CommunityEventCalendar.Install(UIRoot.gameObject);
 		OnScreenResize();
 		Singleton<PlayerController>.Instance().MoveStarted += UIBase.OnPlayerMoveStart;
 		Connections.Frontend.On(delegate(Announce msg, PacketHeader header)
 		{
-			if (Singleton<UIManager>.HasInstance() && !OffServerPopup.TryShow(msg, header))
+			if (Singleton<UIManager>.HasInstance() && !CommunityPopup.TryShow(msg, header))
 			{
 				ChatStruct chat = new ChatStruct
 				{
@@ -264,7 +264,7 @@ public class UIManager : Singleton<UIManager>, IUriInvokable
 					},
 					Type = ChannelType.System
 				};
-				bool flag = OffServerEventCalendar.NotifyAnnouncement(msg.Text);
+				bool flag = CommunityEventCalendar.NotifyAnnouncement(msg.Text);
 				GameSystem<SocialSystem>.Instance().AddChat(chat, !flag);
 				if (!flag)
 				{

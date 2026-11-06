@@ -82,7 +82,7 @@ public class CommodityList : MonoBehaviour, IScreenResizeReceiver
 
 	private bool _isInit;
 
-	private bool _offServerData;
+	private bool _communityData;
 
 	public UIWidget Widget
 	{
@@ -216,7 +216,7 @@ public class CommodityList : MonoBehaviour, IScreenResizeReceiver
 
 	public void Set(Durango.Logic.Market.Commodities commodities)
 	{
-		_offServerData = false;
+		_communityData = false;
 		_commodities = commodities;
 		GameSystem<MarketSystem>.Instance().GetFavoriteProduct(delegate
 		{
@@ -225,13 +225,13 @@ public class CommodityList : MonoBehaviour, IScreenResizeReceiver
 		});
 	}
 
-	public void SetOffServer(Durango.Logic.Market.Commodities commodities)
+	public void SetCommunity(Durango.Logic.Market.Commodities commodities)
 	{
-		_offServerData = true;
+		_communityData = true;
 		_commodities = commodities;
-		if (_historyColumn != null && OffServerAuctionUI.Current == OffServerAuctionUI.Tab.Claims)
+		if (_historyColumn != null && CommunityAuctionUI.Current == CommunityAuctionUI.Tab.Claims)
 		{
-			_historyColumn.SetText(OffServerAuctionUI.Text("status"));
+			_historyColumn.SetText(CommunityAuctionUI.Text("status"));
 		}
 		int i = 0;
 		for (int size = KUtility.GetSize(_selectableColumns); i < size; i++)
@@ -245,7 +245,7 @@ public class CommodityList : MonoBehaviour, IScreenResizeReceiver
 	public void SetAuctionProductType(ProductType type)
 	{
 		SetProductType(type);
-		_offServerData = true;
+		_communityData = true;
 		CommoditySelectableColumn[] selectableColumns = _selectableColumns;
 		foreach (CommoditySelectableColumn obj in selectableColumns)
 		{
@@ -256,7 +256,7 @@ public class CommodityList : MonoBehaviour, IScreenResizeReceiver
 
 	public void SetProductType(ProductType type)
 	{
-		_offServerData = false;
+		_communityData = false;
 		_productType = type;
 		SetHistoryColumn(type);
 		SetReceiveColumn(type);
@@ -491,7 +491,7 @@ public class CommodityList : MonoBehaviour, IScreenResizeReceiver
 
 	private void SelectableColumns_Clicked(ProductSortField sortType)
 	{
-		if (_offServerData || _commodities == null || _commodities.Goods == null || _commodities.Goods.Count == 0 || _commodities.Request.IsLoading)
+		if (_communityData || _commodities == null || _commodities.Goods == null || _commodities.Goods.Count == 0 || _commodities.Request.IsLoading)
 		{
 			return;
 		}

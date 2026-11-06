@@ -170,7 +170,7 @@ public class EquipWidgetBase : UIWidget, IUIInitializable
 
 	protected virtual void SelectEquipPreset(EquipSlotType presetType)
 	{
-		OffServerNinePresets.SelectPreset(this, presetType);
+		CommunityNinePresets.SelectPreset(this, presetType);
 	}
 
 	protected void SelectSlot(EquipSystem.Slot slot)
@@ -200,17 +200,17 @@ public class EquipWidgetBase : UIWidget, IUIInitializable
 
 	private void RefreshEquipOrAvatarTabs()
 	{
-		OffServerNinePresets.RefreshModes(this);
+		CommunityNinePresets.RefreshModes(this);
 	}
 
 	protected virtual void RefreshEquipSlotContainer()
 	{
-		OffServerNinePresets.RefreshBase(this);
+		CommunityNinePresets.RefreshBase(this);
 	}
 
 	protected void RefreshItemList()
 	{
-		OffServerNinePresets.RefreshList(this);
+		CommunityNinePresets.RefreshList(this);
 	}
 
 	protected void RefreshEquipButton()
@@ -262,12 +262,12 @@ public class EquipWidgetBase : UIWidget, IUIInitializable
 
 	protected void TabForEquipPreset_Clicked()
 	{
-		OffServerNinePresets.ClickGearTab(this);
+		CommunityNinePresets.ClickGearTab(this);
 	}
 
 	protected void TabForAvatarEquip_Clicked()
 	{
-		OffServerNinePresets.ClickFashionTab(this);
+		CommunityNinePresets.ClickFashionTab(this);
 	}
 
 	private void EquipPresetTabListWidget_TabClicked(EquipSlotType presetType)

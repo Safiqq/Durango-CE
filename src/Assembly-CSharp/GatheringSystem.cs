@@ -16,7 +16,7 @@ using InteractionData;
 using JetBrains.Annotations;
 using L10N;
 using Messages;
-using OffServer.GatheringTiming;
+using Community.GatheringTiming;
 using Shared.Item;
 using UnityEngine;
 
@@ -393,14 +393,14 @@ public class GatheringSystem : GameSystem<GatheringSystem>
 			})
 			.On(delegate(Announce msg, PacketHeader header)
 			{
-				if (!OffServerPopup.IsPopup(msg))
+				if (!CommunityPopup.IsPopup(msg))
 				{
 					UIManager.SystemMsg(msg.Text, 4f);
 				}
 				else
 				{
 					PauseCollectTimer();
-					OffServerPopup.TryShow(msg, header, delegate(bool ok)
+					CommunityPopup.TryShow(msg, header, delegate(bool ok)
 					{
 						if (msg.Level == 101)
 						{

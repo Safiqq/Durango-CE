@@ -51,7 +51,7 @@ public class Bundle
 	{
 		Id = data.Key;
 		Category = category;
-		Tab = OffServerWeaponMasteryTab.TabOf(data.Value, category);
+		Tab = CommunityWeaponMasteryTab.TabOf(data.Value, category);
 		Sub = ((data.Value.Count <= 1) ? null : new Skill[data.Value.Count - 1]);
 		int num = 0;
 		foreach (KeyValuePair<string, Yaml.Skill[]> item in data.Value)

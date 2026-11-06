@@ -159,7 +159,7 @@ public class GameManager : Singleton<GameManager>
 		ClusterKey = clusterKey;
 		GatewayUrl = url;
 		ClusterMode = mode;
-		OffServerEventCalendar.Prepare();
+		CommunityEventCalendar.Prepare();
 	}
 
 	public static void SetArenaAuthServer(string arenaAuthServerUrl)
@@ -374,7 +374,7 @@ public class GameManager : Singleton<GameManager>
 			}
 			else
 			{
-				OffServerEventCalendar.Authenticated(isReconnect, Emigrated != EmigratedType.None);
+				CommunityEventCalendar.Authenticated(isReconnect, Emigrated != EmigratedType.None);
 				SafeInvoke(this.WelcomeReceived, welcome);
 				TerrainMeta.Load(Region.TerrainId, succeed, failed);
 			}
@@ -396,7 +396,7 @@ public class GameManager : Singleton<GameManager>
 		Connections.Frontend.Send(default(Ready)).On<OK>(delegate
 		{
 			IsReady = true;
-			OffServerUdp.OnReady(Connections.Frontend, PlayerId);
+			CommunityUdp.OnReady(Connections.Frontend, PlayerId);
 			SafeInvoke(this.Ready);
 		});
 	}

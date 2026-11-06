@@ -3,7 +3,7 @@ using Durango.Network;
 using JetBrains.Annotations;
 using L10N;
 using Messages;
-using OffServer.Rift;
+using Community.Rift;
 using Shared.Economy;
 using UnityEngine;
 using Yaml;

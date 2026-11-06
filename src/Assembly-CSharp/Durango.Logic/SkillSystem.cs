@@ -126,7 +126,7 @@ public class SkillSystem : GameSystem<SkillSystem>
 
 	public void RefreshSkillUi(bool opening = false)
 	{
-		if (OffServerLink.Active)
+		if (CommunityLink.Active)
 		{
 			if (!_skillUiDirty || opening)
 			{
@@ -138,7 +138,7 @@ public class SkillSystem : GameSystem<SkillSystem>
 
 	private void Update()
 	{
-		if (!OffServerLink.Active || !GameManager.IsMainScene || !GameManager.IsReady || GameManager.IsSceneClosing)
+		if (!CommunityLink.Active || !GameManager.IsMainScene || !GameManager.IsReady || GameManager.IsSceneClosing)
 		{
 			return;
 		}
@@ -342,7 +342,7 @@ public class SkillSystem : GameSystem<SkillSystem>
 		Durango.Logic.Skill.Category skillCategory2 = GetSkillCategory(Shared.Skill.Category.WeaponMastery);
 		if (skillCategory2 != null)
 		{
-			skillCategory2.Level = OffServerWeaponMasteryTab.Level(this);
+			skillCategory2.Level = CommunityWeaponMasteryTab.Level(this);
 		}
 		SkillPoint = msg.SkillPoint;
 		int num4 = 0;

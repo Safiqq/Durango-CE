@@ -19,7 +19,7 @@ public class ContextActionButtons : ContextActionButtonsBase
 	public override void SetActions(List<InteractionMenuData> menus)
 	{
 		base.SetActions(menus);
-		if (OffServerHotkeys.Supported)
+		if (CommunityHotkeys.Supported)
 		{
 			InputSystem inputSystem = GameSystem<InputSystem>.Instance();
 			for (int i = 0; i < 8; i++)

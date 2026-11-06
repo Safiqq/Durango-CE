@@ -146,14 +146,14 @@ public class DropdownWidget : SelectableWidget
 		{
 			return null;
 		}
-		string text2 = OffServerSettingsText.OptionLabel(Setting.Key, text);
+		string text2 = CommunitySettingsText.OptionLabel(Setting.Key, text);
 		if (text2 != null)
 		{
 			return text2;
 		}
 		if (Setting.Key == "ui_size")
 		{
-			string text3 = OffServerUiSize.OptionLabel(text);
+			string text3 = CommunityUiSize.OptionLabel(text);
 			if (text3 != null)
 			{
 				return text3;

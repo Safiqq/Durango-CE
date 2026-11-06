@@ -36,9 +36,9 @@ public class SellItemWidget : AnimationWidget, IUIInitializable
 
 	private bool _isOpen;
 
-	private bool _offServerAuction;
+	private bool _communityAuction;
 
-	private Action _offServerListed;
+	private Action _communityListed;
 
 	private PresetButton.Style? _registerStyle;
 
@@ -46,33 +46,33 @@ public class SellItemWidget : AnimationWidget, IUIInitializable
 
 	public void OpenAuction(Action onListed)
 	{
-		_offServerListed = onListed;
+		_communityListed = onListed;
 		OpenInner(instant: false);
 		SetAuctionMode(auction: true);
 	}
 
 	public void SetAuctionListed(Action onListed)
 	{
-		_offServerListed = onListed;
+		_communityListed = onListed;
 	}
 
 	public void SetAuctionMode(bool auction)
 	{
-		if (auction && !OffServerAuctionUI.Available)
+		if (auction && !CommunityAuctionUI.Available)
 		{
-			UIManager.SystemMsg(OffServerAuctionUI.Text(OffServerExchange.ConfigReceived ? "auction_off" : "auction_wait"));
+			UIManager.SystemMsg(CommunityAuctionUI.Text(CommunityExchange.ConfigReceived ? "auction_off" : "auction_wait"));
 			auction = false;
 		}
-		bool num = auction != _offServerAuction;
-		_offServerAuction = auction;
+		bool num = auction != _communityAuction;
+		_communityAuction = auction;
 		_priceInput.SetAuctionMode(auction);
-		_itemList.SelectableCount = ((!auction) ? 1 : Math.Max(1, OffServerExchange.MaxPieces));
+		_itemList.SelectableCount = ((!auction) ? 1 : Math.Max(1, CommunityExchange.MaxPieces));
 		if (num && _isOpen)
 		{
 			OnUpdateInventory();
 			if (auction)
 			{
-				UIManager.SystemMsg(OffServerAuctionUI.Text("mode_auction_hint"));
+				UIManager.SystemMsg(CommunityAuctionUI.Text("mode_auction_hint"));
 			}
 		}
 		UpdateModeButton();
@@ -81,7 +81,7 @@ public class SellItemWidget : AnimationWidget, IUIInitializable
 
 	private void UpdateModeButton()
 	{
-		bool flag = OffServerLink.Active && (OffServerAuctionUI.Available || _offServerAuction);
+		bool flag = CommunityLink.Active && (CommunityAuctionUI.Available || _communityAuction);
 		if (!_registerStyle.HasValue)
 		{
 			_registerStyle = _registerButton.GetStyle();
@@ -110,8 +110,8 @@ public class SellItemWidget : AnimationWidget, IUIInitializable
 		}
 		List<string> items = new List<string>
 		{
-			OffServerAuctionUI.Text("mode_sell"),
-			OffServerAuctionUI.Text("mode_auction")
+			CommunityAuctionUI.Text("mode_sell"),
+			CommunityAuctionUI.Text("mode_auction")
 		};
 		StringSelector stringSelector = UIManager.Popup.Tooltip<StringSelector>();
 		stringSelector.Set(items, delegate(int index)
@@ -244,7 +244,7 @@ public class SellItemWidget : AnimationWidget, IUIInitializable
 		{
 			return false;
 		}
-		if (item.Durability.Ratio() < (_offServerAuction ? OffServerExchange.MinDurability : 0.9f))
+		if (item.Durability.Ratio() < (_communityAuction ? CommunityExchange.MinDurability : 0.9f))
 		{
 			return false;
 		}
@@ -253,9 +253,9 @@ public class SellItemWidget : AnimationWidget, IUIInitializable
 
 	private void OnClickRegisterButton()
 	{
-		if (OffServerAuctionPreview.Active && !_offServerAuction)
+		if (CommunityAuctionPreview.Active && !_communityAuction)
 		{
-			UIManager.MessageBox.Show(OffServerAuctionUI.Text("preview_notice"));
+			UIManager.MessageBox.Show(CommunityAuctionUI.Text("preview_notice"));
 		}
 		else
 		{
@@ -268,14 +268,14 @@ public class SellItemWidget : AnimationWidget, IUIInitializable
 			{
 				return;
 			}
-			if (_offServerAuction)
+			if (_communityAuction)
 			{
-				OffServerAuctionUI.AskList(items, _priceInput.GetPrice(), delegate
+				CommunityAuctionUI.AskList(items, _priceInput.GetPrice(), delegate
 				{
 					_priceInput.SetPrice(0L);
-					if (_offServerListed != null)
+					if (_communityListed != null)
 					{
-						_offServerListed();
+						_communityListed();
 					}
 				});
 				return;
@@ -355,11 +355,11 @@ public class SellItemWidget : AnimationWidget, IUIInitializable
 			_priceInput.InsertAlarm(price <= 0);
 		}
 		int count = _itemList.SelectedList.Count;
-		_registerButton.Text = ((count <= 1) ? OffServerAuctionUI.Text("sell_btn") : OffServerAuctionUI.Text("sell_btn_n", count));
-		if (_offServerAuction)
+		_registerButton.Text = ((count <= 1) ? CommunityAuctionUI.Text("sell_btn") : CommunityAuctionUI.Text("sell_btn_n", count));
+		if (_communityAuction)
 		{
-			_registerButton.Text = ((count <= 1) ? OffServerAuctionUI.Text("list_btn") : OffServerAuctionUI.Text("list_btn_n", count));
-			string text = ((count > 0) ? OffServerAuctionUI.CheckSelection(_itemList.SelectedList) : null);
+			_registerButton.Text = ((count <= 1) ? CommunityAuctionUI.Text("list_btn") : CommunityAuctionUI.Text("list_btn_n", count));
+			string text = ((count > 0) ? CommunityAuctionUI.CheckSelection(_itemList.SelectedList) : null);
 			if (text != null)
 			{
 				_registerButton.Disabled = true;

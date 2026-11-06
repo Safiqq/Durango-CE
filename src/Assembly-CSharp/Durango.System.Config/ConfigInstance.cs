@@ -42,7 +42,7 @@ public static class ConfigInstance
 		bool usePCUI = Platform.Instance.UsePCUI;
 		if (Settings != null && usePCUI != _loadedForPcUi)
 		{
-			UnityEngine.Debug.Log("[OffServer] settings list reloaded for the " + (usePCUI ? "PC" : "mobile") + " UI");
+			UnityEngine.Debug.Log("[Community] settings list reloaded for the " + (usePCUI ? "PC" : "mobile") + " UI");
 			LoadFromJson();
 			LoadConfigValue();
 			UIScrollView.FixedScrollWheelFactor = (usePCUI ? 0.4f : 0f);
@@ -153,7 +153,7 @@ public static class ConfigInstance
 
 	private static void HideCreditBefore317()
 	{
-		if (Settings == null || OffServerEmoji.NameTagToggleSupported)
+		if (Settings == null || CommunityEmoji.NameTagToggleSupported)
 		{
 			return;
 		}
@@ -179,7 +179,7 @@ public static class ConfigInstance
 		{
 			num = list.FindIndex((Setting s) => s.Key == "fps");
 		}
-		List<Setting> list2 = OffServerGameplayOptions.BuildSettings();
+		List<Setting> list2 = CommunityGameplayOptions.BuildSettings();
 		list2.RemoveAll(delegate(Setting s)
 		{
 			foreach (List<Setting> value in Settings.Values)
@@ -267,11 +267,11 @@ public static class ConfigInstance
 
 	private static void InjectHotkeySettings()
 	{
-		if (Settings == null || !OffServerHotkeys.Supported || Settings.ContainsKey("hotkey"))
+		if (Settings == null || !CommunityHotkeys.Supported || Settings.ContainsKey("hotkey"))
 		{
 			return;
 		}
-		List<Setting> value = OffServerHotkeys.BuildSettings();
+		List<Setting> value = CommunityHotkeys.BuildSettings();
 		Dictionary<string, List<Setting>> dictionary = new Dictionary<string, List<Setting>>();
 		foreach (KeyValuePair<string, List<Setting>> setting in Settings)
 		{
@@ -290,11 +290,11 @@ public static class ConfigInstance
 
 	private static void InjectVoiceSettings()
 	{
-		if (Settings == null || Settings.ContainsKey("offserver_voice"))
+		if (Settings == null || Settings.ContainsKey("community_voice"))
 		{
 			return;
 		}
-		List<Setting> value = OffServerVoiceSettings.BuildSettings();
+		List<Setting> value = CommunityVoiceSettings.BuildSettings();
 		string text = (Settings.ContainsKey("hotkey") ? "hotkey" : "default");
 		Dictionary<string, List<Setting>> dictionary = new Dictionary<string, List<Setting>>();
 		foreach (KeyValuePair<string, List<Setting>> setting in Settings)
@@ -302,19 +302,19 @@ public static class ConfigInstance
 			dictionary[setting.Key] = setting.Value;
 			if (setting.Key == text)
 			{
-				dictionary["offserver_voice"] = value;
+				dictionary["community_voice"] = value;
 			}
 		}
-		if (!dictionary.ContainsKey("offserver_voice"))
+		if (!dictionary.ContainsKey("community_voice"))
 		{
-			dictionary["offserver_voice"] = value;
+			dictionary["community_voice"] = value;
 		}
 		Settings = dictionary;
 	}
 
 	private static void InjectDiscordLinkSetting()
 	{
-		if (Settings == null || !Settings.ContainsKey("account") || !OffServerLink.Active)
+		if (Settings == null || !Settings.ContainsKey("account") || !CommunityLink.Active)
 		{
 			return;
 		}
@@ -369,7 +369,7 @@ public static class ConfigInstance
 			valueSetting.Key = "move_redeem";
 			valueSetting.Type = SettingType.ButtonBox;
 			valueSetting.GridNumber = ((!(list[num] is ValueSetting valueSetting2)) ? 1 : valueSetting2.GridNumber);
-			valueSetting.PrepareLabelText = OffServerMoveDevice.RedeemButtonLabel;
+			valueSetting.PrepareLabelText = CommunityMoveDevice.RedeemButtonLabel;
 			list.Insert(num + 1, valueSetting);
 		}
 	}
@@ -570,16 +570,16 @@ public static class ConfigInstance
 			value = ChangeScreenMode(value);
 			break;
 		case "target_lock_mode":
-			OffServerGameplayOptions.TargetLockMode = value;
+			CommunityGameplayOptions.TargetLockMode = value;
 			break;
 		case "blood_amount":
-			OffServerBloodFx.SetAmount(value);
+			CommunityBloodFx.SetAmount(value);
 			break;
 		case "blood_color":
-			OffServerBloodFx.SetColor(value);
+			CommunityBloodFx.SetColor(value);
 			break;
 		case "blood_stain_time":
-			OffServerBloodFx.SetStainSeconds(OffServerGameplayOptions.ParseBloodStainSeconds(value));
+			CommunityBloodFx.SetStainSeconds(CommunityGameplayOptions.ParseBloodStainSeconds(value));
 			break;
 		case "anti_aliasing":
 			value = ChangeAntiAliasing(value);
@@ -609,24 +609,24 @@ public static class ConfigInstance
 			value = UiMode.Normalize(value);
 			break;
 		case "max_visible_players":
-			PlayerManager.MaxVisiblePlayers = OffServerGameplayOptions.ParseMaxVisiblePlayers(value);
+			PlayerManager.MaxVisiblePlayers = CommunityGameplayOptions.ParseMaxVisiblePlayers(value);
 			break;
 		case "combat_move_cancel":
-			OffServerCombatMoveCancel.OnSetting(value, save);
+			CommunityCombatMoveCancel.OnSetting(value, save);
 			break;
 		case "mobile_move_mode":
-			value = OffServerMobileMove.OnSetting(value);
+			value = CommunityMobileMove.OnSetting(value);
 			break;
 		case "net_transport":
-			OffServerUdp.OnSetting(value, save);
+			CommunityUdp.OnSetting(value, save);
 			break;
-		case "offserver_voice_mode":
-		case "offserver_voice_level":
-		case "offserver_voice_volume":
-		case "offserver_voice_sensitivity":
+		case "community_voice_mode":
+		case "community_voice_level":
+		case "community_voice_volume":
+		case "community_voice_sensitivity":
 			if (save)
 			{
-				OffServerVoiceSettings.Apply(key, value);
+				CommunityVoiceSettings.Apply(key, value);
 			}
 			break;
 		}
@@ -732,7 +732,7 @@ public static class ConfigInstance
 			ChangeVerticalSync(value);
 			break;
 		case "show_fps":
-			OffServerFpsCounter.SetVisible(value);
+			CommunityFpsCounter.SetVisible(value);
 			break;
 		case "attack_range_player":
 			CombatSystem.PlayerAttackRangeEnabled = value;
@@ -746,16 +746,16 @@ public static class ConfigInstance
 		case "lava_shield_fx":
 			if (save)
 			{
-				OffServerLavaShieldNet.OnSettingChanged(value);
+				CommunityLavaShieldNet.OnSettingChanged(value);
 			}
 			break;
 		case "blood_fx":
-			OffServerBloodFx.Enabled = value;
+			CommunityBloodFx.Enabled = value;
 			break;
-		case "offserver_voice_deaf":
+		case "community_voice_deaf":
 			if (save)
 			{
-				OffServerVoiceSettings.Apply(key, value);
+				CommunityVoiceSettings.Apply(key, value);
 			}
 			break;
 		case "mouse_reversed":
@@ -772,7 +772,7 @@ public static class ConfigInstance
 
 	private static void ApplyShowNameFlags(bool show)
 	{
-		if (OffServerEmoji.SetShowNameTags(show))
+		if (CommunityEmoji.SetShowNameTags(show))
 		{
 			UILabel.RefreshAllEmoji();
 			if (GameSystem<SocialSystem>.HasInstance())
@@ -951,14 +951,14 @@ public static class ConfigInstance
 
 	public static void NotifyAction(string key, ValueSetting op = null)
 	{
-		if (OffServerSettingsMenu.HandleAction(key) || OffServerHotkeys.HandleAction(key) || OffServerVoiceSettings.HandleAction(key))
+		if (CommunitySettingsMenu.HandleAction(key) || CommunityHotkeys.HandleAction(key) || CommunityVoiceSettings.HandleAction(key))
 		{
 			return;
 		}
 		switch (key)
 		{
 		case "lang_packs":
-			OffServerLangPack.Open();
+			CommunityLangPack.Open();
 			break;
 		case "select_character":
 			Durango.Utils.Singleton<GameManager>.Instance().MoveToTitle();
@@ -1021,22 +1021,22 @@ public static class ConfigInstance
 			break;
 		}
 		case "coupon":
-			if (!OffServerCouponUI.Open(OffServerCouponUI.Mode.Coupon))
+			if (!CommunityCouponUI.Open(CommunityCouponUI.Mode.Coupon))
 			{
 				UIManager.SystemMsg("เป\u0e34ดหน\u0e49าค\u0e39ปองไม\u0e48สำเร\u0e47จ กร\u0e38ณาเป\u0e34ดหน\u0e49าต\u0e31\u0e49งค\u0e48าใหม\u0e48");
 			}
 			break;
 		case "move_redeem":
-			if (!OffServerCouponUI.Open(OffServerCouponUI.Mode.Move))
+			if (!CommunityCouponUI.Open(CommunityCouponUI.Mode.Move))
 			{
-				UIManager.Popup.Tooltip<TextInputPopup>().Show(SendCoupon, OffServerMoveDevice.RedeemButtonLabel);
+				UIManager.Popup.Tooltip<TextInputPopup>().Show(SendCoupon, CommunityMoveDevice.RedeemButtonLabel);
 			}
 			break;
 		case "discord_link":
-			OffServerDiscordLink.Begin();
+			CommunityDiscordLink.Begin();
 			break;
 		case "move_device":
-			OffServerMoveDevice.Begin();
+			CommunityMoveDevice.Begin();
 			break;
 		case "credit":
 			UIManager.FindScript<CreditGroup>().Open();
@@ -1065,16 +1065,16 @@ public static class ConfigInstance
 		{
 			return;
 		}
-		bool moveCode = OffServerMoveDevice.LooksLikeCode(coupon);
+		bool moveCode = CommunityMoveDevice.LooksLikeCode(coupon);
 		Connections.Frontend.Send(new AcceptTENCoupon
 		{
 			CouponNum = coupon,
-			ToyToken = (OffServerLink.Active ? OffServerLink.AccountId : Platform.Instance.Token)
+			ToyToken = (CommunityLink.Active ? CommunityLink.AccountId : Platform.Instance.Token)
 		}).On<OK>(delegate
 		{
 			if (moveCode)
 			{
-				OffServerMoveDevice.OnRedeemed();
+				CommunityMoveDevice.OnRedeemed();
 			}
 			else
 			{

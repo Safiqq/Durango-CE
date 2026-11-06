@@ -46,7 +46,7 @@ public class PlayerFloatingControl : MonoBehaviour
 		_baseClanLabelPos = _clantagLabel.transform.localPosition;
 		Transform transform = ((_top != null) ? _top.Find("VoiceIcon") : null);
 		_voiceIcon = ((transform != null) ? transform.GetComponent<UISprite>() : null);
-		OffServerVoiceUI.SetupHeadIcon(_voiceIcon);
+		CommunityVoiceUI.SetupHeadIcon(_voiceIcon);
 	}
 
 	public void Process(bool hideLocalPlayer)
@@ -58,7 +58,7 @@ public class PlayerFloatingControl : MonoBehaviour
 			bool flag2 = Target.WorldLineRenderer.IsDrawing();
 			if (_voiceIcon != null)
 			{
-				bool flag3 = OffServerVoiceUI.HeadIconFor(Target);
+				bool flag3 = CommunityVoiceUI.HeadIconFor(Target);
 				_iconBg.SetActive(flag2 || flag3);
 				_drawIcon.SetActive(flag2 && !flag3);
 				_voiceIcon.gameObject.SetActive(flag3);

@@ -160,7 +160,7 @@ public class EquipSystem : GameSystem<EquipSystem>
 
 	public void EquipItem(ItemData item)
 	{
-		OffServerNinePresets.EquipItem(this, item);
+		CommunityNinePresets.EquipItem(this, item);
 	}
 
 	public void EquipItem(EquipSlotType presetType, string slot, ItemData item, Action onReply = null)
@@ -227,7 +227,7 @@ public class EquipSystem : GameSystem<EquipSystem>
 
 	public void ChangePreset(EquipSlotType presetType, [CanBeNull] Action onReply = null)
 	{
-		OffServerNinePresets.ChangePreset(this, presetType, onReply);
+		CommunityNinePresets.ChangePreset(this, presetType, onReply);
 	}
 
 	public void AttachAccessory(string id)
@@ -245,7 +245,7 @@ public class EquipSystem : GameSystem<EquipSystem>
 
 	public bool IsEquippedItem([NotNull] ItemData item)
 	{
-		return OffServerNinePresets.IsEquippedItem(this, item);
+		return CommunityNinePresets.IsEquippedItem(this, item);
 	}
 
 	public ItemData FindEquippedItem(EquipSlotType presetType, params string[] slots)
@@ -270,7 +270,7 @@ public class EquipSystem : GameSystem<EquipSystem>
 
 	public static IEnumerable<EquipSlotType> EnumerateEquipPresetTypes(bool includeAvatar = false)
 	{
-		return OffServerNinePresets.Enumerate(includeAvatar);
+		return CommunityNinePresets.Enumerate(includeAvatar);
 	}
 
 	[CanBeNull]

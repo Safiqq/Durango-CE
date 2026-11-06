@@ -391,7 +391,7 @@ public class PrologueManager : Durango.Utils.Singleton<PrologueManager>
 						if (ok)
 						{
 							SoundManager.PlayEvent("ui_new_character_created");
-							FinishCreateCharacter(userName, region, display.Gender, OffServerLink.Active ? Shared.Player.Job.Invalid : display.Job.Value.Value, display.MakeDisplay(), (int)display.Job.Value.Value);
+							FinishCreateCharacter(userName, region, display.Gender, CommunityLink.Active ? Shared.Player.Job.Invalid : display.Job.Value.Value, display.MakeDisplay(), (int)display.Job.Value.Value);
 						}
 						else
 						{
@@ -971,7 +971,7 @@ public class PrologueManager : Durango.Utils.Singleton<PrologueManager>
 			voice_type = display.VoiceType,
 			body_size = display.BodySize
 		});
-		if (OffServerLink.Active)
+		if (CommunityLink.Active)
 		{
 			JObject jObject = JObject.Parse(text);
 			jObject["starter_outfit"] = createCharacterInfo.StarterOutfit;

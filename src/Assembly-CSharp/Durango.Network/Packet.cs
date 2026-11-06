@@ -19,7 +19,7 @@ public struct Packet
 	{
 		int count = SnappyCodec.Uncompress(payload, payloadOffset, payloadSize, decompressingBuffer, 0);
 		byte[] buf = decompressingBuffer;
-		OffServerI18n.Localize(ref buf, ref count);
+		CommunityI18n.Localize(ref buf, ref count);
 		using MemoryStream stream = new MemoryStream(buf, 0, count);
 		using Unpacker unpacker = Unpacker.Create(stream);
 		unpacker.Read();

@@ -1,5 +1,5 @@
 using Durango.Logic.Clusters;
-using OffServer;
+using Community;
 using UnityEngine;
 
 namespace Durango.UI;
@@ -48,7 +48,7 @@ public class ExpGaugeBase : UIWidget
 		if (Application.isPlaying)
 		{
 			GameSystem<StatisticsSystem>.Instance().StatisticsUpdated += OnUpdateStatistics;
-			OffServerSeasonPass.Updated += OnUpdateStatistics;
+			CommunitySeasonPass.Updated += OnUpdateStatistics;
 			SeasonLevelClient.Attach();
 			SeasonLevelHud.Attach(this);
 			Refresh(instant: true);
@@ -61,7 +61,7 @@ public class ExpGaugeBase : UIWidget
 		if (Application.isPlaying)
 		{
 			GameSystem<StatisticsSystem>.Instance().StatisticsUpdated -= OnUpdateStatistics;
-			OffServerSeasonPass.Updated -= OnUpdateStatistics;
+			CommunitySeasonPass.Updated -= OnUpdateStatistics;
 		}
 	}
 
@@ -78,9 +78,9 @@ public class ExpGaugeBase : UIWidget
 	private void Set(int exp, bool instant)
 	{
 		int level = GameSystem<StatisticsSystem>.Instance().Level;
-		if (OffServerSeasonPass.UseSeasonHud && !SeasonLevelHud.UsesDedicatedHud)
+		if (CommunitySeasonPass.UseSeasonHud && !SeasonLevelHud.UsesDedicatedHud)
 		{
-			Set(level, OffServerSeasonPass.SeasonRatio(OffServerSeasonPass.Current), instant);
+			Set(level, CommunitySeasonPass.SeasonRatio(CommunitySeasonPass.Current), instant);
 			return;
 		}
 		GameSystem<StatisticsSystem>.Instance().GetExpRange(level, out var min, out var max);

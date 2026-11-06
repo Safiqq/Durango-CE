@@ -12,7 +12,7 @@ using Durango.Utils;
 using Durango.Utils.Extensions;
 using JetBrains.Annotations;
 using Messages;
-using OffServer.WeaponMastery;
+using Community.WeaponMastery;
 using Shared.Battle;
 using Shared.Region;
 using UnityEngine;
@@ -175,7 +175,7 @@ public class CombatSystem : GameSystem<CombatSystem>
 		{
 			bool num = damaged.AttackerId == PlayerBehavior.LocalPlayer.EntityId;
 			bool flag = damaged.VictimId == PlayerBehavior.LocalPlayer.EntityId;
-			if (num && OffServerLink.MhHitStop && !GameManager.IsPrologueMode && damaged.Damage.Result == DamageResult.Hit && damaged.Damage.Value > 0 && MhHitPose.IsMelee(damaged.Damage.AttackType) && _usingAction.IsPlayingSwing(damaged.VictimId, PlayerBehavior.LocalPlayer.LastPlayerClipInfo?.Clip) && Durango.Utils.Singleton<AnimalManager>.Instance().GetAnimal(damaged.VictimId) != null)
+			if (num && CommunityLink.MhHitStop && !GameManager.IsPrologueMode && damaged.Damage.Result == DamageResult.Hit && damaged.Damage.Value > 0 && MhHitPose.IsMelee(damaged.Damage.AttackType) && _usingAction.IsPlayingSwing(damaged.VictimId, PlayerBehavior.LocalPlayer.LastPlayerClipInfo?.Clip) && Durango.Utils.Singleton<AnimalManager>.Instance().GetAnimal(damaged.VictimId) != null)
 			{
 				PlayerBehavior.LocalPlayer.HoldHitPose();
 			}
@@ -196,7 +196,7 @@ public class CombatSystem : GameSystem<CombatSystem>
 			Connections.Frontend.Send(msg);
 		});
 		Durango.Utils.Singleton<GameManager>.Instance().AddOnReady(OnReady);
-		OffServerCombatMoveCancel.Install();
+		CommunityCombatMoveCancel.Install();
 	}
 
 	private void Update()
@@ -470,7 +470,7 @@ public class CombatSystem : GameSystem<CombatSystem>
 		{
 			return false;
 		}
-		if (OffServerCounterMotion.Locked)
+		if (CommunityCounterMotion.Locked)
 		{
 			return false;
 		}
@@ -523,11 +523,11 @@ public class CombatSystem : GameSystem<CombatSystem>
 		{
 			return;
 		}
-		bool flag = targetSelect && !GameManager.IsPrologueMode && OffServerGameplayOptions.TargetLockMode == "nearest" && KUtility.GetSize(battleAction.Data.AttackInfo) > 0;
+		bool flag = targetSelect && !GameManager.IsPrologueMode && CommunityGameplayOptions.TargetLockMode == "nearest" && KUtility.GetSize(battleAction.Data.AttackInfo) > 0;
 		if (flag || (KUtility.GetSize(battleAction.Data.AttackInfo) > 0 && (target == null || !target.IsAlive)))
 		{
 			target = FindAutoTarget();
-			if (target == null && OffServerGameplayOptions.TargetLockMode == "manual")
+			if (target == null && CommunityGameplayOptions.TargetLockMode == "manual")
 			{
 				return;
 			}
@@ -541,7 +541,7 @@ public class CombatSystem : GameSystem<CombatSystem>
 
 	private void RefreshNearestLock()
 	{
-		if (CombatMode && !GameManager.IsPrologueMode && !(_target.Value == null) && !(OffServerGameplayOptions.TargetLockMode != "nearest"))
+		if (CombatMode && !GameManager.IsPrologueMode && !(_target.Value == null) && !(CommunityGameplayOptions.TargetLockMode != "nearest"))
 		{
 			DamageableEntity target = FindAutoTarget();
 			_usingAction.RefreshApproachTarget(target);
@@ -551,7 +551,7 @@ public class CombatSystem : GameSystem<CombatSystem>
 
 	internal DamageableEntity FindAutoTarget()
 	{
-		string targetLockMode = OffServerGameplayOptions.TargetLockMode;
+		string targetLockMode = CommunityGameplayOptions.TargetLockMode;
 		if (targetLockMode == "manual")
 		{
 			return null;
@@ -725,11 +725,11 @@ public class CombatSystem : GameSystem<CombatSystem>
 
 	public static bool IsPvPEnabled()
 	{
-		if (OffServerDuel.Fighting)
+		if (CommunityDuel.Fighting)
 		{
 			return true;
 		}
-		if (OffServerRanked.Fighting)
+		if (CommunityRanked.Fighting)
 		{
 			return true;
 		}
@@ -746,19 +746,19 @@ public class CombatSystem : GameSystem<CombatSystem>
 		{
 			return false;
 		}
-		if (OffServerRanked.InMatch)
+		if (CommunityRanked.InMatch)
 		{
 			if (IsPvPEnabled())
 			{
-				return OffServerRanked.IsEnemy(otherPlayer.EntityId);
+				return CommunityRanked.IsEnemy(otherPlayer.EntityId);
 			}
 			return false;
 		}
-		if (OffServerDuel.InDuel || OffServerDuel.IsDueling(otherPlayer.EntityId))
+		if (CommunityDuel.InDuel || CommunityDuel.IsDueling(otherPlayer.EntityId))
 		{
-			if (OffServerDuel.Fighting)
+			if (CommunityDuel.Fighting)
 			{
-				return OffServerDuel.IsOpponent(otherPlayer.EntityId);
+				return CommunityDuel.IsOpponent(otherPlayer.EntityId);
 			}
 			return false;
 		}

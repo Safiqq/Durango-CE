@@ -356,7 +356,7 @@ public class ItemInfoView : MonoBehaviour
 			color = PresetColor.UIBlack;
 			text = Util.LocalizedDurability(durability.Get(), durability.Max());
 		}
-		float floatAttribute = item.GetFloatAttribute("offserver_durability_level");
+		float floatAttribute = item.GetFloatAttribute("community_durability_level");
 		if (floatAttribute > 0f)
 		{
 			float num4 = durability.Max();
@@ -470,13 +470,13 @@ public class ItemInfoView : MonoBehaviour
 		{
 			return null;
 		}
-		float floatAttribute = _targetItem.GetFloatAttribute("offserver_durability_level");
+		float floatAttribute = _targetItem.GetFloatAttribute("community_durability_level");
 		if (floatAttribute > 0f && _targetItem.Durability != null)
 		{
 			float num3 = _targetItem.Durability.Max();
 			float num4 = Mathf.Clamp(_targetItem.Durability.Get(), 0f, num3);
 			float num5 = ((num3 > 0f) ? (num4 / num3 * 100f) : 0f);
-			float floatAttribute2 = _targetItem.GetFloatAttribute("offserver_durability_repair_loss");
+			float floatAttribute2 = _targetItem.GetFloatAttribute("community_durability_repair_loss");
 			text = $"Lv.{Mathf.RoundToInt(floatAttribute)} · {num5:0.#}%\n{num4:0.#} / {num3:0.#}\n" + text;
 			if (floatAttribute2 > 0f)
 			{

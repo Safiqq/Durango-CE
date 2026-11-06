@@ -59,7 +59,7 @@ public class ContextActionButtonsBase : MonoBehaviour
 			ContextActionButtonBase contextActionButtonBase = _actionButtons[num2];
 			contextActionButtonBase.transform.localPosition = _actionSlotPositions[num2];
 			contextActionButtonBase.Hide();
-			OffServerHudLayout.Register("context_slot_" + num2, contextActionButtonBase.transform, "คำส\u0e31\u0e48ง / Action " + (num2 + 1), "context");
+			CommunityHudLayout.Register("context_slot_" + num2, contextActionButtonBase.transform, "คำส\u0e31\u0e48ง / Action " + (num2 + 1), "context");
 			Transform transform = base.transform.Find("Backgrounds");
 			if (!(transform != null))
 			{
@@ -78,7 +78,7 @@ public class ContextActionButtonsBase : MonoBehaviour
 			}
 			if (transform2 != null && num3 < 0.01f)
 			{
-				OffServerHudLayout.AttachCompanion(contextActionButtonBase.transform, transform2);
+				CommunityHudLayout.AttachCompanion(contextActionButtonBase.transform, transform2);
 			}
 		}
 	}

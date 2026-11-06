@@ -12,7 +12,7 @@ using Durango.Utils;
 using JetBrains.Annotations;
 using L10N;
 using Messages;
-using OffServer.ClanPillar;
+using Community.ClanPillar;
 using Shared.Region;
 using Shared.System;
 using UnityEngine;

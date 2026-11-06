@@ -44,7 +44,7 @@ public class UsingAction
 
 	private PredictTimer _tamingTimer;
 
-	private OffServerCombatMoveCancel.Swing _cmc;
+	private CommunityCombatMoveCancel.Swing _cmc;
 
 	public PredictTimer TamingTimer
 	{
@@ -139,7 +139,7 @@ public class UsingAction
 	{
 		if (HasValue())
 		{
-			if (!OffServerCounterMotion.Locked)
+			if (!CommunityCounterMotion.Locked)
 			{
 				GameSystem<global::InputSystem>.Instance().MoveLock = false;
 			}
@@ -175,11 +175,11 @@ public class UsingAction
 		{
 			return false;
 		}
-		if (OffServerCounterMotion.Locked)
+		if (CommunityCounterMotion.Locked)
 		{
 			return false;
 		}
-		if (!OffServerCombatMoveCancel.Cancel(_cmc, Time.time))
+		if (!CommunityCombatMoveCancel.Cancel(_cmc, Time.time))
 		{
 			return false;
 		}
@@ -273,19 +273,19 @@ public class UsingAction
 						StartAt = predictedServerTime,
 						TargetEntityId = ((!(_target == null)) ? _target.GetEntityId() : null),
 						TargetTile = ((!(_target == null)) ? _target.GetTile() : ((Point2?)null)),
-						MoveCancelMode = OffServerCombatMoveCancel.ReportedMode
+						MoveCancelMode = CommunityCombatMoveCancel.ReportedMode
 					});
 					num = _action.RecoveryTime(_action.Data.Meta.ActionLength);
 					LocalMotionUpdater motionUpdater = PlayerController.MotionUpdater;
 					string motion = actionMotion;
 					float playbackRate = _action.PlaybackRate;
 					motionUpdater.Motion(motion, 0f, playbackRate);
-					_cmc = OffServerCombatMoveCancel.Begin(_action, _target, predictedServerTime, time);
+					_cmc = CommunityCombatMoveCancel.Begin(_action, _target, predictedServerTime, time);
 					if (this.UsedAction != null)
 					{
 						this.UsedAction(_action, _target);
 					}
-					OffServerCombatMoveCancel.AfterUse(_cmc);
+					CommunityCombatMoveCancel.AfterUse(_cmc);
 				}
 				else if (_tamingItem != null)
 				{

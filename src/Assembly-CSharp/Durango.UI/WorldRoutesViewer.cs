@@ -4,7 +4,7 @@ using Durango.Logic;
 using Durango.UI.Control;
 using JetBrains.Annotations;
 using Messages;
-using OffServer.ClanPillar;
+using Community.ClanPillar;
 using Shared.Region;
 using UnityEngine;
 using Yaml;

@@ -120,10 +120,10 @@ public class Clusters
 			_clusters.Add(clusterKey, GameManager.ConnectCluster);
 			GameManager.SetCluster(clusterKey, GameManager.ConnectCluster.GatewayUrlRoot, GameManager.ConnectCluster.Mode);
 		}
-		else if (OffServerLink.Active)
+		else if (CommunityLink.Active)
 		{
 			_clusters.Clear();
-			LoadOffServerClusters();
+			LoadCommunityClusters();
 			return;
 		}
 		bool flag = false;
@@ -148,15 +148,15 @@ public class Clusters
 		}
 	}
 
-	private void LoadOffServerClusters()
+	private void LoadCommunityClusters()
 	{
-		List<string[]> list = new List<string[]>(OffServerLink.MultiServers);
-		string gateway = OffServerLink.Gateway;
-		if (OffServerLink.Enabled && !list.Any((string[] s) => OffServerLink.SameGateway(s[1], gateway)))
+		List<string[]> list = new List<string[]>(CommunityLink.MultiServers);
+		string gateway = CommunityLink.Gateway;
+		if (CommunityLink.Enabled && !list.Any((string[] s) => CommunityLink.SameGateway(s[1], gateway)))
 		{
 			list.Insert(0, new string[2]
 			{
-				OffServerLink.Name,
+				CommunityLink.Name,
 				gateway
 			});
 		}
@@ -168,14 +168,14 @@ public class Clusters
 			{
 				continue;
 			}
-			string displayName = (string.IsNullOrEmpty(item[0]) ? ("OffServer " + text2) : item[0]);
-			string text3 = "os_" + text2.TrimEnd('/').ToLowerInvariant();
+			string displayName = (string.IsNullOrEmpty(item[0]) ? ("Community Server " + text2) : item[0]);
+			string text3 = "cs_" + text2.TrimEnd('/').ToLowerInvariant();
 			if (!_clusters.ContainsKey(text3))
 			{
-				Cluster cluster = OffServerLink.CreateClusterNamed(displayName, text2);
+				Cluster cluster = CommunityLink.CreateClusterNamed(displayName, text2);
 				cluster.IsRecommendable = false;
 				_clusters.Add(text3, cluster);
-				if (text == null && OffServerLink.SameGateway(text2, gateway))
+				if (text == null && CommunityLink.SameGateway(text2, gateway))
 				{
 					text = text3;
 				}
@@ -305,7 +305,7 @@ public class Clusters
 		{
 			if (!(capturedNpsn != Platform.Instance.NPSN))
 			{
-				OffServerLink.NoteLoginGate(response);
+				CommunityLink.NoteLoginGate(response);
 				Account obj = Json.Read<Account>(result);
 				if (callback != null)
 				{

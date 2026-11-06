@@ -41,7 +41,7 @@ public class InputKeyboard : InputDispatcher<InputKeyboard.Message>
 		{
 			InitDefaultKey();
 			InitMenuKey();
-			OffServerHotkeys.Attach(this);
+			CommunityHotkeys.Attach(this);
 			_init = true;
 		}
 	}
@@ -49,14 +49,14 @@ public class InputKeyboard : InputDispatcher<InputKeyboard.Message>
 	public void Process()
 	{
 		_candidateKeys.Clear();
-		if (OffServerHotkeys.BlockKeyboard)
+		if (CommunityHotkeys.BlockKeyboard)
 		{
 			return;
 		}
 		Layer currentLayer = GetCurrentLayer();
 		Modifier pressedModifier = GetPressedModifier();
 		Modifier modifier = pressedModifier & ~(Modifier.LeftShift | Modifier.RightShift);
-		bool flag = modifier != pressedModifier && OffServerRunButton.Available;
+		bool flag = modifier != pressedModifier && CommunityRunButton.Available;
 		foreach (KeyValuePair<KeySet, InputCommand> item in _keyMap)
 		{
 			KeySet key = item.Key;
@@ -419,7 +419,7 @@ public class InputKeyboard : InputDispatcher<InputKeyboard.Message>
 		{
 			return Layer.InputText;
 		}
-		if (OffServerCareerUI.IsOpen || TooltipBase.HasModal() || (UIManager.MessageBox != null && UIManager.MessageBox.IsShow))
+		if (CommunityCareerUI.IsOpen || TooltipBase.HasModal() || (UIManager.MessageBox != null && UIManager.MessageBox.IsShow))
 		{
 			return Layer.ModalPopupUI;
 		}

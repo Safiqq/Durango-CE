@@ -34,17 +34,17 @@ public class Commodity
 
 	private float _requestAt;
 
-	public object OffServerTag;
+	public object CommunityTag;
 
-	public string OffServerPriceText;
+	public string CommunityPriceText;
 
-	public string OffServerDurationText;
+	public string CommunityDurationText;
 
-	public string OffServerDurationSuffix;
+	public string CommunityDurationSuffix;
 
-	public string OffServerNameSuffix;
+	public string CommunityNameSuffix;
 
-	public Action OffServerReceive;
+	public Action CommunityReceive;
 
 	public void Set(Product msg)
 	{

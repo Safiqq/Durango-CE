@@ -439,7 +439,7 @@ public class UIDrawCall : MonoBehaviour
 			mTextureClip = true;
 		}
 		this.shader = Shader.Find(text);
-		if (OffServerShaderRemap.Enabled)
+		if (CommunityShaderRemap.Enabled)
 		{
 			List<string> list = new List<string>();
 			if (mMaterial != null)
@@ -454,7 +454,7 @@ public class UIDrawCall : MonoBehaviour
 			{
 				list.Add("CLIP" + mClipCount);
 			}
-			Shader shader = OffServerShaderRemap.FindProjectShader(text, list.ToArray());
+			Shader shader = CommunityShaderRemap.FindProjectShader(text, list.ToArray());
 			if (shader != null)
 			{
 				this.shader = shader;

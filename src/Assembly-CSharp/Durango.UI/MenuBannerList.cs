@@ -44,11 +44,11 @@ public class MenuBannerList : MenuListWidgetBase
 
 	private ListObjectPool<PromotionBannerWidget> _promotionBannerWidgets;
 
-	private bool _offServerPortrait;
+	private bool _communityPortrait;
 
 	private static PromotionLink RankedLink => new PromotionLink
 	{
-		HudText = OffServerRanked.T("ดวล\nจ\u0e31ดอ\u0e31นด\u0e31บ!", "Ranked\nduel!"),
+		HudText = CommunityRanked.T("ดวล\nจ\u0e31ดอ\u0e31นด\u0e31บ!", "Ranked\nduel!"),
 		BackgroundColor = "5A1F1ADC",
 		Image = "warprush_banner",
 		WebLink = "ui://PvpRanked"
@@ -65,8 +65,8 @@ public class MenuBannerList : MenuListWidgetBase
 	public void Show(bool instant, bool isPortrait)
 	{
 		Init();
-		OffServerBannerStyle.Fetch(force: false);
-		_offServerPortrait = isPortrait;
+		CommunityBannerStyle.Fetch(force: false);
+		_communityPortrait = isPortrait;
 		base.gameObject.SetActive(value: true);
 		UpdateHoldersOffset(isPortrait);
 		UpdateLayout(isPortrait);
@@ -92,22 +92,22 @@ public class MenuBannerList : MenuListWidgetBase
 		_promotionBannerWidgets = new ListObjectPool<PromotionBannerWidget>();
 		_promotionBannerWidgets.BaseObject = _bannerWidgetBase;
 		_promotionBannerWidgets.UseBase = true;
-		OffServerBannerStyle.Changed += OffServerBannerChanged;
+		CommunityBannerStyle.Changed += CommunityBannerChanged;
 		base.OnInitialized();
 	}
 
-	private void OffServerBannerChanged()
+	private void CommunityBannerChanged()
 	{
 		if (this == null)
 		{
-			OffServerBannerStyle.Changed -= OffServerBannerChanged;
+			CommunityBannerStyle.Changed -= CommunityBannerChanged;
 			return;
 		}
 		RefreshBanner(GetCustomLiks().Concat(GetPromotionLinks()));
 		if (base.gameObject.activeInHierarchy)
 		{
-			UpdateHoldersOffset(_offServerPortrait);
-			UpdateLayout(_offServerPortrait);
+			UpdateHoldersOffset(_communityPortrait);
+			UpdateLayout(_communityPortrait);
 		}
 	}
 
@@ -117,7 +117,7 @@ public class MenuBannerList : MenuListWidgetBase
 		int num = 0;
 		foreach (PromotionLink link in links)
 		{
-			if (PromotionBannerWidget.IsShowPeriod(link) && OffServerBannerStyle.Shows(link))
+			if (PromotionBannerWidget.IsShowPeriod(link) && CommunityBannerStyle.Shows(link))
 			{
 				_promotionBannerWidgets.GetNext().Set(link);
 			}
@@ -184,7 +184,7 @@ public class MenuBannerList : MenuListWidgetBase
 	{
 		if (GameSystem<MenuSystem>.Instance().IsEnabled(MenuType.PvpIsland))
 		{
-			yield return OffServerRanked.ReplacesBrawl ? RankedLink : _customLinks[0];
+			yield return CommunityRanked.ReplacesBrawl ? RankedLink : _customLinks[0];
 		}
 		if (GameSystem<MenuSystem>.Instance().IsEnabled(MenuType.Music))
 		{

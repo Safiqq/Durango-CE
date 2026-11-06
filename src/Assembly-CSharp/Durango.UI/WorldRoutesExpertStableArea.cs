@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Durango.Logic.Explore;
 using L10N;
 using Messages;
-using OffServer.ClanPillar;
+using Community.ClanPillar;
 using Shared.Region;
 using UnityEngine;
 

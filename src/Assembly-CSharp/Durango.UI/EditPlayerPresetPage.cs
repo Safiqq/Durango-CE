@@ -161,7 +161,7 @@ public class EditPlayerPresetPage : MonoBehaviour, IEditPlayerDisplayPage
 			_crosshairMarker.gameObject.SetActive(value: false);
 		}
 		_selectedJobLabel.text = job.GetName();
-		if (OffServerLink.Active)
+		if (CommunityLink.Active)
 		{
 			_infoTitleLabel.text = "เล\u0e37อกร\u0e39ปล\u0e31กษณ\u0e4cเร\u0e34\u0e48มต\u0e49น";
 			_infoDescriptionLabel.text = "ช\u0e38ดน\u0e35\u0e49เป\u0e47นร\u0e39ปล\u0e31กษณ\u0e4cของต\u0e31วละคร ค\u0e38ณจะเล\u0e37อกอาช\u0e35พและร\u0e31บสก\u0e34ลเร\u0e34\u0e48มต\u0e49นเม\u0e37\u0e48อเด\u0e34นทางถ\u0e36งเกาะเทม";

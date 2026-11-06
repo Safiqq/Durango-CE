@@ -64,7 +64,7 @@ public class BattleActionButtonContainer : MonoBehaviour
 		foreach (SlotArgument slotArgument in array)
 		{
 			InitializeButton(slotArgument, pressed);
-			OffServerHudLayout.Register("battle_slot_" + num, slotArgument.Button.transform, "ต\u0e48อส\u0e39\u0e49 / Skill " + (num + 1), "combat");
+			CommunityHudLayout.Register("battle_slot_" + num, slotArgument.Button.transform, "ต\u0e48อส\u0e39\u0e49 / Skill " + (num + 1), "combat");
 			num++;
 		}
 		InitializeButton(_petActionSlot, delegate(BattleActionButton btn, bool press)
@@ -85,8 +85,8 @@ public class BattleActionButtonContainer : MonoBehaviour
 
 	private void Start()
 	{
-		OffServerHudLayout.Register("battle_pet", _petActionSlot.Button.transform, "สก\u0e34ลส\u0e31ตว\u0e4c / Pet skill", "combat");
-		OffServerHudLayout.Register("battle_tame", _tameActinoSlot.Button.transform, "จ\u0e31บส\u0e31ตว\u0e4c / Capture", "combat");
+		CommunityHudLayout.Register("battle_pet", _petActionSlot.Button.transform, "สก\u0e34ลส\u0e31ตว\u0e4c / Pet skill", "combat");
+		CommunityHudLayout.Register("battle_tame", _tameActinoSlot.Button.transform, "จ\u0e31บส\u0e31ตว\u0e4c / Capture", "combat");
 	}
 
 	private void InitializeButton(SlotArgument args, Action<BattleActionButton, bool> pressed)

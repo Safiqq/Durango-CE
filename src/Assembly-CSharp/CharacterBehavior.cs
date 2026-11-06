@@ -396,7 +396,7 @@ public abstract class CharacterBehavior : MonoBehaviour
 		{
 			IntegratedEffect.Emit(_hitEffect, Biome.Invalid, position, Quaternion.identity);
 		}
-		OffServerBloodFx.OnHit(this, damage, attacker, position, !string.IsNullOrEmpty(_hitEffect));
+		CommunityBloodFx.OnHit(this, damage, attacker, position, !string.IsNullOrEmpty(_hitEffect));
 		LastAttacker = attacker;
 		if (this.TakenDamage != null)
 		{

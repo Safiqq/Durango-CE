@@ -188,7 +188,7 @@ public class Connection
 
 	private float _connectStartedAt;
 
-	private OffServerUdpTransport _udp;
+	private CommunityUdpTransport _udp;
 
 	private byte[] _udpFrameBuffer;
 
@@ -212,7 +212,7 @@ public class Connection
 		}
 	}
 
-	public OffServerUdpTransport Udp => _udp;
+	public CommunityUdpTransport Udp => _udp;
 
 	public bool UdpActive
 	{
@@ -233,10 +233,10 @@ public class Connection
 	public Connection(bool timeSynchronize = false)
 	{
 		_timeSynchronize = timeSynchronize;
-		OffServerLink.IsAdmin = false;
+		CommunityLink.IsAdmin = false;
 		On(delegate(CheatFlags msg, PacketHeader header)
 		{
-			OffServerLink.SetAdminFlags(msg.Flags);
+			CommunityLink.SetAdminFlags(msg.Flags);
 		});
 	}
 
@@ -1107,7 +1107,7 @@ public class Connection
 		}
 	}
 
-	public bool BeginUdp(OffServerUdp.Offer offer, string entityId)
+	public bool BeginUdp(CommunityUdp.Offer offer, string entityId)
 	{
 		if (offer == null)
 		{
@@ -1115,12 +1115,12 @@ public class Connection
 		}
 		if (_udp != null)
 		{
-			OffServerUdp.Log("ready: this line already has a UDP transport (" + _udp.Current.ToString() + ")");
+			CommunityUdp.Log("ready: this line already has a UDP transport (" + _udp.Current.ToString() + ")");
 			return false;
 		}
 		if (!Connected())
 		{
-			OffServerUdp.Log("ready: TCP not connected — UDP not tried");
+			CommunityUdp.Log("ready: TCP not connected — UDP not tried");
 			return false;
 		}
 		IPEndPoint iPEndPoint = null;
@@ -1133,36 +1133,36 @@ public class Connection
 		}
 		if (iPEndPoint == null || iPEndPoint.AddressFamily != AddressFamily.InterNetwork)
 		{
-			OffServerUdp.Log("ready: TCP remote " + iPEndPoint?.ToString() + " is not IPv4 — UDP not tried");
+			CommunityUdp.Log("ready: TCP remote " + iPEndPoint?.ToString() + " is not IPv4 — UDP not tried");
 			return false;
 		}
 		byte[] request;
 		try
 		{
-			request = OffServerUdp.BuildRequest(offer.Key, entityId);
+			request = CommunityUdp.BuildRequest(offer.Key, entityId);
 		}
 		catch (Exception ex2)
 		{
-			OffServerUdp.Log("ready: " + ex2.Message + " — UDP not tried");
+			CommunityUdp.Log("ready: " + ex2.Message + " — UDP not tried");
 			return false;
 		}
 		if (_udpFrameBuffer == null)
 		{
 			_udpFrameBuffer = new byte[24 + SnappyCodec.GetMaxCompressedLength(262144)];
 		}
-		return (_udp = new OffServerUdpTransport(this, new IPEndPoint(iPEndPoint.Address, offer.Port), request, offer.FallbackSec, 10, 15, entityId)).Start();
+		return (_udp = new CommunityUdpTransport(this, new IPEndPoint(iPEndPoint.Address, offer.Port), request, offer.FallbackSec, 10, 15, entityId)).Start();
 	}
 
 	public bool BeginUdpHello(string entityId, int fallbackSec)
 	{
 		if (_udp != null)
 		{
-			OffServerUdp.Log("ready: this line already has a UDP transport (" + _udp.Current.ToString() + ") — no Hello");
+			CommunityUdp.Log("ready: this line already has a UDP transport (" + _udp.Current.ToString() + ") — no Hello");
 			return false;
 		}
 		if (!Connected() || string.IsNullOrEmpty(entityId))
 		{
-			OffServerUdp.Log("ready: TCP not connected or no entity id — no Hello");
+			CommunityUdp.Log("ready: TCP not connected or no entity id — no Hello");
 			return false;
 		}
 		IPEndPoint iPEndPoint = null;
@@ -1175,14 +1175,14 @@ public class Connection
 		}
 		if (iPEndPoint == null || iPEndPoint.AddressFamily != AddressFamily.InterNetwork)
 		{
-			OffServerUdp.Log("ready: TCP remote " + iPEndPoint?.ToString() + " is not IPv4 — no Hello");
+			CommunityUdp.Log("ready: TCP remote " + iPEndPoint?.ToString() + " is not IPv4 — no Hello");
 			return false;
 		}
 		if (_udpFrameBuffer == null)
 		{
 			_udpFrameBuffer = new byte[24 + SnappyCodec.GetMaxCompressedLength(262144)];
 		}
-		(_udp = new OffServerUdpTransport(this, new IPEndPoint(iPEndPoint.Address, 0), null, (fallbackSec > 0) ? fallbackSec : 3, 10, 15, entityId)).BeginHelloOnly();
+		(_udp = new CommunityUdpTransport(this, new IPEndPoint(iPEndPoint.Address, 0), null, (fallbackSec > 0) ? fallbackSec : 3, 10, 15, entityId)).BeginHelloOnly();
 		return true;
 	}
 
@@ -1283,7 +1283,7 @@ public class Connection
 		}
 		else
 		{
-			OffServerUdp.Log("UdpDown kind " + msg.Kind + " on a line without a UDP transport — ignored");
+			CommunityUdp.Log("UdpDown kind " + msg.Kind + " on a line without a UDP transport — ignored");
 		}
 	}
 

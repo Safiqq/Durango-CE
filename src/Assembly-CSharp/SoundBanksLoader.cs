@@ -43,7 +43,7 @@ public class SoundBanksLoader
 		{
 			if (result)
 			{
-				OffServerLog.Info("[Sound] SoundbanksInfo ok, event-included banks: " + _soundBanksInfo.EventIncludedBankPaths.Count + " path=" + _soundBankPath);
+				CommunityLog.Info("[Sound] SoundbanksInfo ok, event-included banks: " + _soundBanksInfo.EventIncludedBankPaths.Count + " path=" + _soundBankPath);
 				LoadEventIncludedBanks(new Stack<string>(_soundBanksInfo.EventIncludedBankPaths));
 			}
 			else

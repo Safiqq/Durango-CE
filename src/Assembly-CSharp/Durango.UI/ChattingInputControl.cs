@@ -137,7 +137,7 @@ public class ChattingInputControl : MonoBehaviour, IUIInitializable
 				Name = T._("아이템 공유"),
 				Do = delegate
 				{
-					OffServerItemShare.PickAndShare();
+					CommunityItemShare.PickAndShare();
 				},
 				Validator = () => GameManager.ClusterMode == Mode.Online
 			}

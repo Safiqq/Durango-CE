@@ -12,7 +12,7 @@ public class InputVirtualStick : InputDispatcher<InputVirtualStick.Message>
 
 	public void Process(List<InputTouch.TouchEvent> touchEvents, UIManager uiManager)
 	{
-		if (OffServerHudLayout.IsHidden("joystick"))
+		if (CommunityHudLayout.IsHidden("joystick"))
 		{
 			if (uiManager != null && uiManager.VirtualStick != null)
 			{

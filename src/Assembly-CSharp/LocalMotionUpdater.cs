@@ -307,7 +307,7 @@ public class LocalMotionUpdater
 		{
 			Framework = (int)Player.CurrentWeaponFramework,
 			StandState = (int)StandState,
-			MoveSpeed = (int)(Singleton<PlayerController>.Instance().GetCurrentMoveSpeed() / OffServerRunButton.AnimRate),
+			MoveSpeed = (int)(Singleton<PlayerController>.Instance().GetCurrentMoveSpeed() / CommunityRunButton.AnimRate),
 			IsInWater = IsInWater,
 			IsMoving = _movedByManual,
 			IsSwimming = IsSwimming,
@@ -505,7 +505,7 @@ public class LocalMotionUpdater
 				if (_movedByManual)
 				{
 					state = ((!IsInWater) ? "Run" : ((Player.GetBiome() != Biome.Lava) ? "Water_Swim" : "Lava_Walk"));
-					playbackRate = OffServerRunButton.AnimRate;
+					playbackRate = CommunityRunButton.AnimRate;
 				}
 				else if (IsState("Lava_Walk") || IsState("Water_Swim") || IsState("Run") || _motionRefreshStatus >= AnimRefreshStatus.Refresh)
 				{

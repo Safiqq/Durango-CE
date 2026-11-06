@@ -152,7 +152,7 @@ public class SoundEventInstance
 		ApplySwitch();
 		AkCallbackType in_uFlags = (AkCallbackType)9;
 		_playingId = AkSoundEngine.PostEvent(eventName, _akSoundObject, (uint)in_uFlags, EventCallback, null);
-		OffServerSoundDiagnostics.OnEventPosted(eventName, _playingId, _akSoundObject);
+		CommunitySoundDiagnostics.OnEventPosted(eventName, _playingId, _akSoundObject);
 		if (_playingId != 0)
 		{
 			CurrentState = State.Playing;

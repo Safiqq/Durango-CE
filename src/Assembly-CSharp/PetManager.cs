@@ -289,7 +289,7 @@ public class PetManager : Durango.Utils.Singleton<PetManager>
 		animal.Level = msg.Statistics.Level;
 		animal.SetSurvivalGauge(stat.Life, null);
 		animal.SetOld(stat.IsOld);
-		OffServerPetScale.Apply(animal, stat);
+		CommunityPetScale.Apply(animal, stat);
 		VehiclePet component = animal.GetComponent<VehiclePet>();
 		component.MoveSpeed = msg.Statistics.DerivedAbilities.Get(Derived.Speed, 0f);
 		component.IsRidable = SingletonDict<int, Yaml.Pet>.Get(msg.EntityType)?.IsRidable ?? false;

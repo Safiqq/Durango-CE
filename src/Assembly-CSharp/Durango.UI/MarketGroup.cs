@@ -64,13 +64,13 @@ public class MarketGroup : UIBase, INotificationable
 
 	public Notification Notification => _notification;
 
-	public bool OffServerAuctionOpen
+	public bool CommunityAuctionOpen
 	{
 		get
 		{
 			if (_historyList != null)
 			{
-				return _historyList.OffServerAuctionMode;
+				return _historyList.CommunityAuctionMode;
 			}
 			return false;
 		}
@@ -82,7 +82,7 @@ public class MarketGroup : UIBase, INotificationable
 		_menuList = _menuLinker.Object.GetComponent<IconTabList>();
 		if (GameManager.ClusterMode == Mode.Online)
 		{
-			_menus = ((!OffServerLink.Active) ? new Menu[3]
+			_menus = ((!CommunityLink.Active) ? new Menu[3]
 			{
 				Menu.Buy,
 				Menu.MyMarket,
@@ -100,8 +100,8 @@ public class MarketGroup : UIBase, INotificationable
 				Menu menu = _menus[i];
 				_menuList.Add(IconMap.Get(menu), menu switch
 				{
-					Menu.AuctionList => OffServerAuctionUI.Text("menu_list"),
-					Menu.Auction => OffServerAuctionUI.Text("menu_auction"),
+					Menu.AuctionList => CommunityAuctionUI.Text("menu_list"),
+					Menu.Auction => CommunityAuctionUI.Text("menu_auction"),
 					_ => menu.GetName(),
 				});
 			}
@@ -124,7 +124,7 @@ public class MarketGroup : UIBase, INotificationable
 		GameSystem<MarketSystem>.Instance().OnProductSold += OnProductSold;
 		GameSystem<MarketSystem>.Instance().OnProductPaymentReceived += OnProductPaymentReceived;
 		GameSystem<MarketSystem>.Instance().OnProductStateUpdated += OnProductStateUpdated;
-		OffServerExchange.Changed += UpdateNotifiactionMarkers;
+		CommunityExchange.Changed += UpdateNotifiactionMarkers;
 		_productSoldAlarm = new StackableAlarm<string, ProductSold>("ProductSold", (ProductSold sold) => sold.Item.Id, (ProductSold sold, int count) => (count <= 1) ? T._("<em>{0}</em> 아이템이 팔렸습니다.", sold.Item.Name) : T._("<em>{0}</em> 외 {1}개 아이템이 팔렸습니다.", sold.Item.Name, count - 1), "alarm_market", majorAlarm: true, 1.8f, delegate
 		{
 			if (!base.IsOpened)
@@ -138,7 +138,7 @@ public class MarketGroup : UIBase, INotificationable
 
 	private void OnDestroy()
 	{
-		OffServerExchange.Changed -= UpdateNotifiactionMarkers;
+		CommunityExchange.Changed -= UpdateNotifiactionMarkers;
 	}
 
 	public void OpenAndSearch(OrTagFilter tagFilter, OrTagFilter material, int level = 0)
@@ -164,20 +164,20 @@ public class MarketGroup : UIBase, INotificationable
 		SelectMenuTab((Menu)menu);
 	}
 
-	public void OpenAuctionTab(OffServerAuctionUI.Tab tab)
+	public void OpenAuctionTab(CommunityAuctionUI.Tab tab)
 	{
 		if (!base.IsOpened)
 		{
 			Open();
 		}
-		if (base.IsOpened && OffServerAuctionUI.Available)
+		if (base.IsOpened && CommunityAuctionUI.Available)
 		{
 			_menuList.Select(_menus.IndexOf(Menu.Auction));
 			_goodsList.Close();
 			_sellItemWidget.Close();
 			_historyList.OpenAuction(tab);
 			_selectedTab = Menu.Auction;
-			_titleWidget.Object.SetTitle(OffServerAuctionPreview.Active ? "ประม\u0e39ล · ต\u0e31วอย\u0e48าง UI" : OffServerAuctionUI.Text("menu_auction"));
+			_titleWidget.Object.SetTitle(CommunityAuctionPreview.Active ? "ประม\u0e39ล · ต\u0e31วอย\u0e48าง UI" : CommunityAuctionUI.Text("menu_auction"));
 			HasBack.Value = false;
 		}
 	}
@@ -187,7 +187,7 @@ public class MarketGroup : UIBase, INotificationable
 		bool num = base.Close();
 		if (num)
 		{
-			OffServerAuctionPreview.End();
+			CommunityAuctionPreview.End();
 		}
 		return num;
 	}
@@ -253,7 +253,7 @@ public class MarketGroup : UIBase, INotificationable
 		_historyList.Close();
 		_sellItemWidget.SetAuctionListed(delegate
 		{
-			OpenAuctionTab(OffServerAuctionUI.Tab.Selling);
+			OpenAuctionTab(CommunityAuctionUI.Tab.Selling);
 		});
 		_sellItemWidget.Open();
 	}
@@ -289,9 +289,9 @@ public class MarketGroup : UIBase, INotificationable
 			break;
 		case Menu.Auction:
 		case Menu.AuctionList:
-			if (!OffServerAuctionUI.Available)
+			if (!CommunityAuctionUI.Available)
 			{
-				UIManager.SystemMsg(OffServerAuctionUI.Text(OffServerExchange.ConfigReceived ? "auction_off" : "auction_wait"));
+				UIManager.SystemMsg(CommunityAuctionUI.Text(CommunityExchange.ConfigReceived ? "auction_off" : "auction_wait"));
 				_menuList.Select(_menus.IndexOf(_selectedTab));
 				return;
 			}
@@ -300,14 +300,14 @@ public class MarketGroup : UIBase, INotificationable
 			{
 				_menuList.Select(_menus.IndexOf(Menu.Auction));
 				_sellItemWidget.Close();
-				_historyList.OpenAuction(OffServerAuctionUI.Tab.Browse);
+				_historyList.OpenAuction(CommunityAuctionUI.Tab.Browse);
 				break;
 			}
 			_menuList.Select(_menus.IndexOf(Menu.Sell));
 			_historyList.Close();
 			_sellItemWidget.OpenAuction(delegate
 			{
-				OpenAuctionTab(OffServerAuctionUI.Tab.Selling);
+				OpenAuctionTab(CommunityAuctionUI.Tab.Selling);
 			});
 			menu = Menu.Sell;
 			break;
@@ -315,7 +315,7 @@ public class MarketGroup : UIBase, INotificationable
 			throw new ArgumentOutOfRangeException();
 		}
 		_selectedTab = menu;
-		_titleWidget.Object.SetTitle((menu != Menu.Auction) ? T._("{0} 섬", GameManager.Region.Name) : (OffServerAuctionPreview.Active ? "ประม\u0e39ล · ต\u0e31วอย\u0e48าง UI" : OffServerAuctionUI.Text("menu_auction")));
+		_titleWidget.Object.SetTitle((menu != Menu.Auction) ? T._("{0} 섬", GameManager.Region.Name) : (CommunityAuctionPreview.Active ? "ประม\u0e39ล · ต\u0e31วอย\u0e48าง UI" : CommunityAuctionUI.Text("menu_auction")));
 		HasBack.Value = value;
 	}
 
@@ -353,7 +353,7 @@ public class MarketGroup : UIBase, INotificationable
 
 	private void UpdateNotifiactionMarkers()
 	{
-		bool flag = OffServerExchange.PendingClaims > 0;
+		bool flag = CommunityExchange.PendingClaims > 0;
 		_notification.On = _onExpiredNotification || _onPaymentPendingNotification || flag;
 		if (!(_menuList == null) && _menus != null)
 		{

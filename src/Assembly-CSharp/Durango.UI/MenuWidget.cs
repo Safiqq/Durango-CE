@@ -34,7 +34,7 @@ public class MenuWidget : SelectableWidget
 
 	public MenuType Type { get; private set; }
 
-	public bool OffServerRanked { get; private set; }
+	public bool CommunityRanked { get; private set; }
 
 	public bool NotificationOn { get; private set; }
 
@@ -58,18 +58,18 @@ public class MenuWidget : SelectableWidget
 	public void Set(MenuType type)
 	{
 		Type = type;
-		OffServerRanked = false;
+		CommunityRanked = false;
 		base.Disabled = false;
-		SetMenuText((type == MenuType.PvpIsland && global::OffServerRanked.ReplacesBrawl) ? global::OffServerRanked.T("ดวลจ\u0e31ดอ\u0e31นด\u0e31บ", "Ranked duel") : type.GetName());
+		SetMenuText((type == MenuType.PvpIsland && global::CommunityRanked.ReplacesBrawl) ? global::CommunityRanked.T("ดวลจ\u0e31ดอ\u0e31นด\u0e31บ", "Ranked duel") : type.GetName());
 		SetMenuIcon(IconMap.Get(type));
 		RefreshParentIcon(State.Normal);
 		SetNotification(MenuHelper.GetNotificationable(type)?.Notification);
 	}
 
-	public void SetOffServerRanked(string text, string icon)
+	public void SetCommunityRanked(string text, string icon)
 	{
 		Type = MenuType.PvpIsland;
-		OffServerRanked = true;
+		CommunityRanked = true;
 		base.Disabled = false;
 		SetMenuText(text);
 		SetMenuIcon(icon);

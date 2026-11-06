@@ -109,8 +109,8 @@ public class BottomMenuWidget_PC : BottomMenuWidgetBase
 		}
 		UIBase.UIOpened += RefreshCommunicationButton;
 		UIBase.UIClosed += RefreshCommunicationButton;
-		OffServerVoiceUI.AttachPcMicButton(_buttonLayout.transform, () => _communicationButton != null && _communicationButton.gameObject.activeSelf);
-		OffServerRunButtonUI.Attach(() => this != null && _communicationButton != null && _communicationButton.gameObject.activeInHierarchy);
+		CommunityVoiceUI.AttachPcMicButton(_buttonLayout.transform, () => _communicationButton != null && _communicationButton.gameObject.activeSelf);
+		CommunityRunButtonUI.Attach(() => this != null && _communicationButton != null && _communicationButton.gameObject.activeInHierarchy);
 	}
 
 	protected override void OnClickCommunicationButton()
@@ -207,7 +207,7 @@ public class BottomMenuWidget_PC : BottomMenuWidgetBase
 	{
 		SetCommunicationButtonActive(UIBase.CurrentUI == null || UIBase.CurrentUI.Anchor != UIBase.AnchorType.Fullscreen);
 		_buttonLayout.UpdateLayout();
-		OffServerVoiceUI.RefreshMicButton();
+		CommunityVoiceUI.RefreshMicButton();
 	}
 
 	private void OnDestroy()

@@ -39,7 +39,7 @@ public struct Equipments
 
 	public static Equipments Unpack(Unpacker unpacker)
 	{
-		return OffServerNinePresets.ReadEquipments(unpacker);
+		return CommunityNinePresets.ReadEquipments(unpacker);
 	}
 
 	public override string ToString()

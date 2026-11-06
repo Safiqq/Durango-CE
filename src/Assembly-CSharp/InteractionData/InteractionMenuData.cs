@@ -214,9 +214,9 @@ public struct InteractionMenuData : IComparable<InteractionMenuData>
 		case Interaction.PillarSiegeDeclare:
 		case Interaction.PillarSiegeStatus:
 			return true;
-		case Interaction.OffServerDodoAction:
-		case Interaction.OffServerTrade:
-		case Interaction.OffServerDuel:
+		case Interaction.CommunityDodoAction:
+		case Interaction.CommunityTrade:
+		case Interaction.CommunityDuel:
 			return true;
 		case Interaction.Attack:
 		case Interaction.OnePunch:
@@ -293,10 +293,10 @@ public struct InteractionMenuData : IComparable<InteractionMenuData>
 		case Interaction.CaptureScreenShot:
 		case Interaction.OpenPetMenu:
 		case Interaction.PetActiveSkill:
-		case Interaction.OffServerDodoCheer:
-		case Interaction.OffServerDodoAction:
-		case Interaction.OffServerTrade:
-		case Interaction.OffServerDuel:
+		case Interaction.CommunityDodoCheer:
+		case Interaction.CommunityDodoAction:
+		case Interaction.CommunityTrade:
+		case Interaction.CommunityDuel:
 			return true;
 		default:
 			return false;
@@ -324,7 +324,7 @@ public struct InteractionMenuData : IComparable<InteractionMenuData>
 
 	public static bool IsMovingAction(Interaction action)
 	{
-		if (action == Interaction.Dash || action == Interaction.OffServerDodoCheer)
+		if (action == Interaction.Dash || action == Interaction.CommunityDodoCheer)
 		{
 			return true;
 		}

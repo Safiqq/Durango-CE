@@ -15,7 +15,7 @@ public class EquipPresetTabListWidget : IconTabList, IUIInitializable
 
 	void IUIInitializable.Init()
 	{
-		OffServerNinePresets.InitTabs(this);
+		CommunityNinePresets.InitTabs(this);
 	}
 
 	public void SelectTab(EquipSlotType presetType)

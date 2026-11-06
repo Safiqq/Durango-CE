@@ -124,9 +124,9 @@ public class InventoryGroup : UIBase
 				CurrencyWidget slot = currencyWidget;
 				UIEventListener.Get(gameObject).onClick = delegate(GameObject go)
 				{
-					if (slot.CurrencyType.Normalize() == Currency.Gem && OffServerWalletExchange.Available)
+					if (slot.CurrencyType.Normalize() == Currency.Gem && CommunityWalletExchange.Available)
 					{
-						OffServerWalletExchange.Open();
+						CommunityWalletExchange.Open();
 					}
 					else
 					{
@@ -137,7 +137,7 @@ public class InventoryGroup : UIBase
 			if (!_moneyLogged)
 			{
 				Transform transform = currencyWidget.transform;
-				UnityEngine.Debug.Log("[OffServer] bag money " + transform.name + " (" + currencyWidget.CurrencyType.ToString() + ") wasBuilt=" + isBuilt + " built=" + flag + " active=" + currencyWidget.gameObject.activeInHierarchy + " cluster=" + GameManager.ClusterMode.ToString() + " pos=" + transform.position.ToString("F3") + " reactivated=[" + text + "]");
+				UnityEngine.Debug.Log("[Community] bag money " + transform.name + " (" + currencyWidget.CurrencyType.ToString() + ") wasBuilt=" + isBuilt + " built=" + flag + " active=" + currencyWidget.gameObject.activeInHierarchy + " cluster=" + GameManager.ClusterMode.ToString() + " pos=" + transform.position.ToString("F3") + " reactivated=[" + text + "]");
 			}
 		}
 		_pcMoneySlots = ((Platform.Instance.UsePCUI && uITitleWidget != null) ? componentsInChildren : null);
@@ -146,7 +146,7 @@ public class InventoryGroup : UIBase
 			_moneyLogged = true;
 			if (componentsInChildren.Length == 0)
 			{
-				UnityEngine.Debug.Log("[OffServer] bag money: no CurrencyWidget in " + base.name);
+				UnityEngine.Debug.Log("[Community] bag money: no CurrencyWidget in " + base.name);
 			}
 		}
 	}

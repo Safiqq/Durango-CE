@@ -470,7 +470,7 @@ public class SocialSystem : GameSystem<SocialSystem>
 		}
 		if (msg.Message.Body is RadioNotice)
 		{
-			if (msg.ChannelType == ChannelType.System && OffServerEventCalendar.NotifyAnnouncement(((RadioNotice)msg.Message.Body).Text))
+			if (msg.ChannelType == ChannelType.System && CommunityEventCalendar.NotifyAnnouncement(((RadioNotice)msg.Message.Body).Text))
 			{
 				chatStruct.NoBubble = true;
 				AddChat(chatStruct, notify: false);
@@ -1163,7 +1163,7 @@ public class SocialSystem : GameSystem<SocialSystem>
 
 	private void OnPlayEmoticon(PlayEmoticon msg, PacketHeader header)
 	{
-		if (OffServerLink.MhAnimalEmotes && msg.EntityId != null && msg.EntityId.StartsWith("an_", StringComparison.Ordinal))
+		if (CommunityLink.MhAnimalEmotes && msg.EntityId != null && msg.EntityId.StartsWith("an_", StringComparison.Ordinal))
 		{
 			AnimalBehavior animal = Singleton<AnimalManager>.Instance().GetAnimal(msg.EntityId);
 			if (animal != null && animal.IsAlive)

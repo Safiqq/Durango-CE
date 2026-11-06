@@ -88,13 +88,13 @@ public class QuestNodeWidget : MonoBehaviour
 		receiveButton.Clicked = (Action)Delegate.Combine(receiveButton.Clicked, new Action(OnClickReceiveButton));
 		_receiveButton.SetEffect(PresetButton.Effect.Emphasis);
 		_receiveText = _receiveButton.Text;
-		OffServerQuestSkip.Changed -= OnQuestSkipChanged;
-		OffServerQuestSkip.Changed += OnQuestSkipChanged;
+		CommunityQuestSkip.Changed -= OnQuestSkipChanged;
+		CommunityQuestSkip.Changed += OnQuestSkipChanged;
 	}
 
 	private void OnDestroy()
 	{
-		OffServerQuestSkip.Changed -= OnQuestSkipChanged;
+		CommunityQuestSkip.Changed -= OnQuestSkipChanged;
 	}
 
 	private void OnQuestSkipChanged()
@@ -108,10 +108,10 @@ public class QuestNodeWidget : MonoBehaviour
 	private void UpdateReceiveOrSkip()
 	{
 		long price = 0L;
-		_skipMode = !IsReached() && !_quest.Finished && OffServerQuestSkip.TryGetPrice(QuestId, out price);
+		_skipMode = !IsReached() && !_quest.Finished && CommunityQuestSkip.TryGetPrice(QuestId, out price);
 		if (_receiveText != null)
 		{
-			_receiveButton.Text = (_skipMode ? OffServerQuestSkip.ButtonText(price) : _receiveText);
+			_receiveButton.Text = (_skipMode ? CommunityQuestSkip.ButtonText(price) : _receiveText);
 		}
 		_receiveButton.transform.parent.gameObject.SetActive((IsReached() && !_quest.Finished) || _skipMode);
 	}
@@ -139,7 +139,7 @@ public class QuestNodeWidget : MonoBehaviour
 	{
 		if (_skipMode)
 		{
-			OffServerQuestSkip.Ask(QuestId);
+			CommunityQuestSkip.Ask(QuestId);
 		}
 		else if (!_isWaitRewardRequest)
 		{

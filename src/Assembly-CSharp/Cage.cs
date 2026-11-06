@@ -53,7 +53,7 @@ public class Cage : CageBase
 				MakeAnimal(pet.EntityId, pet.GetAnimalType(), delegate(PetAI petAI)
 				{
 					petAI.TargetAnimal.SetOld(stat.IsOld);
-					OffServerPetScale.Apply(petAI.TargetAnimal, stat);
+					CommunityPetScale.Apply(petAI.TargetAnimal, stat);
 				});
 			}
 		}

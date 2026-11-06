@@ -44,7 +44,7 @@ public sealed class GameInstall
 			{
 				return serverTxt;
 			}
-			string oldTxt = Path.Combine(Dir, "offserver.txt");
+			string oldTxt = Path.Combine(Dir, "community.txt");
 			if (File.Exists(oldTxt))
 			{
 				return oldTxt;
@@ -232,7 +232,7 @@ public sealed class GameInstall
 		Process process = Process.Start(new ProcessStartInfo
 		{
 			FileName = ExePath,
-			Arguments = "-logFile \"" + text + "\" -offserver-launcher " + (ticket ?? Version),
+			Arguments = "-logFile \"" + text + "\" -community-launcher " + (ticket ?? Version),
 			WorkingDirectory = Dir,
 			UseShellExecute = true
 		}) ?? throw new InvalidOperationException("Process.Start ค\u0e37น null");

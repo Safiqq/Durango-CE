@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Durango.Logic.Notification;
 using Durango.UI.Control;
 using NestedPrefab;
-using OffServer.Rift;
+using Community.Rift;
 using UnityEngine;
 using Yaml;
 

@@ -43,7 +43,7 @@ public class DamageWidget : UIWidget
 			string text = damage.Part.GetName();
 			if (flag && damage.Part == BodyPart.Leg && text == "Bridge")
 			{
-				text = ((OffServerDiscordLink.Lang == "th") ? "ขา" : "Leg");
+				text = ((CommunityDiscordLink.Lang == "th") ? "ขา" : "Leg");
 			}
 			_partTextLabel.text = (flag ? text : string.Empty);
 			_partTextLabel.fontSize = Mathf.RoundToInt((float)_originalPartFontSize * 1.25f);

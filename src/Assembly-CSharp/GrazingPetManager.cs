@@ -143,7 +143,7 @@ public class GrazingPetManager
 					component.Level = pet.Statistics.Level;
 					component.SetSurvivalGauge(stat.Life, null);
 					component.SetOld(stat.IsOld);
-					OffServerPetScale.Apply(component, stat);
+					CommunityPetScale.Apply(component, stat);
 					_ghosts[pet.EntityId] = grazingPetAI;
 					component.ShowEyeTrail(pet.HasEyeTrail());
 				}

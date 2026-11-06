@@ -32,7 +32,7 @@ public class SkillCategoryWidget : MonoBehaviour, IUIInitializable
 		for (int i = 0; i < skillCategoryCount; i++)
 		{
 			Category type = skillSystem.GetSkillCategory(i).Type;
-			if (!OffServerWeaponMasteryTab.ShowTab(type))
+			if (!CommunityWeaponMasteryTab.ShowTab(type))
 			{
 				continue;
 			}

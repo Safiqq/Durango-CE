@@ -42,13 +42,13 @@ public class InteractionHelperList : MonoBehaviour, IUIInitializable
 		_animWidget = GetComponent<AnimationWidget>();
 		GameSystem<InteractionSystem>.Instance().InteractionTargetSelected += OnSelectInteractionTarget;
 		GameSystem<PartySystem>.Instance().MembersUpdated += PartySystem_MembersUpdated;
-		if (GetType() == typeof(InteractionHelperList) && OffServerHotkeys.Supported)
+		if (GetType() == typeof(InteractionHelperList) && CommunityHotkeys.Supported)
 		{
-			GameSystem<InputSystem>.Instance().On(InputCommand.Collect, OffServerCollectKey);
+			GameSystem<InputSystem>.Instance().On(InputCommand.Collect, CommunityCollectKey);
 		}
 	}
 
-	private void OffServerCollectKey(InputCommandMessage message)
+	private void CommunityCollectKey(InputCommandMessage message)
 	{
 		if (GameSystem<CombatSystem>.Instance().CombatMode || PlayerBehavior.LocalPlayer == null)
 		{

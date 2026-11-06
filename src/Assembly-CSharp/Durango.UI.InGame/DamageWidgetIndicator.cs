@@ -79,7 +79,7 @@ public class DamageWidgetIndicator : UIWidget
 		_targetTransform = target.GetBodyPartTransform(damage.Part);
 		_line1.gameObject.SetActive(value: true);
 		_line2.gameObject.SetActive(value: true);
-		bool showPart = OffServerLink.MhPartLabels && !GameManager.IsPrologueMode && Singleton<AnimalManager>.Instance().GetAnimal(target.GetEntityId()) != null;
+		bool showPart = CommunityLink.MhPartLabels && !GameManager.IsPrologueMode && Singleton<AnimalManager>.Instance().GetAnimal(target.GetEntityId()) != null;
 		_damageWidget.Set(damage, showPart);
 	}
 

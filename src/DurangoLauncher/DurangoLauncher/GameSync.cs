@@ -60,7 +60,7 @@ public static class GameSync
 
 	public static bool Keep(string rel)
 	{
-		if (!rel.Equals("server.txt", StringComparison.OrdinalIgnoreCase) && !rel.Equals("offserver.txt", StringComparison.OrdinalIgnoreCase) && (rel.Contains('/') || !rel.StartsWith(Path.GetFileNameWithoutExtension("DurangoLauncher.exe"), StringComparison.OrdinalIgnoreCase)) && !rel.EndsWith(".log", StringComparison.OrdinalIgnoreCase) && !rel.StartsWith(".update/", StringComparison.OrdinalIgnoreCase))
+		if (!rel.Equals("server.txt", StringComparison.OrdinalIgnoreCase) && !rel.Equals("community.txt", StringComparison.OrdinalIgnoreCase) && (rel.Contains('/') || !rel.StartsWith(Path.GetFileNameWithoutExtension("DurangoLauncher.exe"), StringComparison.OrdinalIgnoreCase)) && !rel.EndsWith(".log", StringComparison.OrdinalIgnoreCase) && !rel.StartsWith(".update/", StringComparison.OrdinalIgnoreCase))
 		{
 			return rel.StartsWith("Languages/", StringComparison.OrdinalIgnoreCase);
 		}
@@ -105,7 +105,7 @@ public static class GameSync
 					{
 						throw new InvalidDataException("manifest: path นอกโฟลเดอร\u0e4cเกม " + text);
 					}
-					if (text.Equals("server.txt", StringComparison.OrdinalIgnoreCase) || text.Equals("offserver.txt", StringComparison.OrdinalIgnoreCase))
+					if (text.Equals("server.txt", StringComparison.OrdinalIgnoreCase) || text.Equals("community.txt", StringComparison.OrdinalIgnoreCase))
 					{
 						if (!File.Exists(fullPath2))
 						{

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using OffServer.WeaponMastery;
+using Community.WeaponMastery;
 using Yaml.Util;
 
 namespace Yaml;

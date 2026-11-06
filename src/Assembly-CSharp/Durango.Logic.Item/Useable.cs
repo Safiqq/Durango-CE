@@ -215,7 +215,7 @@ public static class Useable
 		{
 			AddType(result, UseType.OpenBox);
 		}
-		if (OffServerItemShare.CanShare(item))
+		if (CommunityItemShare.CanShare(item))
 		{
 			AddType(result, UseType.Share);
 		}

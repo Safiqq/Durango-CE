@@ -50,13 +50,13 @@ public class TitleClusterSelection : MonoBehaviour
 			string text = clusterKeys[i];
 			TitleClusterInfo node = nodes.GetNext().GetComponent<TitleClusterInfo>();
 			node.Init(text, clusters);
-			if (OffServerLink.Active)
+			if (CommunityLink.Active)
 			{
 				node.SetPlayerInfo(-1);
 				string key = text;
 				string gatewayUrl = clusters.GetCluster(text).GatewayUrlRoot;
-				bool isVerified = OffServerLink.IsGatewayVerified(gatewayUrl);
-				OffServerLink.FetchStatus(gatewayUrl, delegate(bool up, int online)
+				bool isVerified = CommunityLink.IsGatewayVerified(gatewayUrl);
+				CommunityLink.FetchStatus(gatewayUrl, delegate(bool up, int online)
 				{
 					if (node != null && node.ClusterKey == key)
 					{

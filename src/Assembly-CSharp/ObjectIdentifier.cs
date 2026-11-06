@@ -83,19 +83,19 @@ public static class ObjectIdentifier
 			return false;
 		}
 		PlayerBehavior component = obj.GetComponent<PlayerBehavior>();
-		if (component != null && (OffServerDuel.InDuel || OffServerDuel.IsDueling(component.EntityId)))
+		if (component != null && (CommunityDuel.InDuel || CommunityDuel.IsDueling(component.EntityId)))
 		{
-			if (OffServerDuel.Fighting)
+			if (CommunityDuel.Fighting)
 			{
-				return !OffServerDuel.IsOpponent(component.EntityId);
+				return !CommunityDuel.IsOpponent(component.EntityId);
 			}
 			return true;
 		}
-		if (component != null && OffServerRanked.InMatch)
+		if (component != null && CommunityRanked.InMatch)
 		{
-			if (OffServerRanked.Fighting)
+			if (CommunityRanked.Fighting)
 			{
-				return !OffServerRanked.IsEnemy(component.EntityId);
+				return !CommunityRanked.IsEnemy(component.EntityId);
 			}
 			return true;
 		}

@@ -29,8 +29,8 @@ using InteractionData;
 using Messages;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using OffServer.ClanPillar;
-using OffServer.Rift;
+using Community.ClanPillar;
+using Community.Rift;
 using Shared.Ability;
 using Shared.Battle;
 using Shared.Economy;
@@ -136,9 +136,9 @@ public class TestBridge : MonoBehaviour
 	{
 		Add("help", "รายการคำส\u0e31\u0e48ง", CmdHelp);
 		Add("ping", "ตอบ pong + เวลาในเกม", CmdPing);
-		Add("udp", "udp [status|fallback|hello|unblock|sim <loss%> [delayMs]|tcp|auto] — ช\u0e31\u0e49นร\u0e31บส\u0e48ง UDP ของสาย frontend (UDP-TRANSPORT 3.3.0 · OffServerUdp) · fallback = กล\u0e31บ TCP เด\u0e35\u0e4bยวน\u0e35\u0e49 · hello = ขอ Offer ใหม\u0e48ท\u0e31นท\u0e35 (UDP-CHANNELS · ย\u0e31งห\u0e48าง ≥ 10 ว\u0e34) · unblock = ล\u0e49างบล\u0e47อก 1 ชม.ของเคร\u0e37\u0e48องน\u0e35\u0e49 · sim = จำลองหาย/หน\u0e48วงเฉพาะช\u0e48อง 2 ของต\u0e31วเกมน\u0e35\u0e49 (0 0 = ป\u0e34ด) · tcp/auto = ต\u0e31\u0e49งค\u0e48า «การเช\u0e37\u0e48อมต\u0e48อ»", CmdUdp);
-		Add("voice", "voice [panel|auto 0/1|level 0-2|talk 1/0|mute <id> 0/1|deaf 0/1|volume x] — สถานะ/ค\u0e38มไมค\u0e4cตามระยะ (VOICE-CHAT 3.1.9 · OffServerVoice)", CmdVoice);
-		Add("dodo", "dodo [state|send <kind> <json>|fake <kind> <json|@file>|click <key>|cheer 0/1|bet <side> <amount>|hello|lobby|close|reset] — Dodo Fight v2 (3.2.0 · OffServerDodoFight) · fake = เล\u0e48น DodoDown ในเคร\u0e37\u0e48องไม\u0e48ต\u0e49องม\u0e35เซ\u0e34ร\u0e4cฟ · json ใช\u0e49 ' แทนเคร\u0e37\u0e48องหมายคำพ\u0e39ดค\u0e39\u0e48 เช\u0e48น {'enabled':true}", CmdDodo);
+		Add("udp", "udp [status|fallback|hello|unblock|sim <loss%> [delayMs]|tcp|auto] — ช\u0e31\u0e49นร\u0e31บส\u0e48ง UDP ของสาย frontend (UDP-TRANSPORT 3.3.0 · CommunityUdp) · fallback = กล\u0e31บ TCP เด\u0e35\u0e4bยวน\u0e35\u0e49 · hello = ขอ Offer ใหม\u0e48ท\u0e31นท\u0e35 (UDP-CHANNELS · ย\u0e31งห\u0e48าง ≥ 10 ว\u0e34) · unblock = ล\u0e49างบล\u0e47อก 1 ชม.ของเคร\u0e37\u0e48องน\u0e35\u0e49 · sim = จำลองหาย/หน\u0e48วงเฉพาะช\u0e48อง 2 ของต\u0e31วเกมน\u0e35\u0e49 (0 0 = ป\u0e34ด) · tcp/auto = ต\u0e31\u0e49งค\u0e48า «การเช\u0e37\u0e48อมต\u0e48อ»", CmdUdp);
+		Add("voice", "voice [panel|auto 0/1|level 0-2|talk 1/0|mute <id> 0/1|deaf 0/1|volume x] — สถานะ/ค\u0e38มไมค\u0e4cตามระยะ (VOICE-CHAT 3.1.9 · CommunityVoice)", CmdVoice);
+		Add("dodo", "dodo [state|send <kind> <json>|fake <kind> <json|@file>|click <key>|cheer 0/1|bet <side> <amount>|hello|lobby|close|reset] — Dodo Fight v2 (3.2.0 · CommunityDodoFight) · fake = เล\u0e48น DodoDown ในเคร\u0e37\u0e48องไม\u0e48ต\u0e49องม\u0e35เซ\u0e34ร\u0e4cฟ · json ใช\u0e49 ' แทนเคร\u0e37\u0e48องหมายคำพ\u0e39ดค\u0e39\u0e48 เช\u0e48น {'enabled':true}", CmdDodo);
 		Add("riftscope", "riftscope [state|fake [json]|tab <0-3>|track [i]|close|clear|coin <n>|wallet] — S02 กล\u0e49องส\u0e48องส\u0e31ตว\u0e4c (RiftScopeDown 7300027) + ยอดเหร\u0e35ยญรอยแยก · fake ไม\u0e48ใส\u0e48 json = ส\u0e31ตว\u0e4cรอบต\u0e31วจร\u0e34งในฉากเป\u0e47นผลส\u0e48อง (ไม\u0e48ส\u0e48งอะไรถ\u0e36งเซ\u0e34ร\u0e4cฟ) · json ใช\u0e49 ' แทนเคร\u0e37\u0e48องหมายคำพ\u0e39ดค\u0e39\u0e48 · coin = ใส\u0e48ยอดสก\u0e38ล 8 ในกระเป\u0e4bาเง\u0e34นเคร\u0e37\u0e48องน\u0e35\u0e49", CmdRiftScope);
 		Add("riftcompass", "riftcompass [state|scan|fold|close] — native compass; scan uses a real inventory compass, state is read-only", CmdRiftCompass);
 		Add("craftstats", "craftstats [open|refresh|probe] — authoritative crafting abilities and native displayed rows/reward ladder", CmdCraftStats);
@@ -181,15 +181,15 @@ public class TestBridge : MonoBehaviour
 		Add("wait", "wait <ms>", CmdWait);
 		Add("discordlink", "discordlink [status|start|click|cancel] — ป\u0e38\u0e48ม Link Discord: start = เร\u0e34\u0e48ม flow ไม\u0e48เป\u0e34ดเบราว\u0e4cเซอร\u0e4c (ค\u0e37น url ให\u0e49จำลอง callback) · click = เหม\u0e37อนกดป\u0e38\u0e48ม (เป\u0e34ดเบราว\u0e4cเซอร\u0e4c)", CmdDiscordLink);
 		Add("movecode", "movecode [status|click|redeem <รห\u0e31ส>] — ป\u0e38\u0e48ม «ย\u0e49ายเคร\u0e37\u0e48อง»: click = เหม\u0e37อนกดป\u0e38\u0e48ม (ขอรห\u0e31ส 9 หล\u0e31ก · ค\u0e37น code) · redeem = กรอกรห\u0e31สในช\u0e48องค\u0e39ปองแบบ ConfigInstance.SendCoupon", CmdMoveCode);
-		Add("exchange", "exchange [state|preview|previewitem|auction [browse|selling|bidding|claims]|listui|rows|trade <entityId|near>|tkeys|tclick <key>|add <proto> [n]|send <kind> <json>] — AUCTION-TRADE ประม\u0e39ล/เทรด (OffServerExchange) · auction = เป\u0e34ดตลาดแท\u0e47บประม\u0e39ล · tclick = ป\u0e38\u0e48มหน\u0e49าต\u0e48างเทรด (ready/confirm/cancel/add/money/close) · add = วางของในเทรดตรง ๆ (ข\u0e49ามหน\u0e49าเล\u0e37อก) · json ใช\u0e49 ' แทน \"", CmdExchange);
+		Add("exchange", "exchange [state|preview|previewitem|auction [browse|selling|bidding|claims]|listui|rows|trade <entityId|near>|tkeys|tclick <key>|add <proto> [n]|send <kind> <json>] — AUCTION-TRADE ประม\u0e39ล/เทรด (CommunityExchange) · auction = เป\u0e34ดตลาดแท\u0e47บประม\u0e39ล · tclick = ป\u0e38\u0e48มหน\u0e49าต\u0e48างเทรด (ready/confirm/cancel/add/money/close) · add = วางของในเทรดตรง ๆ (ข\u0e49ามหน\u0e49าเล\u0e37อก) · json ใช\u0e49 ' แทน \"", CmdExchange);
 		Add("career", "career [state|open|click <0..7|confirm|back>]", CmdCareer);
-		Add("lava", "lava [state|play [entityId|self] [arrive|leave]|on|off|mul <x>|stop] — LAVA-SHIELD-FX โล\u0e48ลาวา (OffServerLavaShieldNet) · play = เล\u0e48นในเคร\u0e37\u0e48องไม\u0e48ผ\u0e48านเซ\u0e34ร\u0e4cฟ · on/off = สว\u0e34ตช\u0e4cในหน\u0e49าต\u0e31\u0e49งค\u0e48า (ส\u0e48งเซ\u0e34ร\u0e4cฟ)", CmdLava);
-		Add("ranked", "ranked [state|queue 1v1|3v3|cancel|weapon <proto>|side 0|1|leave|lobby|close|hello|fake <kind> <json>|demo <lobby|queue|place|master|found|hud|count|ot|break|breakwin|win|down|gm|dc|place5|title|off> [3v3]] — PVP-RANKED-BO3 ดวลจ\u0e31ดอ\u0e31นด\u0e31บ (OffServerRanked) · demo = ข\u0e49อม\u0e39ลต\u0e31วอย\u0e48างในเคร\u0e37\u0e48อง (ไม\u0e48ผ\u0e48านเซ\u0e34ร\u0e4cฟ) ไว\u0e49ด\u0e39ท\u0e38กหน\u0e49าจอ · hello = ส\u0e48ง Hello เอง (เซ\u0e34ร\u0e4cฟ DEV ท\u0e35\u0e48ย\u0e31งไม\u0e48 push)", CmdRanked);
-		Add("duel", "duel [state|challenge <entityId>|accept [fromId]|decline [fromId]|leave|fake <kind> <json>] — DUEL-CHALLENGE ท\u0e49าดวลท\u0e38กเกาะ (OffServerDuel) · state = สว\u0e34ตช\u0e4c/ดวล/ค\u0e39\u0e48/วงท\u0e35\u0e48วาด", CmdDuel);
-		Add("run", "run [state|on|off|toggle|press 1/0|hold 0/1|hello|pos <x> <y> [size]|reset] — RUN-BUTTON ป\u0e38\u0e48มว\u0e34\u0e48ง 3.2.4 (OffServerRunButton) · on/off/toggle = เหม\u0e37อนกดป\u0e38\u0e48ม (ส\u0e48งเซ\u0e34ร\u0e4cฟ) · hold = ต\u0e31\u0e49งค\u0e48า «กดค\u0e49างเพ\u0e37\u0e48อว\u0e34\u0e48ง» · pos = ย\u0e49ายป\u0e38\u0e48มบนจอ (หน\u0e48วย UI จากม\u0e38มขวาล\u0e48าง · จำในเคร\u0e37\u0e48อง) · reset = ตำแหน\u0e48งเร\u0e34\u0e48ม", CmdRun);
-		Add("blood", "blood [state|play [intensity 0.3-1.4]|on|off|mul <x>|color <red|green|blue|purple|black>|clear] — BLOOD-FX เล\u0e37อดสาด + คราบพ\u0e37\u0e49น (OffServerBloodFx · ในเคร\u0e37\u0e48องเท\u0e48าน\u0e31\u0e49น) · play = สาดท\u0e35\u0e48ต\u0e31วเอง · on/off = สว\u0e34ตช\u0e4cในหน\u0e49าต\u0e31\u0e49งค\u0e48า", CmdBlood);
-		Add("hud", "hud [state|on|off|fetch] — HUD-STATS แถบคนออนไลน\u0e4c · FPS · Ping กลางบน (OffServerFpsCounter) · on/off = สว\u0e34ตช\u0e4cในหน\u0e49าต\u0e31\u0e49งค\u0e48า · fetch = ถาม /status ท\u0e31นท\u0e35", CmdHud);
-		Add("banner", "banner [state|fetch|demo|off|onlyduel 0/1/server|server] — BANNER-STYLE แบนเนอร\u0e4cล\u0e48างจอแบบใหม\u0e48 (OffServerBannerStyle) · fetch = ถาม /banners ท\u0e31นท\u0e35 · demo = แบบใหม\u0e48 + ป\u0e49ายต\u0e31วอย\u0e48างในเคร\u0e37\u0e48องน\u0e35\u0e49 (ไม\u0e48ผ\u0e48านเซ\u0e34ร\u0e4cฟ) · off = แบบเด\u0e34มในเคร\u0e37\u0e48องน\u0e35\u0e49 · onlyduel 1 = เหล\u0e37อแค\u0e48ช\u0e48องดวลในเคร\u0e37\u0e48องน\u0e35\u0e49 (server = ตามเซ\u0e34ร\u0e4cฟ) · server = กล\u0e31บไปใช\u0e49ค\u0e48าจากเซ\u0e34ร\u0e4cฟท\u0e31\u0e49งหมด", CmdBanner);
+		Add("lava", "lava [state|play [entityId|self] [arrive|leave]|on|off|mul <x>|stop] — LAVA-SHIELD-FX โล\u0e48ลาวา (CommunityLavaShieldNet) · play = เล\u0e48นในเคร\u0e37\u0e48องไม\u0e48ผ\u0e48านเซ\u0e34ร\u0e4cฟ · on/off = สว\u0e34ตช\u0e4cในหน\u0e49าต\u0e31\u0e49งค\u0e48า (ส\u0e48งเซ\u0e34ร\u0e4cฟ)", CmdLava);
+		Add("ranked", "ranked [state|queue 1v1|3v3|cancel|weapon <proto>|side 0|1|leave|lobby|close|hello|fake <kind> <json>|demo <lobby|queue|place|master|found|hud|count|ot|break|breakwin|win|down|gm|dc|place5|title|off> [3v3]] — PVP-RANKED-BO3 ดวลจ\u0e31ดอ\u0e31นด\u0e31บ (CommunityRanked) · demo = ข\u0e49อม\u0e39ลต\u0e31วอย\u0e48างในเคร\u0e37\u0e48อง (ไม\u0e48ผ\u0e48านเซ\u0e34ร\u0e4cฟ) ไว\u0e49ด\u0e39ท\u0e38กหน\u0e49าจอ · hello = ส\u0e48ง Hello เอง (เซ\u0e34ร\u0e4cฟ DEV ท\u0e35\u0e48ย\u0e31งไม\u0e48 push)", CmdRanked);
+		Add("duel", "duel [state|challenge <entityId>|accept [fromId]|decline [fromId]|leave|fake <kind> <json>] — DUEL-CHALLENGE ท\u0e49าดวลท\u0e38กเกาะ (CommunityDuel) · state = สว\u0e34ตช\u0e4c/ดวล/ค\u0e39\u0e48/วงท\u0e35\u0e48วาด", CmdDuel);
+		Add("run", "run [state|on|off|toggle|press 1/0|hold 0/1|hello|pos <x> <y> [size]|reset] — RUN-BUTTON ป\u0e38\u0e48มว\u0e34\u0e48ง 3.2.4 (CommunityRunButton) · on/off/toggle = เหม\u0e37อนกดป\u0e38\u0e48ม (ส\u0e48งเซ\u0e34ร\u0e4cฟ) · hold = ต\u0e31\u0e49งค\u0e48า «กดค\u0e49างเพ\u0e37\u0e48อว\u0e34\u0e48ง» · pos = ย\u0e49ายป\u0e38\u0e48มบนจอ (หน\u0e48วย UI จากม\u0e38มขวาล\u0e48าง · จำในเคร\u0e37\u0e48อง) · reset = ตำแหน\u0e48งเร\u0e34\u0e48ม", CmdRun);
+		Add("blood", "blood [state|play [intensity 0.3-1.4]|on|off|mul <x>|color <red|green|blue|purple|black>|clear] — BLOOD-FX เล\u0e37อดสาด + คราบพ\u0e37\u0e49น (CommunityBloodFx · ในเคร\u0e37\u0e48องเท\u0e48าน\u0e31\u0e49น) · play = สาดท\u0e35\u0e48ต\u0e31วเอง · on/off = สว\u0e34ตช\u0e4cในหน\u0e49าต\u0e31\u0e49งค\u0e48า", CmdBlood);
+		Add("hud", "hud [state|on|off|fetch] — HUD-STATS แถบคนออนไลน\u0e4c · FPS · Ping กลางบน (CommunityFpsCounter) · on/off = สว\u0e34ตช\u0e4cในหน\u0e49าต\u0e31\u0e49งค\u0e48า · fetch = ถาม /status ท\u0e31นท\u0e35", CmdHud);
+		Add("banner", "banner [state|fetch|demo|off|onlyduel 0/1/server|server] — BANNER-STYLE แบนเนอร\u0e4cล\u0e48างจอแบบใหม\u0e48 (CommunityBannerStyle) · fetch = ถาม /banners ท\u0e31นท\u0e35 · demo = แบบใหม\u0e48 + ป\u0e49ายต\u0e31วอย\u0e48างในเคร\u0e37\u0e48องน\u0e35\u0e49 (ไม\u0e48ผ\u0e48านเซ\u0e34ร\u0e4cฟ) · off = แบบเด\u0e34มในเคร\u0e37\u0e48องน\u0e35\u0e49 · onlyduel 1 = เหล\u0e37อแค\u0e48ช\u0e48องดวลในเคร\u0e37\u0e48องน\u0e35\u0e49 (server = ตามเซ\u0e34ร\u0e4cฟ) · server = กล\u0e31บไปใช\u0e49ค\u0e48าจากเซ\u0e34ร\u0e4cฟท\u0e31\u0e49งหมด", CmdBanner);
 		Add("seasonpass", "seasonpass [status|fetch|open|close|claim <tier|all>|missions] — Season Pass: fetch = ด\u0e36งสถานะ · open = เป\u0e34ดหน\u0e49า (WarpRushGroup โหมด Pass) · claim = ร\u0e31บข\u0e31\u0e49น (all = ท\u0e31\u0e49งหมด)", CmdSeasonPass);
 		Add("eventcalendar", "eventcalendar [status|open|close|fetch|notify|click key|source loopback-url]", CmdEventCalendar);
 		Add("mtreasury", "mtreasury [status|fetch|open|close|set <coin>|click <key>|x <coin>] — M-TREASURY คล\u0e31งเง\u0e34นเอ\u0e47ม: open = หน\u0e49าต\u0e48าง (เหม\u0e37อนกดป\u0e38\u0e48มในร\u0e49าน) · set = ใส\u0e48จำนวนในหน\u0e49าต\u0e48าง · click = ป\u0e38\u0e48มในหน\u0e49าต\u0e48าง (keys ใน status) · x = แลกตรง (ไม\u0e48ผ\u0e48านย\u0e37นย\u0e31น)", CmdTreasury);
@@ -216,14 +216,14 @@ public class TestBridge : MonoBehaviour
 				r.Fail("UI not ready");
 				yield break;
 			}
-			string category = ((args.Length > 2) ? args[2] : "offserver_combat");
+			string category = ((args.Length > 2) ? args[2] : "community_combat");
 			UIManager.FindScript<ConfigGroup>().Open(category);
 			yield return new WaitForSeconds(0.4f);
 			break;
 		}
 		case "range":
 		case "blood":
-			OffServerSettingsMenu.HandleAction((text == "range") ? "settings_more_range" : "settings_more_blood");
+			CommunitySettingsMenu.HandleAction((text == "range") ? "settings_more_range" : "settings_more_blood");
 			yield return new WaitForSeconds(0.2f);
 			break;
 		default:
@@ -239,7 +239,7 @@ public class TestBridge : MonoBehaviour
 		List<string> list2 = new List<string>();
 		HashSet<string> hashSet2 = new HashSet<string>();
 		List<string> list3 = new List<string>();
-		foreach (KeyValuePair<string, List<Setting>> item in OffServerSettingsMenu.AllRows())
+		foreach (KeyValuePair<string, List<Setting>> item in CommunitySettingsMenu.AllRows())
 		{
 			List<string> list4 = new List<string>();
 			List<string> list5 = new List<string>();
@@ -251,24 +251,24 @@ public class TestBridge : MonoBehaviour
 					list3.Add(item2.Key);
 				}
 			}
-			foreach (Setting item3 in OffServerSettingsMenu.Rows(item.Key))
+			foreach (Setting item3 in CommunitySettingsMenu.Rows(item.Key))
 			{
 				if (!Setting.IsHidden(item3))
 				{
 					list5.Add(item3.Key);
 				}
 			}
-			list.Add(Dict("key", item.Key, "label", OffServerSettingsMenu.Label(item.Key), "allKeys", list4, "visibleKeys", list5));
+			list.Add(Dict("key", item.Key, "label", CommunitySettingsMenu.Label(item.Key), "allKeys", list4, "visibleKeys", list5));
 		}
 		foreach (KeyValuePair<string, List<Setting>> setting in ConfigInstance.Settings)
 		{
 			foreach (Setting item4 in setting.Value)
 			{
-				if (OffServerSettingsMenu.Omitted(item4))
+				if (CommunitySettingsMenu.Omitted(item4))
 				{
 					hashSet2.Add(item4.Key);
 				}
-				else if (item4.Type != SettingType.Grid && item4.Type != SettingType.Category && !Setting.IsHidden(item4) && (!(setting.Key == "offserver_voice") || OffServerVoiceSettings.Visible) && !hashSet.Contains(item4.Key))
+				else if (item4.Type != SettingType.Grid && item4.Type != SettingType.Category && !Setting.IsHidden(item4) && (!(setting.Key == "community_voice") || CommunityVoiceSettings.Visible) && !hashSet.Contains(item4.Key))
 				{
 					list2.Add(item4.Key);
 				}
@@ -353,7 +353,7 @@ public class TestBridge : MonoBehaviour
 			string[] array2 = array;
 			foreach (string text5 in array2)
 			{
-				list.Add(Dict("key", text5, "label", OffServerGameplayOptions.Label(text5), "value", (text5 == array[2] || text5 == array[3]) ? ((object)ConfigInstance.GetValue(text5, defaultValue: false)) : ConfigInstance.GetValue(text5, "normal")));
+				list.Add(Dict("key", text5, "label", CommunityGameplayOptions.Label(text5), "value", (text5 == array[2] || text5 == array[3]) ? ((object)ConfigInstance.GetValue(text5, defaultValue: false)) : ConfigInstance.GetValue(text5, "normal")));
 			}
 			r.Set("settings", list);
 			yield break;
@@ -1020,10 +1020,10 @@ public class TestBridge : MonoBehaviour
 	private IEnumerator CmdNameTag(string[] args, Result r)
 	{
 		string text = ((args.Length > 1) ? args[1].ToLowerInvariant() : "status");
-		r.Set("atlas", OffServerEmoji.Available).Set("caps", "X-OffServer-Caps: nametag-emoji, item-link, server-popup, voice-chat, i18n-keys, pet-scale, pvp-ranked, pvp-duel, gather-check, rift-coin, rift-scope");
-		if (OffServerEmoji.Texture != null)
+		r.Set("atlas", CommunityEmoji.Available).Set("caps", "X-Community-Caps: nametag-emoji, item-link, server-popup, voice-chat, i18n-keys, pet-scale, pvp-ranked, pvp-duel, gather-check, rift-coin, rift-scope");
+		if (CommunityEmoji.Texture != null)
 		{
-			r.Set("texture", OffServerEmoji.Texture.width + "x" + OffServerEmoji.Texture.height + " mips " + OffServerEmoji.Texture.mipmapCount);
+			r.Set("texture", CommunityEmoji.Texture.width + "x" + CommunityEmoji.Texture.height + " mips " + CommunityEmoji.Texture.mipmapCount);
 		}
 		FieldInfo field = typeof(PlayerFloatingControl).GetField("_nametagLabel", BindingFlags.Instance | BindingFlags.NonPublic);
 		List<UILabel> nameLabels = new List<UILabel>();
@@ -1094,7 +1094,7 @@ public class TestBridge : MonoBehaviour
 			foreach (Transform item in uILabel2.transform)
 			{
 				UITexture component = item.GetComponent<UITexture>();
-				if (component != null && component.mainTexture == OffServerEmoji.Texture && component.isVisible)
+				if (component != null && component.mainTexture == CommunityEmoji.Texture && component.isVisible)
 				{
 					num2++;
 				}
@@ -1255,21 +1255,21 @@ public class TestBridge : MonoBehaviour
 				Durango.Utils.Singleton<GameManager>.Instance().MoveToTitle();
 				break;
 			case "open":
-				r.Set("opened", OffServerEventCalendar.Open());
+				r.Set("opened", CommunityEventCalendar.Open());
 				break;
 			case "close":
-				OffServerEventCalendar.Close();
+				CommunityEventCalendar.Close();
 				break;
 			case "fetch":
-				OffServerEventCalendar.Fetch();
+				CommunityEventCalendar.Fetch();
 				break;
 			case "notify":
-				r.Set("shown", OffServerEventCalendar.TestNotification());
+				r.Set("shown", CommunityEventCalendar.TestNotification());
 				break;
 			case "click":
 				if (args.Length > 2)
 				{
-					r.Set("clicked", OffServerEventCalendar.Click(args[2]));
+					r.Set("clicked", CommunityEventCalendar.Click(args[2]));
 					break;
 				}
 				goto default;
@@ -1280,7 +1280,7 @@ public class TestBridge : MonoBehaviour
 				}
 				if (args[2] == "server")
 				{
-					OffServerEventCalendar.TestSource = "";
+					CommunityEventCalendar.TestSource = "";
 				}
 				else
 				{
@@ -1289,22 +1289,22 @@ public class TestBridge : MonoBehaviour
 						r.Fail("Only loopback HTTP test sources are allowed");
 						yield break;
 					}
-					OffServerEventCalendar.TestSource = args[2];
+					CommunityEventCalendar.TestSource = args[2];
 				}
-				OffServerEventCalendar.Fetch();
+				CommunityEventCalendar.Fetch();
 				break;
 			}
 		}
 		yield return null;
-		r.Set("open", OffServerEventCalendar.IsOpen).Set("status", OffServerEventCalendar.State).Set("events", OffServerEventCalendar.EventCount)
-			.Set("loginOpens", OffServerEventCalendar.LoginOpens)
-			.Set("prefetching", OffServerEventCalendar.Prefetching)
-			.Set("cached", OffServerEventCalendar.HasCachedData)
-			.Set("noticeVisible", OffServerEventCalendar.NoticeVisible)
-			.Set("noticeTitle", OffServerEventCalendar.NoticeTitle)
-			.Set("pendingNotices", OffServerEventCalendar.PendingNotices)
-			.Set("noticeProgress", OffServerEventCalendar.NoticeProgress)
-			.Set("noticeAlpha", OffServerEventCalendar.NoticeAlpha);
+		r.Set("open", CommunityEventCalendar.IsOpen).Set("status", CommunityEventCalendar.State).Set("events", CommunityEventCalendar.EventCount)
+			.Set("loginOpens", CommunityEventCalendar.LoginOpens)
+			.Set("prefetching", CommunityEventCalendar.Prefetching)
+			.Set("cached", CommunityEventCalendar.HasCachedData)
+			.Set("noticeVisible", CommunityEventCalendar.NoticeVisible)
+			.Set("noticeTitle", CommunityEventCalendar.NoticeTitle)
+			.Set("pendingNotices", CommunityEventCalendar.PendingNotices)
+			.Set("noticeProgress", CommunityEventCalendar.NoticeProgress)
+			.Set("noticeAlpha", CommunityEventCalendar.NoticeAlpha);
 	}
 
 	private IEnumerator CmdTreasury(string[] args, Result r)
@@ -1313,7 +1313,7 @@ public class TestBridge : MonoBehaviour
 		switch ((args.Length > 1) ? args[1].ToLowerInvariant() : "status")
 		{
 		case "fetch":
-			OffServerTreasury.Fetch(null);
+			CommunityTreasury.Fetch(null);
 			yield return new WaitForSeconds(2f);
 			break;
 		case "open":
@@ -1322,11 +1322,11 @@ public class TestBridge : MonoBehaviour
 				r.Fail("UI ย\u0e31งไม\u0e48พร\u0e49อม (ย\u0e31งไม\u0e48เข\u0e49าโลก?)");
 				yield break;
 			}
-			OffServerTreasuryUI.Open();
+			CommunityTreasuryUI.Open();
 			yield return new WaitForSeconds(2f);
 			break;
 		case "close":
-			OffServerTreasuryUI.Close();
+			CommunityTreasuryUI.Close();
 			break;
 		case "set":
 			if (args.Length <= 2 || !long.TryParse(args[2], out result))
@@ -1334,12 +1334,12 @@ public class TestBridge : MonoBehaviour
 				r.Fail("ต\u0e49องใส\u0e48จำนวน Coin");
 				yield break;
 			}
-			OffServerTreasuryUI.SetAmountForTest(result);
+			CommunityTreasuryUI.SetAmountForTest(result);
 			break;
 		case "click":
-			if (args.Length <= 2 || !OffServerTreasuryUI.Click(args[2]))
+			if (args.Length <= 2 || !CommunityTreasuryUI.Click(args[2]))
 			{
-				r.Fail("ป\u0e38\u0e48มน\u0e35\u0e49กดไม\u0e48ได\u0e49 (ไม\u0e48ม\u0e35/ป\u0e34ด/หน\u0e49าต\u0e48างไม\u0e48เป\u0e34ด) — keys: " + string.Join(",", OffServerTreasuryUI.Keys().ToArray()));
+				r.Fail("ป\u0e38\u0e48มน\u0e35\u0e49กดไม\u0e48ได\u0e49 (ไม\u0e48ม\u0e35/ป\u0e34ด/หน\u0e49าต\u0e48างไม\u0e48เป\u0e34ด) — keys: " + string.Join(",", CommunityTreasuryUI.Keys().ToArray()));
 				yield break;
 			}
 			yield return new WaitForSeconds(1f);
@@ -1350,20 +1350,20 @@ public class TestBridge : MonoBehaviour
 				r.Fail("ต\u0e49องใส\u0e48จำนวน Coin");
 				yield break;
 			}
-			OffServerTreasuryUI.Trade(result);
+			CommunityTreasuryUI.Trade(result);
 			yield return new WaitForSeconds(3f);
 			break;
 		}
-		r.Set("active", OffServerTreasury.Active).Set("balance", OffServerTreasury.Balance).Set("rate", OffServerTreasury.Rate)
-			.Set("fee", OffServerTreasury.Fee)
-			.Set("maxCoins", OffServerTreasury.MaxCoins)
-			.Set("coin", OffServerTreasury.CoinBalance)
-			.Set("tStone", OffServerTreasury.TStoneBalance)
-			.Set("last", OffServerTreasury.LastEvent)
-			.Set("open", OffServerTreasuryUI.IsOpen)
-			.Set("want", OffServerTreasuryUI.Want)
-			.Set("status", OffServerTreasuryUI.LastText)
-			.Set("keys", new List<object>(OffServerTreasuryUI.Keys()));
+		r.Set("active", CommunityTreasury.Active).Set("balance", CommunityTreasury.Balance).Set("rate", CommunityTreasury.Rate)
+			.Set("fee", CommunityTreasury.Fee)
+			.Set("maxCoins", CommunityTreasury.MaxCoins)
+			.Set("coin", CommunityTreasury.CoinBalance)
+			.Set("tStone", CommunityTreasury.TStoneBalance)
+			.Set("last", CommunityTreasury.LastEvent)
+			.Set("open", CommunityTreasuryUI.IsOpen)
+			.Set("want", CommunityTreasuryUI.Want)
+			.Set("status", CommunityTreasuryUI.LastText)
+			.Set("keys", new List<object>(CommunityTreasuryUI.Keys()));
 	}
 
 	private IEnumerator CmdCoupon(string[] args, Result r)
@@ -1378,7 +1378,7 @@ public class TestBridge : MonoBehaviour
 				r.Fail("UI ย\u0e31งไม\u0e48พร\u0e49อม (ย\u0e31งไม\u0e48เข\u0e49าโลก?)");
 				yield break;
 			}
-			if (!OffServerCouponUI.Open((text == "move") ? OffServerCouponUI.Mode.Move : OffServerCouponUI.Mode.Coupon))
+			if (!CommunityCouponUI.Open((text == "move") ? CommunityCouponUI.Mode.Move : CommunityCouponUI.Mode.Coupon))
 			{
 				r.Fail("สร\u0e49างป\u0e4aอปอ\u0e31ปไม\u0e48ได\u0e49 (ไม\u0e48เจอแม\u0e48แบบป\u0e38\u0e48ม/ฟอนต\u0e4cใน PopupGroup)");
 				yield break;
@@ -1386,10 +1386,10 @@ public class TestBridge : MonoBehaviour
 			yield return new WaitForSeconds(1f);
 			break;
 		case "close":
-			OffServerCouponUI.Close();
+			CommunityCouponUI.Close();
 			break;
 		case "set":
-			if (!OffServerCouponUI.SetText((args.Length > 2) ? string.Join(" ", args, 2, args.Length - 2) : string.Empty))
+			if (!CommunityCouponUI.SetText((args.Length > 2) ? string.Join(" ", args, 2, args.Length - 2) : string.Empty))
 			{
 				r.Fail("ป\u0e4aอปอ\u0e31ปไม\u0e48ได\u0e49เป\u0e34ด");
 				yield break;
@@ -1397,14 +1397,14 @@ public class TestBridge : MonoBehaviour
 			break;
 		case "click":
 		{
-			if (args.Length <= 2 || !OffServerCouponUI.Click(args[2]))
+			if (args.Length <= 2 || !CommunityCouponUI.Click(args[2]))
 			{
-				r.Fail("ป\u0e38\u0e48มน\u0e35\u0e49กดไม\u0e48ได\u0e49 (ไม\u0e48ม\u0e35/ป\u0e34ด/ป\u0e4aอปอ\u0e31ปไม\u0e48เป\u0e34ด) — keys: " + string.Join(",", OffServerCouponUI.Keys().ToArray()));
+				r.Fail("ป\u0e38\u0e48มน\u0e35\u0e49กดไม\u0e48ได\u0e49 (ไม\u0e48ม\u0e35/ป\u0e34ด/ป\u0e4aอปอ\u0e31ปไม\u0e48เป\u0e34ด) — keys: " + string.Join(",", CommunityCouponUI.Keys().ToArray()));
 				yield break;
 			}
 			for (int i = 0; i < 40; i++)
 			{
-				if (!OffServerCouponUI.Busy)
+				if (!CommunityCouponUI.Busy)
 				{
 					break;
 				}
@@ -1414,10 +1414,10 @@ public class TestBridge : MonoBehaviour
 			break;
 		}
 		}
-		r.Set("open", OffServerCouponUI.IsOpen).Set("mode", OffServerCouponUI.OpenMode).Set("busy", OffServerCouponUI.Busy)
-			.Set("hint", OffServerCouponUI.LastHint)
-			.Set("result", OffServerCouponUI.LastResult)
-			.Set("keys", new List<object>(OffServerCouponUI.Keys()));
+		r.Set("open", CommunityCouponUI.IsOpen).Set("mode", CommunityCouponUI.OpenMode).Set("busy", CommunityCouponUI.Busy)
+			.Set("hint", CommunityCouponUI.LastHint)
+			.Set("result", CommunityCouponUI.LastResult)
+			.Set("keys", new List<object>(CommunityCouponUI.Keys()));
 	}
 
 	private IEnumerator CmdGemExchange(string[] args, Result r)
@@ -1431,7 +1431,7 @@ public class TestBridge : MonoBehaviour
 				r.Fail("UI ย\u0e31งไม\u0e48พร\u0e49อม (ย\u0e31งไม\u0e48เข\u0e49าโลก?)");
 				yield break;
 			}
-			OffServerWalletExchange.Open();
+			CommunityWalletExchange.Open();
 			yield return new WaitForSeconds(1f);
 			break;
 		case "t2g":
@@ -1442,7 +1442,7 @@ public class TestBridge : MonoBehaviour
 				r.Fail("ต\u0e49องใส\u0e48จำนวน Gem");
 				yield break;
 			}
-			OffServerWalletExchange.Exchange(text, result);
+			CommunityWalletExchange.Exchange(text, result);
 			yield return new WaitForSeconds(2.5f);
 			break;
 		}
@@ -1457,67 +1457,67 @@ public class TestBridge : MonoBehaviour
 		catch (Exception)
 		{
 		}
-		r.Set("available", OffServerWalletExchange.Available).Set("last", OffServerWalletExchange.LastEvent).Set("rate", OffServerWalletExchange.Rate)
+		r.Set("available", CommunityWalletExchange.Available).Set("last", CommunityWalletExchange.LastEvent).Set("rate", CommunityWalletExchange.Rate)
 			.Set("tStone", num)
 			.Set("gem", num2);
 	}
 
 	private IEnumerator CmdLava(string[] args, Result r)
 	{
-		r.Set("result", OffServerLavaShieldNet.DebugCommand(args));
+		r.Set("result", CommunityLavaShieldNet.DebugCommand(args));
 		yield return new WaitForSeconds(0.1f);
 	}
 
 	private IEnumerator CmdRanked(string[] args, Result r)
 	{
-		r.Set("result", OffServerRanked.DebugCommand(args));
+		r.Set("result", CommunityRanked.DebugCommand(args));
 		yield return new WaitForSeconds(0.1f);
 	}
 
 	private IEnumerator CmdDuel(string[] args, Result r)
 	{
-		r.Set("result", OffServerDuel.DebugCommand(args));
+		r.Set("result", CommunityDuel.DebugCommand(args));
 		yield return new WaitForSeconds(0.1f);
 	}
 
 	private IEnumerator CmdRun(string[] args, Result r)
 	{
-		r.Set("result", OffServerRunButton.DebugCommand(args));
+		r.Set("result", CommunityRunButton.DebugCommand(args));
 		yield return new WaitForSeconds(0.1f);
 	}
 
 	private IEnumerator CmdBlood(string[] args, Result r)
 	{
-		r.Set("result", OffServerBloodFx.DebugCommand(args));
+		r.Set("result", CommunityBloodFx.DebugCommand(args));
 		yield return new WaitForSeconds(0.1f);
 	}
 
 	private IEnumerator CmdHud(string[] args, Result r)
 	{
-		OffServerFpsCounter.DebugCommand(args);
+		CommunityFpsCounter.DebugCommand(args);
 		yield return new WaitForSeconds(0.6f);
-		r.Set("result", OffServerFpsCounter.Describe());
+		r.Set("result", CommunityFpsCounter.Describe());
 	}
 
 	private IEnumerator CmdBanner(string[] args, Result r)
 	{
-		string text = OffServerBannerStyle.DebugCommand(args);
+		string text = CommunityBannerStyle.DebugCommand(args);
 		yield return new WaitForSeconds(0.6f);
-		r.Set("result", text + " | now " + OffServerBannerStyle.Describe());
+		r.Set("result", text + " | now " + CommunityBannerStyle.Describe());
 	}
 
 	private IEnumerator CmdCareer(string[] args, Result r)
 	{
 		if (args.Length > 1 && args[1] == "open")
 		{
-			OffServerCareer.Reopen();
+			CommunityCareer.Reopen();
 		}
 		if (args.Length > 2 && args[1] == "click")
 		{
-			r.Set("clicked", OffServerCareerUI.Click(args[2]));
+			r.Set("clicked", CommunityCareerUI.Click(args[2]));
 		}
 		yield return new WaitForSeconds(0.3f);
-		r.Set("open", OffServerCareerUI.IsOpen).Set("busy", OffServerCareer.Busy);
+		r.Set("open", CommunityCareerUI.IsOpen).Set("busy", CommunityCareer.Busy);
 	}
 
 	private IEnumerator CmdExchange(string[] args, Result r)
@@ -1529,7 +1529,7 @@ public class TestBridge : MonoBehaviour
 		{
 			string text2 = ((args.Length > 2) ? args[2].ToLowerInvariant() : "browse");
 			int num2;
-			OffServerAuctionUI.Tab tab;
+			CommunityAuctionUI.Tab tab;
 			switch (text2)
 			{
 			case "stop":
@@ -1539,7 +1539,7 @@ public class TestBridge : MonoBehaviour
 				{
 					marketGroup.ForceClose();
 				}
-				OffServerAuctionPreview.End();
+				CommunityAuctionPreview.End();
 				break;
 			}
 			default:
@@ -1557,8 +1557,8 @@ public class TestBridge : MonoBehaviour
 					goto IL_0295;
 				}
 				IL_0295:
-				tab = (OffServerAuctionUI.Tab)num2;
-				r.Set("opened", OffServerAuctionPreview.Begin(tab, text2 == "list"));
+				tab = (CommunityAuctionUI.Tab)num2;
+				r.Set("opened", CommunityAuctionPreview.Begin(tab, text2 == "list"));
 				yield return new WaitForSeconds(0.5f);
 				break;
 			}
@@ -1566,13 +1566,13 @@ public class TestBridge : MonoBehaviour
 		}
 		case "auaction":
 		{
-			if (!OffServerAuctionPreview.Active || args.Length < 3 || !int.TryParse(args[2], out var result2) || result2 < 0 || result2 >= OffServerAuctionUI.Data.Goods.Count)
+			if (!CommunityAuctionPreview.Active || args.Length < 3 || !int.TryParse(args[2], out var result2) || result2 < 0 || result2 >= CommunityAuctionUI.Data.Goods.Count)
 			{
 				r.Fail("auaction <row>: preview only");
 			}
 			else
 			{
-				OffServerAuctionUI.DoAction(OffServerAuctionUI.Data.Goods[result2]);
+				CommunityAuctionUI.DoAction(CommunityAuctionUI.Data.Goods[result2]);
 			}
 			break;
 		}
@@ -1596,26 +1596,26 @@ public class TestBridge : MonoBehaviour
 			}
 			else
 			{
-				OffServerAuctionUI.Tab tab2 = OffServerAuctionUI.Tab.Browse;
+				CommunityAuctionUI.Tab tab2 = CommunityAuctionUI.Tab.Browse;
 				if (args.Length > 2)
 				{
 					switch (args[2].ToLowerInvariant())
 					{
 					case "selling":
-						tab2 = OffServerAuctionUI.Tab.Selling;
+						tab2 = CommunityAuctionUI.Tab.Selling;
 						break;
 					case "bidding":
-						tab2 = OffServerAuctionUI.Tab.Bidding;
+						tab2 = CommunityAuctionUI.Tab.Bidding;
 						break;
 					case "claims":
-						tab2 = OffServerAuctionUI.Tab.Claims;
+						tab2 = CommunityAuctionUI.Tab.Claims;
 						break;
 					}
 				}
 				marketGroup2.OpenAuctionTab(tab2);
 			}
 			yield return new WaitForSeconds(2f);
-			r.Set("opened", marketGroup2.IsOpened).Set("auctionMode", marketGroup2.OffServerAuctionOpen);
+			r.Set("opened", marketGroup2.IsOpened).Set("auctionMode", marketGroup2.CommunityAuctionOpen);
 			break;
 		}
 		case "trade":
@@ -1645,31 +1645,31 @@ public class TestBridge : MonoBehaviour
 					yield break;
 				}
 			}
-			OffServerExchange.RequestTrade(text3);
+			CommunityExchange.RequestTrade(text3);
 			yield return new WaitForSeconds(1.5f);
 			r.Set("target", text3);
 			break;
 		}
 		case "preview":
-			r.Set("opened", OffServerTradeUI.PreviewForTest());
+			r.Set("opened", CommunityTradeUI.PreviewForTest());
 			break;
 		case "previewitem":
-			r.Set("opened", OffServerTradeUI.PreviewItemForTest());
+			r.Set("opened", CommunityTradeUI.PreviewItemForTest());
 			break;
 		case "tkeys":
-			r.Set("keys", new List<object>(OffServerTradeUI.Keys()));
+			r.Set("keys", new List<object>(CommunityTradeUI.Keys()));
 			break;
 		case "tclick":
-			if (args.Length <= 2 || !OffServerTradeUI.Click(args[2]))
+			if (args.Length <= 2 || !CommunityTradeUI.Click(args[2]))
 			{
-				r.Fail("ป\u0e38\u0e48มน\u0e35\u0e49กดไม\u0e48ได\u0e49 (ไม\u0e48ม\u0e35/ป\u0e34ด/หน\u0e49าต\u0e48างเทรดไม\u0e48เป\u0e34ด) — keys: " + string.Join(",", OffServerTradeUI.Keys().ToArray()));
+				r.Fail("ป\u0e38\u0e48มน\u0e35\u0e49กดไม\u0e48ได\u0e49 (ไม\u0e48ม\u0e35/ป\u0e34ด/หน\u0e49าต\u0e48างเทรดไม\u0e48เป\u0e34ด) — keys: " + string.Join(",", CommunityTradeUI.Keys().ToArray()));
 				yield break;
 			}
 			yield return new WaitForSeconds(1f);
 			break;
 		case "add":
 		{
-			if (args.Length <= 2 || OffServerExchange.Trade == null)
+			if (args.Length <= 2 || CommunityExchange.Trade == null)
 			{
 				r.Fail("add <proto> [n] — ต\u0e49องม\u0e35เทรดเป\u0e34ดอย\u0e39\u0e48");
 				yield break;
@@ -1685,11 +1685,11 @@ public class TestBridge : MonoBehaviour
 				}
 			}
 			JObject jObject = new JObject();
-			jObject["tradeId"] = OffServerExchange.Str(OffServerExchange.Trade, "tradeId");
+			jObject["tradeId"] = CommunityExchange.Str(CommunityExchange.Trade, "tradeId");
 			jObject["itemIds"] = jArray;
 			JObject reply3 = null;
 			bool done3 = false;
-			OffServerExchange.Request(22, jObject, delegate(JObject x)
+			CommunityExchange.Request(22, jObject, delegate(JObject x)
 			{
 				reply3 = x;
 				done3 = true;
@@ -1709,10 +1709,10 @@ public class TestBridge : MonoBehaviour
 				r.Fail("send <kind> <json>");
 				yield break;
 			}
-			JObject body = OffServerExchange.Parse((args.Length > 3) ? string.Join(" ", args, 3, args.Length - 3).Replace('\'', '"') : "{}") ?? new JObject();
+			JObject body = CommunityExchange.Parse((args.Length > 3) ? string.Join(" ", args, 3, args.Length - 3).Replace('\'', '"') : "{}") ?? new JObject();
 			JObject reply2 = null;
 			bool done2 = false;
-			OffServerExchange.Request(result, body, delegate(JObject x)
+			CommunityExchange.Request(result, body, delegate(JObject x)
 			{
 				reply2 = x;
 				done2 = true;
@@ -1726,20 +1726,20 @@ public class TestBridge : MonoBehaviour
 			break;
 		}
 		}
-		foreach (KeyValuePair<string, object> item2 in OffServerExchange.State())
+		foreach (KeyValuePair<string, object> item2 in CommunityExchange.State())
 		{
 			r.Set(item2.Key, item2.Value);
 		}
 		List<object> list = new List<object>();
-		foreach (Durango.Logic.Market.Commodity good in OffServerAuctionUI.Data.Goods)
+		foreach (Durango.Logic.Market.Commodity good in CommunityAuctionUI.Data.Goods)
 		{
 			ItemData item = good.GetItem();
-			list.Add(Dict("id", good.Id, "item", (item != null) ? item.Name : "?", "price", good.Price, "text", good.OffServerPriceText ?? string.Empty));
+			list.Add(Dict("id", good.Id, "item", (item != null) ? item.Name : "?", "price", good.Price, "text", good.CommunityPriceText ?? string.Empty));
 		}
-		r.Set("tab", OffServerAuctionUI.Current.ToString()).Set("rows", list).Set("moneyWaiting", OffServerAuctionUI.MoneyWaiting);
-		if (OffServerExchange.Trade != null)
+		r.Set("tab", CommunityAuctionUI.Current.ToString()).Set("rows", list).Set("moneyWaiting", CommunityAuctionUI.MoneyWaiting);
+		if (CommunityExchange.Trade != null)
 		{
-			r.Set("tradeJson", OffServerExchange.Trade.ToString(Formatting.None));
+			r.Set("tradeJson", CommunityExchange.Trade.ToString(Formatting.None));
 		}
 	}
 
@@ -1749,7 +1749,7 @@ public class TestBridge : MonoBehaviour
 		switch (text)
 		{
 		case "fetch":
-			OffServerSeasonPass.Fetch();
+			CommunitySeasonPass.Fetch();
 			yield return new WaitForSeconds(2f);
 			break;
 		case "open":
@@ -1781,16 +1781,16 @@ public class TestBridge : MonoBehaviour
 			{
 				result = 0;
 			}
-			OffServerSeasonPass.Claim(result);
+			CommunitySeasonPass.Claim(result);
 			yield return new WaitForSeconds(2.5f);
 			break;
 		}
 		case "missions":
-			r.Set("lines", new List<object>(OffServerSeasonPass.MissionLines()));
+			r.Set("lines", new List<object>(CommunitySeasonPass.MissionLines()));
 			break;
 		}
-		OffServerSeasonPass.Status current = OffServerSeasonPass.Current;
-		r.Set("available", OffServerSeasonPass.Available).Set("last", OffServerSeasonPass.LastEvent).Set("claimed", OffServerSeasonPass.LastClaimed)
+		CommunitySeasonPass.Status current = CommunitySeasonPass.Current;
+		r.Set("available", CommunitySeasonPass.Available).Set("last", CommunitySeasonPass.LastEvent).Set("claimed", CommunitySeasonPass.LastClaimed)
 			.Set("mode", WarpRushGroup.SeasonPassMode);
 		if (current == null)
 		{
@@ -1805,27 +1805,27 @@ public class TestBridge : MonoBehaviour
 			.Set("expDailyPoints", current.ExpDailyPoints)
 			.Set("expPointsToday", current.ExpPointsToday)
 			.Set("tierPoints", current.TierPoints)
-			.Set("seasonRatio", OffServerSeasonPass.SeasonRatio(current))
-			.Set("seasonHud", OffServerSeasonPass.UseSeasonHud)
-			.Set("hudText", OffServerSeasonPass.SeasonHudText)
-			.Set("quotaText", OffServerSeasonPass.ExpQuotaText(current))
-			.Set("fetchCount", OffServerSeasonPass.FetchCount)
+			.Set("seasonRatio", CommunitySeasonPass.SeasonRatio(current))
+			.Set("seasonHud", CommunitySeasonPass.UseSeasonHud)
+			.Set("hudText", CommunitySeasonPass.SeasonHudText)
+			.Set("quotaText", CommunitySeasonPass.ExpQuotaText(current))
+			.Set("fetchCount", CommunitySeasonPass.FetchCount)
 			.Set("maxTier", current.MaxTier)
 			.Set("pointsPerTier", current.PointsPerTier)
 			.Set("claimable", current.Claimable)
 			.Set("until", current.Until);
 		List<object> list = new List<object>();
-		foreach (OffServerSeasonPass.Tier tier in current.Tiers)
+		foreach (CommunitySeasonPass.Tier tier in current.Tiers)
 		{
 			list.Add(Dict("tier", tier.Number, "state", tier.State, "box", tier.Box.Items.Count, "special", (tier.Special.Items.Count > 0 && tier.Special.Items[0].Item != null) ? tier.Special.Items[0].Item.PrototypeId : string.Empty));
 		}
 		r.Set("tiers", list);
 		List<object> list2 = new List<object>();
-		foreach (OffServerSeasonPass.Mission mission in current.Daily.Missions)
+		foreach (CommunitySeasonPass.Mission mission in current.Daily.Missions)
 		{
 			list2.Add(Dict("id", mission.Id, "progress", mission.Progress, "count", mission.Count, "done", mission.Done));
 		}
-		foreach (OffServerSeasonPass.Mission mission2 in current.Weekly.Missions)
+		foreach (CommunitySeasonPass.Mission mission2 in current.Weekly.Missions)
 		{
 			list2.Add(Dict("id", mission2.Id, "progress", mission2.Progress, "count", mission2.Count, "done", mission2.Done));
 		}
@@ -1838,26 +1838,26 @@ public class TestBridge : MonoBehaviour
 		switch (text)
 		{
 		case "start":
-			OffServerDiscordLink.Begin(openBrowser: false);
+			CommunityDiscordLink.Begin(openBrowser: false);
 			break;
 		case "click":
 			ConfigInstance.NotifyAction("discord_link");
 			break;
 		case "cancel":
-			OffServerDiscordLink.Cancel();
+			CommunityDiscordLink.Cancel();
 			break;
 		}
 		if (text != "status")
 		{
 			yield return new WaitForSeconds((args.Length > 2) ? (ParseFloat(args[2], 1500f) / 1000f) : 1.5f);
 		}
-		r.Set("busy", OffServerDiscordLink.Busy).Set("port", OffServerDiscordLink.Port).Set("url", OffServerDiscordLink.LastAuthorizeUrl)
-			.Set("last", OffServerDiscordLink.LastEvent)
-			.Set("label", OffServerDiscordLink.ButtonLabel)
-			.Set("discord_name", OffServerLink.DiscordName ?? string.Empty)
-			.Set("client_version", OffServerLink.ClientVersion)
-			.Set("server_version", OffServerLink.LastServerVersion)
-			.Set("caller", OffServerDiscordLink.LastCaller);
+		r.Set("busy", CommunityDiscordLink.Busy).Set("port", CommunityDiscordLink.Port).Set("url", CommunityDiscordLink.LastAuthorizeUrl)
+			.Set("last", CommunityDiscordLink.LastEvent)
+			.Set("label", CommunityDiscordLink.ButtonLabel)
+			.Set("discord_name", CommunityLink.DiscordName ?? string.Empty)
+			.Set("client_version", CommunityLink.ClientVersion)
+			.Set("server_version", CommunityLink.LastServerVersion)
+			.Set("caller", CommunityDiscordLink.LastCaller);
 	}
 
 	private IEnumerator CmdMoveCode(string[] args, Result r)
@@ -1877,15 +1877,15 @@ public class TestBridge : MonoBehaviour
 		}
 		else
 		{
-			OffServerMoveDevice.LastCode = string.Empty;
+			CommunityMoveDevice.LastCode = string.Empty;
 			ConfigInstance.NotifyAction("move_device");
 		}
 		if (text != "status")
 		{
 			yield return new WaitForSeconds(2f);
 		}
-		r.Set("code", OffServerMoveDevice.LastCode).Set("last", OffServerMoveDevice.LastEvent).Set("label", OffServerMoveDevice.ButtonLabel)
-			.Set("machine_key", OffServerLink.AccountId);
+		r.Set("code", CommunityMoveDevice.LastCode).Set("last", CommunityMoveDevice.LastEvent).Set("label", CommunityMoveDevice.ButtonLabel)
+			.Set("machine_key", CommunityLink.AccountId);
 	}
 
 	private IEnumerator CmdHelp(string[] args, Result r)
@@ -1904,12 +1904,12 @@ public class TestBridge : MonoBehaviour
 	{
 		string[] array = new string[Math.Max(0, args.Length - 1)];
 		Array.Copy(args, 1, array, 0, array.Length);
-		string text = OffServerVoice.DebugCommand(array);
+		string text = CommunityVoice.DebugCommand(array);
 		if (text != null)
 		{
 			r.Set("done", text);
 		}
-		foreach (KeyValuePair<string, object> item in OffServerVoice.DebugState())
+		foreach (KeyValuePair<string, object> item in CommunityVoice.DebugState())
 		{
 			r.Set(item.Key, item.Value);
 		}
@@ -1920,12 +1920,12 @@ public class TestBridge : MonoBehaviour
 	{
 		string[] array = new string[Math.Max(0, args.Length - 1)];
 		Array.Copy(args, 1, array, 0, array.Length);
-		string text = OffServerDodoFight.DebugCommand(array);
+		string text = CommunityDodoFight.DebugCommand(array);
 		if (text != null)
 		{
 			r.Set("done", text);
 		}
-		foreach (KeyValuePair<string, object> item in OffServerDodoFight.DebugState())
+		foreach (KeyValuePair<string, object> item in CommunityDodoFight.DebugState())
 		{
 			r.Set(item.Key, item.Value);
 		}
@@ -1979,7 +1979,7 @@ public class TestBridge : MonoBehaviour
 			}
 			break;
 		case "unblock":
-			OffServerUdp.ClearBlock();
+			CommunityUdp.ClearBlock();
 			break;
 		case "sim":
 			if (frontendIfAny != null && frontendIfAny.Udp != null)
@@ -1993,32 +1993,32 @@ public class TestBridge : MonoBehaviour
 			ConfigInstance.ChangeValue("net_transport", text);
 			break;
 		}
-		OffServerUdpTransport offServerUdpTransport = frontendIfAny?.Udp;
-		OffServerUdp.Offer pending = OffServerUdp.Pending;
-		r.Set("setting", OffServerUdp.IsTcpOnly ? "tcp" : "auto");
-		r.Set("blocked_sec", OffServerUdp.IsBlocked(out var remainSec) ? ((int)remainSec) : 0);
-		r.Set("entry", OffServerUdp.LastEntryNote);
+		CommunityUdpTransport communityUdpTransport = frontendIfAny?.Udp;
+		CommunityUdp.Offer pending = CommunityUdp.Pending;
+		r.Set("setting", CommunityUdp.IsTcpOnly ? "tcp" : "auto");
+		r.Set("blocked_sec", CommunityUdp.IsBlocked(out var remainSec) ? ((int)remainSec) : 0);
+		r.Set("entry", CommunityUdp.LastEntryNote);
 		r.Set("offer", (pending != null) ? ("port " + pending.Port + " ttl " + pending.TtlSec + (pending.Used ? " used" : " unused")) : "none");
 		r.Set("tcp_connected", frontendIfAny?.Connected() ?? false);
-		r.Set("phase", (offServerUdpTransport != null) ? offServerUdpTransport.Current.ToString() : "none");
-		r.Set("active", offServerUdpTransport?.Active ?? false);
-		if (offServerUdpTransport != null)
+		r.Set("phase", (communityUdpTransport != null) ? communityUdpTransport.Current.ToString() : "none");
+		r.Set("active", communityUdpTransport?.Active ?? false);
+		if (communityUdpTransport != null)
 		{
-			r.Set("target", offServerUdpTransport.Target.ToString()).Set("rtt_ms", offServerUdpTransport.RttMs).Set("up_sec", (int)offServerUdpTransport.UpSeconds);
-			r.Set("frames_sent", offServerUdpTransport.FramesSent).Set("frames_recv", offServerUdpTransport.FramesRecv);
-			r.Set("bytes_sent", offServerUdpTransport.BytesSent).Set("bytes_recv", offServerUdpTransport.BytesRecv);
-			r.Set("unacked", offServerUdpTransport.Unacked).Set("held", offServerUdpTransport.Held).Set("replayed", offServerUdpTransport.Replayed)
-				.Set("bad_recv", offServerUdpTransport.BadRecv);
-			r.Set("packet_loss", offServerUdpTransport.PacketLoss).Set("fallbacks", offServerUdpTransport.Fallbacks).Set("last_reason", offServerUdpTransport.LastReason);
-			r.Set("peer_channels", offServerUdpTransport.PeerChannels).Set("ch2_sent", offServerUdpTransport.Ch2Sent).Set("ch2_recv", offServerUdpTransport.Ch2Recv);
-			r.Set("move_sent", offServerUdpTransport.MoveSent).Set("move_pending", offServerUdpTransport.MovePending).Set("move_pending_tries", offServerUdpTransport.MovePendingTries);
-			r.Set("move_resends", offServerUdpTransport.MoveResends).Set("move_escalated", offServerUdpTransport.MoveEscalated).Set("move_acks", offServerUdpTransport.MoveAcks)
-				.Set("move_ack_tseq", (long)offServerUdpTransport.MoveAckTseq);
-			r.Set("hello_armed", offServerUdpTransport.HelloArmed).Set("next_hello_sec", offServerUdpTransport.NextHelloInSec).Set("hellos", offServerUdpTransport.Hellos)
-				.Set("offers", offServerUdpTransport.Offers)
-				.Set("last_offer", offServerUdpTransport.LastOfferNote);
-			r.Set("sim_loss_pct", offServerUdpTransport.SimLossPct).Set("sim_delay_ms", offServerUdpTransport.SimDelayMs).Set("sim_dropped", offServerUdpTransport.SimDropped)
-				.Set("sim_delayed", offServerUdpTransport.SimDelayed);
+			r.Set("target", communityUdpTransport.Target.ToString()).Set("rtt_ms", communityUdpTransport.RttMs).Set("up_sec", (int)communityUdpTransport.UpSeconds);
+			r.Set("frames_sent", communityUdpTransport.FramesSent).Set("frames_recv", communityUdpTransport.FramesRecv);
+			r.Set("bytes_sent", communityUdpTransport.BytesSent).Set("bytes_recv", communityUdpTransport.BytesRecv);
+			r.Set("unacked", communityUdpTransport.Unacked).Set("held", communityUdpTransport.Held).Set("replayed", communityUdpTransport.Replayed)
+				.Set("bad_recv", communityUdpTransport.BadRecv);
+			r.Set("packet_loss", communityUdpTransport.PacketLoss).Set("fallbacks", communityUdpTransport.Fallbacks).Set("last_reason", communityUdpTransport.LastReason);
+			r.Set("peer_channels", communityUdpTransport.PeerChannels).Set("ch2_sent", communityUdpTransport.Ch2Sent).Set("ch2_recv", communityUdpTransport.Ch2Recv);
+			r.Set("move_sent", communityUdpTransport.MoveSent).Set("move_pending", communityUdpTransport.MovePending).Set("move_pending_tries", communityUdpTransport.MovePendingTries);
+			r.Set("move_resends", communityUdpTransport.MoveResends).Set("move_escalated", communityUdpTransport.MoveEscalated).Set("move_acks", communityUdpTransport.MoveAcks)
+				.Set("move_ack_tseq", (long)communityUdpTransport.MoveAckTseq);
+			r.Set("hello_armed", communityUdpTransport.HelloArmed).Set("next_hello_sec", communityUdpTransport.NextHelloInSec).Set("hellos", communityUdpTransport.Hellos)
+				.Set("offers", communityUdpTransport.Offers)
+				.Set("last_offer", communityUdpTransport.LastOfferNote);
+			r.Set("sim_loss_pct", communityUdpTransport.SimLossPct).Set("sim_delay_ms", communityUdpTransport.SimDelayMs).Set("sim_dropped", communityUdpTransport.SimDropped)
+				.Set("sim_delayed", communityUdpTransport.SimDelayed);
 		}
 		yield break;
 	}
@@ -2930,7 +2930,7 @@ public class TestBridge : MonoBehaviour
 		}
 		if (args.Length >= 3 && args[1] == "replay")
 		{
-			if (!Uri.TryCreate(OffServerLink.Gateway, UriKind.Absolute, out var result) || !result.IsLoopback || result.Port != 8390)
+			if (!Uri.TryCreate(CommunityLink.Gateway, UriKind.Absolute, out var result) || !result.IsLoopback || result.Port != 8390)
 			{
 				r.Fail("dialog replay is available on local DEV only");
 				yield break;
@@ -3029,9 +3029,9 @@ public class TestBridge : MonoBehaviour
 
 	private IEnumerator CmdUi(string[] args, Result r)
 	{
-		if (OffServerNinePresets.Handles(args))
+		if (CommunityNinePresets.Handles(args))
 		{
-			yield return OffServerNinePresets.UiCommand(args, r);
+			yield return CommunityNinePresets.UiCommand(args, r);
 			yield break;
 		}
 		if (TestBridgeScreen.Handles(args))

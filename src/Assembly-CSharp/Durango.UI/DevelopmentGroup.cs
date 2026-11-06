@@ -62,7 +62,7 @@ public class DevelopmentGroup : UIBase
 
 	private void ApplyAdminVisibility()
 	{
-		bool isAdmin = OffServerLink.IsAdmin;
+		bool isAdmin = CommunityLink.IsAdmin;
 		if (isAdmin == _adminShown)
 		{
 			return;

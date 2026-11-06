@@ -139,7 +139,7 @@ public class MenuSystem : GameSystem<MenuSystem>
 		_recentlyUnlocked = new bool[array.Length];
 		Singleton<GameManager>.Instance().MainSceneLoaded += GameManager_MainSceneLoaded;
 		Singleton<GameManager>.Instance().WelcomeReceived += OnWelcome;
-		OffServerSeasonPass.Updated += RefreshSeasonPassMenu;
+		CommunitySeasonPass.Updated += RefreshSeasonPassMenu;
 		_enableMenuUpdated = new DelayedFunction(delegate
 		{
 			if (this.EnableMenuUpdated != null)
@@ -151,7 +151,7 @@ public class MenuSystem : GameSystem<MenuSystem>
 
 	private void OnDestroy()
 	{
-		OffServerSeasonPass.Updated -= RefreshSeasonPassMenu;
+		CommunitySeasonPass.Updated -= RefreshSeasonPassMenu;
 	}
 
 	private void RefreshSeasonPassMenu()
@@ -175,13 +175,13 @@ public class MenuSystem : GameSystem<MenuSystem>
 	private IEnumerator FetchSeasonPassSoon()
 	{
 		yield return new WaitForSeconds(2f);
-		OffServerSeasonPass.Fetch();
+		CommunitySeasonPass.Fetch();
 	}
 
 	public static bool IsHiddenMenu(MenuType type)
 	{
-		bool showSeasonUi = OffServerSeasonPass.ShowSeasonUi;
-		if (type == MenuType.SeasonPass && (!OffServerLink.Active || !showSeasonUi))
+		bool showSeasonUi = CommunitySeasonPass.ShowSeasonUi;
+		if (type == MenuType.SeasonPass && (!CommunityLink.Active || !showSeasonUi))
 		{
 			return true;
 		}
@@ -223,9 +223,9 @@ public class MenuSystem : GameSystem<MenuSystem>
 
 	private void OnWelcome(Welcome welcome)
 	{
-		OffServerSeasonPass.Reset();
+		CommunitySeasonPass.Reset();
 		RefreshSeasonPassMenu();
-		if (OffServerLink.Active)
+		if (CommunityLink.Active)
 		{
 			StartCoroutine(FetchSeasonPassSoon());
 		}

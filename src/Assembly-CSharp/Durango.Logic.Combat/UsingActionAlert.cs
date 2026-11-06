@@ -48,7 +48,7 @@ public class UsingActionAlert
 		{
 			_items.Add(new Item
 			{
-				Info = (playerActionAttackInfo.OffServerPreview ?? playerActionAttackInfo)
+				Info = (playerActionAttackInfo.CommunityPreview ?? playerActionAttackInfo)
 			});
 		}
 		if (Singleton<PlayerManager>.Instance().GetPlayer(GameManager.PlayerId) != null)
@@ -59,7 +59,7 @@ public class UsingActionAlert
 			{
 				_items.Add(new Item
 				{
-					Info = (playerActionAttackInfo2.OffServerPreview ?? playerActionAttackInfo2)
+					Info = (playerActionAttackInfo2.CommunityPreview ?? playerActionAttackInfo2)
 				});
 			}
 		}

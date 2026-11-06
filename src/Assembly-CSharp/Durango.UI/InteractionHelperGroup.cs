@@ -14,7 +14,7 @@ public class InteractionHelperGroup : InteractionHelperGroupBase
 	{
 		UIManager.FindScript<ToDoListGroupBase>().AddWidthOnChanged(OnChangeTodoWidthRatio);
 		base.Start();
-		if (OffServerHotkeys.Supported)
+		if (CommunityHotkeys.Supported)
 		{
 			GameSystem<InputSystem>.Instance().On(InputCommand.HelperButtonAction, delegate
 			{

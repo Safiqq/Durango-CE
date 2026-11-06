@@ -255,7 +255,7 @@ public class ConfigMainWidget : MonoBehaviour
 	{
 		_rectLayout.UpdateLayout();
 		UIUtility.UpdateAnchors(base.transform);
-		if (!OffServerCouponUI.CouponPageOpen)
+		if (!CommunityCouponUI.CouponPageOpen)
 		{
 			SetConfigLayout(_currentCategory);
 		}
@@ -263,7 +263,7 @@ public class ConfigMainWidget : MonoBehaviour
 
 	public void SetConfigLayout(string category)
 	{
-		category = OffServerSettingsMenu.Resolve(category);
+		category = CommunitySettingsMenu.Resolve(category);
 		_currentCategory = category;
 		_pushLoadFailedLabel.gameObject.SetActive(value: false);
 		UIManager.Popup.LoadingRing.DetachFromWidget(_widget.gameObject);
@@ -330,10 +330,10 @@ public class ConfigMainWidget : MonoBehaviour
 
 	private void SetCategoryWidgets()
 	{
-		List<Setting> list = OffServerSettingsMenu.Rows(_currentCategory);
-		if (_currentCategory == "offserver_audio")
+		List<Setting> list = CommunitySettingsMenu.Rows(_currentCategory);
+		if (_currentCategory == "community_audio")
 		{
-			OffServerVoiceSettings.SyncValues(list);
+			CommunityVoiceSettings.SyncValues(list);
 		}
 		GridWidget gridWidget = null;
 		foreach (Setting item in list)
@@ -443,7 +443,7 @@ public class ConfigMainWidget : MonoBehaviour
 			}
 			catch (Exception ex)
 			{
-				UnityEngine.Debug.LogWarning("[OffServer] สร\u0e49างแถวต\u0e31\u0e49งค\u0e48า '" + item.Key + "' ไม\u0e48ได\u0e49 ข\u0e49ามไป: " + ex.Message);
+				UnityEngine.Debug.LogWarning("[Community] สร\u0e49างแถวต\u0e31\u0e49งค\u0e48า '" + item.Key + "' ไม\u0e48ได\u0e49 ข\u0e49ามไป: " + ex.Message);
 				settingItem = null;
 			}
 			if (settingItem == null)
@@ -769,7 +769,7 @@ public class ConfigMainWidget : MonoBehaviour
 			OnButtonBoxClick(widget.ValueSetting);
 		};
 		settingItem.Value = op.Value;
-		OffServerHotkeyRow.Decorate(widget, op, settingItem.Label);
+		CommunityHotkeyRow.Decorate(widget, op, settingItem.Label);
 		return settingItem;
 	}
 
@@ -891,7 +891,7 @@ public class ConfigMainWidget : MonoBehaviour
 			{
 				if (configMainWidget.gameObject.activeInHierarchy)
 				{
-					OffServerHudLayout.Open(configMainWidget._buttonBase);
+					CommunityHudLayout.Open(configMainWidget._buttonBase);
 					break;
 				}
 			}
@@ -902,7 +902,7 @@ public class ConfigMainWidget : MonoBehaviour
 		}
 	}
 
-	public static void RefreshOffServerAccount()
+	public static void RefreshCommunityAccount()
 	{
 		ConfigMainWidget[] array = UnityEngine.Object.FindObjectsByType<ConfigMainWidget>();
 		foreach (ConfigMainWidget configMainWidget in array)
@@ -914,7 +914,7 @@ public class ConfigMainWidget : MonoBehaviour
 		}
 	}
 
-	public static void RefreshOffServerLanguages()
+	public static void RefreshCommunityLanguages()
 	{
 		ConfigMainWidget[] array = UnityEngine.Object.FindObjectsByType<ConfigMainWidget>();
 		foreach (ConfigMainWidget configMainWidget in array)
@@ -926,7 +926,7 @@ public class ConfigMainWidget : MonoBehaviour
 		}
 	}
 
-	public static void RefreshOffServerMenu(string category)
+	public static void RefreshCommunityMenu(string category)
 	{
 		ConfigMainWidget[] array = UnityEngine.Object.FindObjectsByType<ConfigMainWidget>();
 		foreach (ConfigMainWidget configMainWidget in array)
@@ -938,7 +938,7 @@ public class ConfigMainWidget : MonoBehaviour
 		}
 	}
 
-	public static void RefreshOffServerHotkeys()
+	public static void RefreshCommunityHotkeys()
 	{
 		ConfigMainWidget[] array = UnityEngine.Object.FindObjectsByType<ConfigMainWidget>();
 		foreach (ConfigMainWidget configMainWidget in array)
@@ -952,7 +952,7 @@ public class ConfigMainWidget : MonoBehaviour
 				ButtonBoxWidget buttonBoxWidget = settingItem.Contents as ButtonBoxWidget;
 				if (buttonBoxWidget != null)
 				{
-					OffServerHotkeyRow.Decorate(buttonBoxWidget, settingItem.Setting, settingItem.Label);
+					CommunityHotkeyRow.Decorate(buttonBoxWidget, settingItem.Setting, settingItem.Label);
 				}
 			}
 		}
@@ -960,41 +960,41 @@ public class ConfigMainWidget : MonoBehaviour
 
 	private void DoLocalize(SettingItem setting)
 	{
-		if (setting.Setting is OffServerHotkeySetting offServerHotkeySetting)
+		if (setting.Setting is CommunityHotkeySetting communityHotkeySetting)
 		{
-			offServerHotkeySetting.PrepareLabelText = OffServerHotkeys.Text(offServerHotkeySetting.TextKey);
+			communityHotkeySetting.PrepareLabelText = CommunityHotkeys.Text(communityHotkeySetting.TextKey);
 		}
 		if (setting.Key == "show_fps" && setting.Setting is ValueSetting valueSetting)
 		{
-			valueSetting.PrepareLabelText = OffServerFpsCounter.Label;
+			valueSetting.PrepareLabelText = CommunityFpsCounter.Label;
 		}
-		string text = OffServerGameplayOptions.Label(setting.Key);
+		string text = CommunityGameplayOptions.Label(setting.Key);
 		if (text != null && setting.Setting is ValueSetting valueSetting2)
 		{
 			valueSetting2.PrepareLabelText = text;
 		}
-		string text2 = OffServerVoiceSettings.Label(setting.Key);
+		string text2 = CommunityVoiceSettings.Label(setting.Key);
 		if (text2 != null && setting.Setting is ValueSetting valueSetting3)
 		{
 			valueSetting3.PrepareLabelText = text2;
 		}
 		if (setting.Key == "discord_link" && setting.Setting is ValueSetting valueSetting4)
 		{
-			valueSetting4.PrepareLabelText = OffServerDiscordLink.ButtonLabel;
+			valueSetting4.PrepareLabelText = CommunityDiscordLink.ButtonLabel;
 		}
 		if (setting.Key == "move_device" && setting.Setting is ValueSetting valueSetting5)
 		{
-			valueSetting5.PrepareLabelText = OffServerMoveDevice.ButtonLabel;
+			valueSetting5.PrepareLabelText = CommunityMoveDevice.ButtonLabel;
 		}
 		if (setting.Key == "move_redeem" && setting.Setting is ValueSetting valueSetting6)
 		{
-			valueSetting6.PrepareLabelText = OffServerMoveDevice.RedeemButtonLabel;
+			valueSetting6.PrepareLabelText = CommunityMoveDevice.RedeemButtonLabel;
 		}
 		if (setting.Key == "lang_packs" && setting.Setting is ValueSetting valueSetting7)
 		{
-			valueSetting7.PrepareLabelText = OffServerLangPack.ButtonLabel;
+			valueSetting7.PrepareLabelText = CommunityLangPack.ButtonLabel;
 		}
-		string text3 = OffServerSettingsText.RowLabel(setting.Key);
+		string text3 = CommunitySettingsText.RowLabel(setting.Key);
 		if (text3 != null && setting.Setting is ValueSetting valueSetting8)
 		{
 			valueSetting8.PrepareLabelText = text3;
@@ -1031,7 +1031,7 @@ public class ConfigMainWidget : MonoBehaviour
 		case SettingType.TextLabel:
 			if (setting.Key == "private_number")
 			{
-				UnityEngine.Debug.Log("[OffServer] settings ▸ Account Number = '" + (setting.Contents as UILabel).text + "'");
+				UnityEngine.Debug.Log("[Community] settings ▸ Account Number = '" + (setting.Contents as UILabel).text + "'");
 			}
 			break;
 		case SettingType.Button:
@@ -1050,7 +1050,7 @@ public class ConfigMainWidget : MonoBehaviour
 			{
 				_accountRowColor = uILabel.color;
 			}
-			uILabel.color = (string.IsNullOrEmpty(OffServerLink.DiscordName) ? Color.red : (_accountRowColor ?? Color.white));
+			uILabel.color = (string.IsNullOrEmpty(CommunityLink.DiscordName) ? Color.red : (_accountRowColor ?? Color.white));
 			GameObject obj = uILabel.gameObject;
 			BoxCollider component = obj.GetComponent<BoxCollider>();
 			if (component != null)

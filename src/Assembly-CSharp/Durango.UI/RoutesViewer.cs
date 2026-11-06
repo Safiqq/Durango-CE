@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using L10N;
-using OffServer.ClanPillar;
+using Community.ClanPillar;
 using Shared.Region;
 using UnityEngine;
 using Yaml;

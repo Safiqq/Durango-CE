@@ -382,7 +382,7 @@ public static class LocalGatewayServer
 		                 "Connection: close\r\n" +
 		                 "Access-Control-Allow-Origin: *\r\n" +
 		                 "Access-Control-Allow-Methods: GET, POST, OPTIONS\r\n" +
-		                 "Access-Control-Allow-Headers: Content-Type, Authorization, X-OffServer-Client\r\n" +
+		                 "Access-Control-Allow-Headers: Content-Type, Authorization, X-Community-Client\r\n" +
 		                 "\r\n";
 		byte[] headerBytes = Encoding.ASCII.GetBytes(headers);
 		stream.Write(headerBytes, 0, headerBytes.Length);

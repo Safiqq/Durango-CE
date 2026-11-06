@@ -290,7 +290,7 @@ public abstract class ChattingGroupBase : UIBase
 		{
 			RadioLink radioLink = (RadioLink)chatStruct.Body;
 			ParamsDictionary paramsDictionary = ParamsDictionary.MakeParams(radioLink.Link);
-			if (!OffServerItemShare.TryOpen(paramsDictionary))
+			if (!CommunityItemShare.TryOpen(paramsDictionary))
 			{
 				string text = ((paramsDictionary != null) ? paramsDictionary.Get("link") : radioLink.Link);
 				UIUtility.OpenUri(string.Empty, text ?? string.Empty);

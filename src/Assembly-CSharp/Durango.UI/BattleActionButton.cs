@@ -198,7 +198,7 @@ public class BattleActionButton : MonoBehaviour
 
 	private void OnPress(bool isPress)
 	{
-		if (!OffServerHudLayout.BlocksInput)
+		if (!CommunityHudLayout.BlocksInput)
 		{
 			ShowPressEffect(isPress);
 			if (this.Pressed != null)

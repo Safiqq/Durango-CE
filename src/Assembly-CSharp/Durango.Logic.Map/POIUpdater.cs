@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Durango.Network;
 using Durango.Utils;
 using Messages;
-using OffServer.ClanPillar;
+using Community.ClanPillar;
 using Shared.Season2;
 using Shared.System;
 using UnityEngine;

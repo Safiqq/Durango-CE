@@ -9,8 +9,8 @@ using Durango.Utils.Extensions;
 using L10N;
 using Messages;
 using NestedPrefab;
-using OffServer;
-using OffServer.Rift;
+using Community;
+using Community.Rift;
 using Shared.Rank;
 using Shared.Season2;
 using UnityEngine;
@@ -84,11 +84,11 @@ public class WarpRushGroup : UIBase, IUIInitializable, INotificationable
 			UIManager.Alarm.ShowNotify(T._("{0} 크레이터 한 곳이 워프됐습니다.", WarpRushSystem.GetResourceName(resourceType)), "act_warpback", major: false);
 		};
 		GameSystem<WarpRushSystem>.Instance().RewardStatusChanged += OnRewardStatusChange;
-		OffServerSeasonPass.Updated += delegate
+		CommunitySeasonPass.Updated += delegate
 		{
 			if (SeasonPassMode && base.IsOpened)
 			{
-				if (OffServerSeasonPass.ShowSeasonUi)
+				if (CommunitySeasonPass.ShowSeasonUi)
 				{
 					ApplySeasonPassMode();
 				}
@@ -97,9 +97,9 @@ public class WarpRushGroup : UIBase, IUIInitializable, INotificationable
 					Close();
 				}
 			}
-			if (OffServerLink.Active)
+			if (CommunityLink.Active)
 			{
-				_notification.On = OffServerSeasonPass.ClaimableCount > 0;
+				_notification.On = CommunitySeasonPass.ClaimableCount > 0;
 			}
 		};
 		GameSystem<WarpRushSystem>.Instance().RewardedRankingUpdated += delegate
@@ -121,7 +121,7 @@ public class WarpRushGroup : UIBase, IUIInitializable, INotificationable
 
 	protected override bool TryOpen()
 	{
-		if (SeasonPassMode && !OffServerSeasonPass.ShowSeasonUi)
+		if (SeasonPassMode && !CommunitySeasonPass.ShowSeasonUi)
 		{
 			return false;
 		}
@@ -140,7 +140,7 @@ public class WarpRushGroup : UIBase, IUIInitializable, INotificationable
 	private void ApplySeasonPassMode()
 	{
 		bool seasonPassMode = SeasonPassMode;
-		_titleWidget.Object.SetTitle((seasonPassMode && SeasonLevelPage.Supports(OffServerSeasonPass.Current)) ? RiftText.T("ซ\u0e35ซ\u0e31\u0e48น", "Season") : ((!seasonPassMode) ? T._("워프 러시") : (OffServerSeasonPass.HasSeasonLevel ? OffServerSeasonPass.SeasonTitle(OffServerSeasonPass.Current) : OffServerSeasonPass.Text("title"))));
+		_titleWidget.Object.SetTitle((seasonPassMode && SeasonLevelPage.Supports(CommunitySeasonPass.Current)) ? RiftText.T("ซ\u0e35ซ\u0e31\u0e48น", "Season") : ((!seasonPassMode) ? T._("워프 러시") : (CommunitySeasonPass.HasSeasonLevel ? CommunitySeasonPass.SeasonTitle(CommunitySeasonPass.Current) : CommunitySeasonPass.Text("title"))));
 		for (int i = 0; i < _contents.Length; i++)
 		{
 			IconTabWidget iconTabWidget = _tabList.Get(i);
@@ -152,7 +152,7 @@ public class WarpRushGroup : UIBase, IUIInitializable, INotificationable
 				}
 				else
 				{
-					iconTabWidget.Set(seasonPassMode ? "icon_warprush_reward" : IconMap.Get(Tab.Reward), seasonPassMode ? OffServerSeasonPass.Text("tab_rewards") : Tab.Reward.GetName());
+					iconTabWidget.Set(seasonPassMode ? "icon_warprush_reward" : IconMap.Get(Tab.Reward), seasonPassMode ? CommunitySeasonPass.Text("tab_rewards") : Tab.Reward.GetName());
 				}
 			}
 		}

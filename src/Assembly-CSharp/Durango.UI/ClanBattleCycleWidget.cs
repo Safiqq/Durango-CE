@@ -1,8 +1,8 @@
 using Durango.Network;
 using L10N;
 using Messages;
-using OffServer.ClanPillar;
-using OffServer.Rift;
+using Community.ClanPillar;
+using Community.Rift;
 using UnityEngine;
 
 namespace Durango.UI;

@@ -663,7 +663,7 @@ public class InventorySystem : GameSystem<InventorySystem>
 		{
 			if (m.Time < 0f)
 			{
-				OffServerCounterMotion.Play(m.Motion, 0f - m.Time);
+				CommunityCounterMotion.Play(m.Motion, 0f - m.Time);
 			}
 			else
 			{
@@ -1012,7 +1012,7 @@ public class InventorySystem : GameSystem<InventorySystem>
 			_playerInventory.Items[i].IsEquipments = false;
 		}
 		UpdatePresetEquipments(current);
-		UpdatePresetEquipments(OffServerNinePresets.CurrentFashion);
+		UpdatePresetEquipments(CommunityNinePresets.CurrentFashion);
 		if (this.PlayerInventoryUpdated != null)
 		{
 			this.PlayerInventoryUpdated();

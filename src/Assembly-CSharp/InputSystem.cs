@@ -48,7 +48,7 @@ public class InputSystem : GameSystem<InputSystem>
 
 	private readonly InputMouse _inputMouse = new InputMouse();
 
-	private readonly OffServerMobileDragMove _mobileDragMove = new OffServerMobileDragMove();
+	private readonly CommunityMobileDragMove _mobileDragMove = new CommunityMobileDragMove();
 
 	private Camera _mainCamera;
 
@@ -208,7 +208,7 @@ public class InputSystem : GameSystem<InputSystem>
 
 	private void Update()
 	{
-		if (OffServerHudLayout.BlocksInput)
+		if (CommunityHudLayout.BlocksInput)
 		{
 			ResetHudLayoutInput();
 		}
@@ -230,7 +230,7 @@ public class InputSystem : GameSystem<InputSystem>
 			{
 				if (AllowVirtualStickMove)
 				{
-					if (OffServerMobileMoveRules.StickEnabled(OffServerMobileMove.Current(DrawMode)))
+					if (CommunityMobileMoveRules.StickEnabled(CommunityMobileMove.Current(DrawMode)))
 					{
 						_mobileDragMove.Reset();
 						_inputVirtualStick.Process(touchEvents, _uiManager);

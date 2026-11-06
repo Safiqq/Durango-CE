@@ -50,13 +50,13 @@ public class PromotionBannerWidget : UIWidget
 		SetTexture(_texture, data.Image);
 		if (data.WebLink == "ui://PvpRanked")
 		{
-			OffServerRankedUI.DecorateBanner(_texture);
+			CommunityRankedUI.DecorateBanner(_texture);
 		}
 		else
 		{
-			OffServerRankedUI.UndecorateBanner(_texture);
+			CommunityRankedUI.UndecorateBanner(_texture);
 		}
-		OffServerBannerSkin.Apply(this, _background, _texture, _hudText, data);
+		CommunityBannerSkin.Apply(this, _background, _texture, _hudText, data);
 	}
 
 	private void OnClick()
@@ -65,7 +65,7 @@ public class PromotionBannerWidget : UIWidget
 		{
 			if (_data.WebLink == "ui://PvpRanked")
 			{
-				OffServerRankedUI.OpenLobby();
+				CommunityRankedUI.OpenLobby();
 			}
 			else if (!string.IsNullOrEmpty(_data.WebLink))
 			{

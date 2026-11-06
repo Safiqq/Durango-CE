@@ -68,7 +68,7 @@ public class QuestSystem : GameSystem<QuestSystem>
 		Connections.Frontend.On<QuestStarted>(OnQuestStarted);
 		Connections.Frontend.On<QuestCategories>(OnQuestCategories);
 		Connections.Frontend.On<QuestRewardResults>(OnQuestRewardResults);
-		OffServerQuestSkip.Install(this);
+		CommunityQuestSkip.Install(this);
 		GameSystem<StatisticsSystem>.Instance().LevelChanged += delegate(int prev, int cur)
 		{
 			GameSystem<MenuSystem>.Instance().EnableMenu(MenuType.Story, cur >= 20);
@@ -440,7 +440,7 @@ public class QuestSystem : GameSystem<QuestSystem>
 		ToDoCollection toDoCollection = GameSystem<ToDoListSystem>.Instance().FindCollection(target);
 		if (toDoCollection == null)
 		{
-			toDoCollection = OffServerQuestSkip.NewHudCollection();
+			toDoCollection = CommunityQuestSkip.NewHudCollection();
 			toDoCollection.Key = target;
 			toDoCollection.Title = questYml.Subject;
 			Category category2 = _questCategories.Get(questYml.Category);

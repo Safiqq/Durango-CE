@@ -8,7 +8,7 @@ public static class Util
 	{
 		if (category == Shared.Skill.Category.WeaponMastery)
 		{
-			return OffServerWeaponMasteryTab.Name();
+			return CommunityWeaponMasteryTab.Name();
 		}
 		return LocalizeUtil.Get(category);
 	}
@@ -17,7 +17,7 @@ public static class Util
 	{
 		if (category == Shared.Skill.Category.WeaponMastery)
 		{
-			return OffServerWeaponMasteryTab.Description();
+			return CommunityWeaponMasteryTab.Description();
 		}
 		return LocalizeSystem.Get(LocalizeUtil.GetKey(category) + "_description");
 	}

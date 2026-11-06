@@ -47,7 +47,7 @@ public class ConfigTabWidget : MonoBehaviour
 	private void CreateTabs()
 	{
 		_scrollView.Nodes.Clear();
-		foreach (string item in OffServerSettingsMenu.Categories())
+		foreach (string item in CommunitySettingsMenu.Categories())
 		{
 			ConfigTabItem configTabItem = _scrollView.Nodes.Add<ConfigTabItem>();
 			configTabItem.Set(item);
@@ -60,7 +60,7 @@ public class ConfigTabWidget : MonoBehaviour
 		foreach (KeyValuePair<string, List<Setting>> setting in ConfigInstance.Settings)
 		{
 			List<Setting> value = setting.Value;
-			if ((GameManager.ClusterMode != Mode.Online && setting.Key != "default" && setting.Key != "screen" && setting.Key != "hotkey") || (setting.Key == "offserver_voice" && !OffServerVoiceSettings.Visible))
+			if ((GameManager.ClusterMode != Mode.Online && setting.Key != "default" && setting.Key != "screen" && setting.Key != "hotkey") || (setting.Key == "community_voice" && !CommunityVoiceSettings.Visible))
 			{
 				continue;
 			}
@@ -91,7 +91,7 @@ public class ConfigTabWidget : MonoBehaviour
 
 	public void SelectTab(string category)
 	{
-		category = OffServerSettingsMenu.Resolve(category);
+		category = CommunitySettingsMenu.Resolve(category);
 		for (int i = 0; i < _scrollView.Nodes.Count; i++)
 		{
 			ConfigTabItem component = _scrollView.Nodes[i].GetComponent<ConfigTabItem>();

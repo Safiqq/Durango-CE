@@ -10,8 +10,8 @@ using Durango.Utils;
 using L10N;
 using Messages;
 using NestedPrefab;
-using OffServer;
-using OffServer.Rift;
+using Community;
+using Community.Rift;
 using Shared.Season2;
 using UnityEngine;
 using Yaml;
@@ -134,7 +134,7 @@ public class WarpRushRewards : MonoBehaviour, IUIInitializable, IScreenResizeRec
 		GameSystem<WarpRushSystem>.Instance().RewardStatusUpdated += FillBottom;
 		GameSystem<SeasonSystem>.Instance().SeasonUpdated += SeasonSystem_SeasonUpdated;
 		SeasonSystem_SeasonUpdated();
-		OffServerSeasonPass.Updated += OnSeasonPassUpdated;
+		CommunitySeasonPass.Updated += OnSeasonPassUpdated;
 		_seasonLevelPage = SeasonLevelPage.Attach(this, _rewardList.Nodes.BaseObject, _bottomDescription, _bottomDeliveryButton);
 	}
 
@@ -159,7 +159,7 @@ public class WarpRushRewards : MonoBehaviour, IUIInitializable, IScreenResizeRec
 		InitSubTab();
 		if (SeasonMode)
 		{
-			OffServerSeasonPass.Fetch();
+			CommunitySeasonPass.Fetch();
 		}
 	}
 
@@ -222,8 +222,8 @@ public class WarpRushRewards : MonoBehaviour, IUIInitializable, IScreenResizeRec
 		_subTabList.BeginLoad();
 		if (seasonPass)
 		{
-			OffServerSeasonPass.Status current = OffServerSeasonPass.Current;
-			_subTabList.AddText((current != null && current.Active && !string.IsNullOrEmpty(current.SeasonName)) ? current.SeasonName : OffServerSeasonPass.Text("tab_rewards"));
+			CommunitySeasonPass.Status current = CommunitySeasonPass.Current;
+			_subTabList.AddText((current != null && current.Active && !string.IsNullOrEmpty(current.SeasonName)) ? current.SeasonName : CommunitySeasonPass.Text("tab_rewards"));
 		}
 		else
 		{
@@ -308,14 +308,14 @@ public class WarpRushRewards : MonoBehaviour, IUIInitializable, IScreenResizeRec
 
 	private void FillSeasonRewards()
 	{
-		if (_seasonLevelPage != null && _seasonLevelPage.Present(OffServerSeasonPass.Current))
+		if (_seasonLevelPage != null && _seasonLevelPage.Present(CommunitySeasonPass.Current))
 		{
 			return;
 		}
-		OffServerSeasonPass.Status current = OffServerSeasonPass.Current;
+		CommunitySeasonPass.Status current = CommunitySeasonPass.Current;
 		_rewardBoxSprite.spriteName = "icon_warprush_reward";
-		_levelRewardText.text = OffServerSeasonPass.Text("row_box");
-		_cashRewardText.text = OffServerSeasonPass.Text("row_special");
+		_levelRewardText.text = CommunitySeasonPass.Text("row_box");
+		_cashRewardText.text = CommunitySeasonPass.Text("row_special");
 		_cashRewardIcon.color = PresetColor.UIYellow;
 		_cashRewardText.color = PresetColor.UIYellow;
 		_cashRewardBackground.color = new Color32(byte.MaxValue, 216, 91, 50);
@@ -324,7 +324,7 @@ public class WarpRushRewards : MonoBehaviour, IUIInitializable, IScreenResizeRec
 		if (current != null && current.Active)
 		{
 			int firstClaimable = current.FirstClaimable;
-			foreach (OffServerSeasonPass.Tier tier in current.Tiers)
+			foreach (CommunitySeasonPass.Tier tier in current.Tiers)
 			{
 				_rewardList.Nodes.GetNext().GetComponent<WarpRushRewardPhaseWidget>().SetSeasonPass(tier, firstClaimable);
 			}
@@ -343,25 +343,25 @@ public class WarpRushRewards : MonoBehaviour, IUIInitializable, IScreenResizeRec
 
 	private void FillSeasonBottom()
 	{
-		if (!(_seasonLevelPage != null) || !_seasonLevelPage.Present(OffServerSeasonPass.Current))
+		if (!(_seasonLevelPage != null) || !_seasonLevelPage.Present(CommunitySeasonPass.Current))
 		{
-			OffServerSeasonPass.Status current = OffServerSeasonPass.Current;
+			CommunitySeasonPass.Status current = CommunitySeasonPass.Current;
 			_bottomBoxSprite.spriteName = "icon_warprush_reward";
-			_bottomSubDescription.text = OffServerSeasonPass.ExpQuotaText(current);
-			_bottomRewardListButton.Text = OffServerSeasonPass.Text("missions");
+			_bottomSubDescription.text = CommunitySeasonPass.ExpQuotaText(current);
+			_bottomRewardListButton.Text = CommunitySeasonPass.Text("missions");
 			_bottomDeliveryButton.Clicked = ClaimAllSeasonPass;
 			if (current == null || !current.Active)
 			{
-				_bottomDescription.text = OffServerSeasonPass.Text("no_season");
+				_bottomDescription.text = CommunitySeasonPass.Text("no_season");
 				_bottomSubLevelGauge.fillAmount = 0f;
-				_bottomDeliveryButton.Text = OffServerSeasonPass.Text("claim_none");
+				_bottomDeliveryButton.Text = CommunitySeasonPass.Text("claim_none");
 				_bottomDeliveryButton.Disabled = true;
 				return;
 			}
 			bool flag = current.Tier >= current.MaxTier;
-			_bottomDescription.text = ((current.ExpPerPoint > 0) ? (OffServerSeasonPass.SeasonTitle(current) + "   " + (flag ? RiftText.T("ส\u0e39งส\u0e38ด", "MAX") : (current.TierPoints.ToString("N0") + " / " + current.PointsPerTier.ToString("N0")))) : (flag ? OffServerSeasonPass.Text("progress_max", current.MaxTier, current.Points.ToString("N0")) : OffServerSeasonPass.Text("progress", current.Tier, current.MaxTier, current.TierPoints.ToString("N0"), current.PointsPerTier.ToString("N0"))));
+			_bottomDescription.text = ((current.ExpPerPoint > 0) ? (CommunitySeasonPass.SeasonTitle(current) + "   " + (flag ? RiftText.T("ส\u0e39งส\u0e38ด", "MAX") : (current.TierPoints.ToString("N0") + " / " + current.PointsPerTier.ToString("N0")))) : (flag ? CommunitySeasonPass.Text("progress_max", current.MaxTier, current.Points.ToString("N0")) : CommunitySeasonPass.Text("progress", current.Tier, current.MaxTier, current.TierPoints.ToString("N0"), current.PointsPerTier.ToString("N0"))));
 			_bottomSubLevelGauge.fillAmount = (flag ? 1f : Mathf.Clamp01((float)current.TierPoints / (float)current.PointsPerTier));
-			_bottomDeliveryButton.Text = ((current.Claimable > 0) ? OffServerSeasonPass.Text("claim_all", current.Claimable) : OffServerSeasonPass.Text("claim_none"));
+			_bottomDeliveryButton.Text = ((current.Claimable > 0) ? CommunitySeasonPass.Text("claim_all", current.Claimable) : CommunitySeasonPass.Text("claim_none"));
 			_bottomDeliveryButton.Disabled = current.Claimable == 0;
 		}
 	}
@@ -373,7 +373,7 @@ public class WarpRushRewards : MonoBehaviour, IUIInitializable, IScreenResizeRec
 			double num = until - Connections.Frontend.GetPredictedServerTime();
 			if (num > 0.0)
 			{
-				text = OffServerSeasonPass.Text("ends_in", TimedeltaFormatter.Format(num, 1, (num > 86400.0) ? "day" : "min"));
+				text = CommunitySeasonPass.Text("ends_in", TimedeltaFormatter.Format(num, 1, (num > 86400.0) ? "day" : "min"));
 				period = (float)(num % (double)TimedeltaFormatter.CurrentMinUnit());
 			}
 			else
@@ -386,20 +386,20 @@ public class WarpRushRewards : MonoBehaviour, IUIInitializable, IScreenResizeRec
 
 	private void ClaimAllSeasonPass()
 	{
-		if (OffServerSeasonPass.ClaimableCount <= 0)
+		if (CommunitySeasonPass.ClaimableCount <= 0)
 		{
-			UIManager.SystemMsg(OffServerSeasonPass.Text("claim_none"));
+			UIManager.SystemMsg(CommunitySeasonPass.Text("claim_none"));
 		}
 		else
 		{
-			OffServerSeasonPass.Claim(0);
+			CommunitySeasonPass.Claim(0);
 		}
 	}
 
 	private void ShowSeasonMissions()
 	{
 		SimpleTextListPopup simpleTextListPopup = UIManager.Popup.Tooltip<SimpleTextListPopup>();
-		simpleTextListPopup.Set(OffServerSeasonPass.Text("missions_title"), OffServerSeasonPass.MissionLines());
+		simpleTextListPopup.Set(CommunitySeasonPass.Text("missions_title"), CommunitySeasonPass.MissionLines());
 		simpleTextListPopup.Show();
 	}
 

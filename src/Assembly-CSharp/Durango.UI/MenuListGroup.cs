@@ -60,7 +60,7 @@ public class MenuListGroup : MenuListGroupBase
 		{
 			_walletPopupButton.SetActive(value: false);
 		}
-		if (!OffServerHotkeys.Supported)
+		if (!CommunityHotkeys.Supported)
 		{
 			return;
 		}

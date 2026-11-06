@@ -77,7 +77,7 @@ public class ToggleWidget : MonoBehaviour
 		}
 		string key = Parent.Key;
 		object value = Parent.Value;
-		string text = OffServerSettingsText.OptionLabel(key, value?.ToString());
+		string text = CommunitySettingsText.OptionLabel(key, value?.ToString());
 		if (text != null)
 		{
 			Text.text = text;
@@ -85,10 +85,10 @@ public class ToggleWidget : MonoBehaviour
 		}
 		if (key == "max_visible_players")
 		{
-			Text.text = OffServerGameplayOptions.MaxVisiblePlayersOptionLabel(value?.ToString());
+			Text.text = CommunityGameplayOptions.MaxVisiblePlayersOptionLabel(value?.ToString());
 			return;
 		}
-		string text2 = OffServerGameplayOptions.BloodOptionLabel(key, value?.ToString());
+		string text2 = CommunityGameplayOptions.BloodOptionLabel(key, value?.ToString());
 		if (text2 != null)
 		{
 			Text.text = text2;
@@ -97,17 +97,17 @@ public class ToggleWidget : MonoBehaviour
 		switch (key)
 		{
 		case "net_transport":
-			Text.text = OffServerUdp.OptionLabel(value?.ToString());
+			Text.text = CommunityUdp.OptionLabel(value?.ToString());
 			return;
 		case "combat_move_cancel":
-			Text.text = OffServerCombatMoveCancel.OptionLabel(value?.ToString());
+			Text.text = CommunityCombatMoveCancel.OptionLabel(value?.ToString());
 			return;
 		case "mobile_move_mode":
-			Text.text = OffServerMobileMove.OptionLabel(value?.ToString());
+			Text.text = CommunityMobileMove.OptionLabel(value?.ToString());
 			return;
 		case "ui_size":
 		{
-			string text3 = OffServerUiSize.OptionLabel(value?.ToString());
+			string text3 = CommunityUiSize.OptionLabel(value?.ToString());
 			if (text3 != null)
 			{
 				Text.text = text3;
@@ -116,7 +116,7 @@ public class ToggleWidget : MonoBehaviour
 			break;
 		}
 		}
-		string text4 = OffServerVoiceSettings.OptionLabel(key, value?.ToString());
+		string text4 = CommunityVoiceSettings.OptionLabel(key, value?.ToString());
 		if (text4 != null)
 		{
 			Text.text = text4;

@@ -603,18 +603,18 @@ public enum Interaction
 	RemoveGrazingPet = 10278,
 	[T.EnumName("เช\u0e35ยร\u0e4cโดโด\u0e49")]
 	[Menu(0, MenuType.Normal)]
-	OffServerDodoCheer = 30001,
+	CommunityDodoCheer = 30001,
 	[T.EnumName("Dodo Fight")]
 	[Menu(300, MenuType.Normal)]
-	OffServerDodoAction = 30002,
+	CommunityDodoAction = 30002,
 	[T.EnumName("거래")]
 	[EnumIcon("act_packaging")]
 	[Menu(385, MenuType.Normal)]
-	OffServerTrade = 30003,
+	CommunityTrade = 30003,
 	[T.EnumName("공격!")]
 	[EnumIcon("act_Attack")]
 	[Menu(384, MenuType.Normal)]
-	OffServerDuel = 30004,
+	CommunityDuel = 30004,
 	[T.EnumName("ประกาศสงคราม")]
 	[EnumIcon("act_occupy_warphole")]
 	[Menu(209, MenuType.Normal)]

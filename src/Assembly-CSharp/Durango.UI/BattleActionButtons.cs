@@ -337,7 +337,7 @@ public class BattleActionButtons : MonoBehaviour, IScreenResizeReceiver
 			_leaveButton.gameObject.SetActive(value: false);
 		};
 		_actionButtons.PlayerActionPressed += OnPlayerActionPress;
-		if (CombatLoadout.Enabled && OffServerHotkeys.Supported)
+		if (CombatLoadout.Enabled && CommunityHotkeys.Supported)
 		{
 			for (int num = 0; num < 6; num++)
 			{
@@ -572,7 +572,7 @@ public class BattleActionButtons : MonoBehaviour, IScreenResizeReceiver
 
 	private void ProcessReservedPlayerAction()
 	{
-		if (OffServerHudLayout.BlocksInput)
+		if (CommunityHudLayout.BlocksInput)
 		{
 			_pressedPlayerActions.Clear();
 			_lastPressedAction = default(Pair<BattleActionButton, float>);
@@ -637,7 +637,7 @@ public class BattleActionButtons : MonoBehaviour, IScreenResizeReceiver
 
 	private bool DoPlayerAction(BattleAction action)
 	{
-		if (OffServerHudLayout.BlocksInput)
+		if (CommunityHudLayout.BlocksInput)
 		{
 			return false;
 		}
@@ -722,7 +722,7 @@ public class BattleActionButtons : MonoBehaviour, IScreenResizeReceiver
 
 	private void OnLoadoutKey(InputCommandMessage message)
 	{
-		if (_isShow && base.isActiveAndEnabled && !UIBase.HasOpenedUI && !UICamera.inputHasFocus && !OffServerHudLayout.BlocksInput && !OffServerRanked.InMatch && CombatLoadout.Current() != null && !UIManager.MessageBox.IsOpened && _actionButtons.gameObject.activeInHierarchy)
+		if (_isShow && base.isActiveAndEnabled && !UIBase.HasOpenedUI && !UICamera.inputHasFocus && !CommunityHudLayout.BlocksInput && !CommunityRanked.InMatch && CombatLoadout.Current() != null && !UIManager.MessageBox.IsOpened && _actionButtons.gameObject.activeInHierarchy)
 		{
 			BattleActionButton actionButton = _actionButtons.GetActionButton((int)(message.Command - 70));
 			GameSystem<InputSystem>.Instance().StopPropagation();
@@ -741,7 +741,7 @@ public class BattleActionButtons : MonoBehaviour, IScreenResizeReceiver
 		{
 			return;
 		}
-		if (CombatLoadout.Enabled && OffServerHotkeys.Supported)
+		if (CombatLoadout.Enabled && CommunityHotkeys.Supported)
 		{
 			for (int i = 0; i < 6; i++)
 			{
@@ -921,7 +921,7 @@ public class BattleActionButtons : MonoBehaviour, IScreenResizeReceiver
 	{
 		BattleAction[] actionSlots = GameSystem<CombatSystem>.Instance().ActionSlots;
 		int playerActionSlotCount = _actionButtons.PlayerActionSlotCount;
-		string[] array = ((CombatLoadout.Enabled && !OffServerRanked.InMatch) ? CombatLoadout.Current() : null);
+		string[] array = ((CombatLoadout.Enabled && !CommunityRanked.InMatch) ? CombatLoadout.Current() : null);
 		for (int i = 0; i < playerActionSlotCount; i++)
 		{
 			if (array != null && i < array.Length)

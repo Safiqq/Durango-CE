@@ -22,18 +22,18 @@ public class ConfigTabItem : SelectableWidget
 		Category = category;
 		_nameLabel.maxLineCount = 2;
 		_nameLabel.overflowMethod = UILabel.Overflow.ShrinkContent;
-		_nameLabel.text = OffServerSettingsMenu.Label(category);
-		if (OffServerDiscordLink.Lang == "th")
+		_nameLabel.text = CommunitySettingsMenu.Label(category);
+		if (CommunityDiscordLink.Lang == "th")
 		{
 			if (category == "screen")
 			{
 				_nameLabel.text = "ภาพและ\nประส\u0e34ทธ\u0e34ภาพ";
 			}
-			if (category == "offserver_combat")
+			if (category == "community_combat")
 			{
 				_nameLabel.text = "ต\u0e48อส\u0e39\u0e49และ\nเอฟเฟกต\u0e4c";
 			}
-			if (category == "offserver_chat")
+			if (category == "community_chat")
 			{
 				_nameLabel.text = "แชทและ\nการแสดงผล";
 			}

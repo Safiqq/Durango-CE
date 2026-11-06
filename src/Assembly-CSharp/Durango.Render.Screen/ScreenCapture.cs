@@ -230,7 +230,7 @@ public class ScreenCapture : Singleton<ScreenCapture>
 			{
 				int width = ((_localizeLogos[num].Width <= 0) ? texture.width : _localizeLogos[num].Width);
 				int height = ((_localizeLogos[num].Height <= 0) ? texture.height : _localizeLogos[num].Height);
-				texture = OffServerRebornTitle.WatermarkFor(texture, width, height, out width, out height);
+				texture = CommunityRebornTitle.WatermarkFor(texture, width, height, out width, out height);
 				_logoMaterial.mainTexture = texture;
 				_logoMaterial.SetPass(0);
 				Rect rect = new Rect(20f, 20f, width, height);

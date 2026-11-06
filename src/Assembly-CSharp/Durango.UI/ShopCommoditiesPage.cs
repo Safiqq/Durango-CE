@@ -57,13 +57,13 @@ public class ShopCommoditiesPage : MonoBehaviour, IUIInitializable, RectLayout.I
 		try
 		{
 			GameObject gameObject = UnityEngine.Object.Instantiate(_coinTransferButton.gameObject, _coinTransferButton.transform.parent);
-			gameObject.name = "OffServerTreasuryButton";
+			gameObject.name = "CommunityTreasuryButton";
 			_treasuryButton = gameObject.GetComponent<SelectableButton>();
-			_treasuryButton.Text = OffServerTreasury.Text("button");
+			_treasuryButton.Text = CommunityTreasury.Text("button");
 			_treasuryButton.ToPreferredSize();
-			_treasuryButton.Clicked = OffServerTreasuryUI.Open;
+			_treasuryButton.Clicked = CommunityTreasuryUI.Open;
 			gameObject.SetActive(value: false);
-			OffServerTreasury.Changed += RefreshTreasuryButton;
+			CommunityTreasury.Changed += RefreshTreasuryButton;
 		}
 		catch (Exception exception)
 		{
@@ -74,18 +74,18 @@ public class ShopCommoditiesPage : MonoBehaviour, IUIInitializable, RectLayout.I
 
 	private void OnDestroy()
 	{
-		OffServerTreasury.Changed -= RefreshTreasuryButton;
+		CommunityTreasury.Changed -= RefreshTreasuryButton;
 	}
 
 	private void RefreshTreasuryButton()
 	{
 		if (!(_treasuryButton == null))
 		{
-			bool flag = OffServerTreasury.Active && (_lastKey == "durangoCoin" || _lastKey == "gem" || _lastKey == "r_piece");
+			bool flag = CommunityTreasury.Active && (_lastKey == "durangoCoin" || _lastKey == "gem" || _lastKey == "r_piece");
 			_treasuryButton.gameObject.SetActive(flag);
 			if (flag)
 			{
-				_treasuryButton.Text = OffServerTreasury.Text("button");
+				_treasuryButton.Text = CommunityTreasury.Text("button");
 				_treasuryButton.ToPreferredSize();
 				PlaceTreasuryButton();
 			}
@@ -168,7 +168,7 @@ public class ShopCommoditiesPage : MonoBehaviour, IUIInitializable, RectLayout.I
 		_coinTransferButton.gameObject.SetActive(flag);
 		_lastKey = key ?? string.Empty;
 		RefreshTreasuryButton();
-		OffServerTreasury.FetchIfStale();
+		CommunityTreasury.FetchIfStale();
 	}
 
 	private void OnSelectCommodity(string commodity)

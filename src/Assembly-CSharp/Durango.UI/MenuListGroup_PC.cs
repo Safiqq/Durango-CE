@@ -78,7 +78,7 @@ public class MenuListGroup_PC : MenuListGroupBase
 
 	private void OnMouseClick(GameObject go)
 	{
-		if (base.IsOpened && TouchBlockBox.gameObject.activeSelf && !UIUtility.IsWidgetContainsMousePointer(TouchBlockBox) && !OffServerPointerOnBanner())
+		if (base.IsOpened && TouchBlockBox.gameObject.activeSelf && !UIUtility.IsWidgetContainsMousePointer(TouchBlockBox) && !CommunityPointerOnBanner())
 		{
 			Close();
 		}

@@ -369,7 +369,7 @@ public class UIBase : MonoBehaviour, IUriInvokable
 			CloseWhenPlayerMoveUIList[i].ForceClose();
 		}
 		CloseWhenPlayerMoveUIList.Clear();
-		OffServerMoveClose.OnPlayerMoveStart();
+		CommunityMoveClose.OnPlayerMoveStart();
 	}
 
 	private void CheckRectEnabled()
@@ -415,7 +415,7 @@ public class UIBase : MonoBehaviour, IUriInvokable
 
 	public virtual bool Open()
 	{
-		if ((OffServerCareerUI.BlocksOtherMenus || OffServerTradeUI.BlocksOtherMenus) && (IsOpenable || this is MenuListGroupBase))
+		if ((CommunityCareerUI.BlocksOtherMenus || CommunityTradeUI.BlocksOtherMenus) && (IsOpenable || this is MenuListGroupBase))
 		{
 			return false;
 		}

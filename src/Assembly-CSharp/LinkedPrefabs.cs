@@ -53,7 +53,7 @@ public class LinkedPrefabs
 			}
 			catch (Exception ex)
 			{
-				UnityEngine.Debug.LogError("[OffServer] LinkedPrefabs: prefab '" + gameObject.name + "' failed: " + ex.Message);
+				UnityEngine.Debug.LogError("[Community] LinkedPrefabs: prefab '" + gameObject.name + "' failed: " + ex.Message);
 			}
 		}
 	}

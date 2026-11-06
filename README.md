@@ -27,7 +27,7 @@
 | Platform | Implementation State | Verification Status | Operational Notes |
 | :--- | :---: | :---: | :--- |
 | **Windows** | **Ready** | **Verified (Bare Metal & VM)** | Full standalone client with internal background server (`127.0.0.1:8190`). Decompiled C# source compiling cleanly with .NET 9. |
-| **Android** | **Not Ready** | **Audited (Pending Device Testing)** | Static security audit of APK and IL2CPP metadata complete ([`docs/ANDROID_SECURITY_AUDIT.md`](file:///home/safiqq/Durango-OffServer-Client/docs/ANDROID_SECURITY_AUDIT.md)). Next development priority before macOS. |
+| **Android** | **Not Ready** | **Audited (Pending Device Testing)** | Static security audit of APK and IL2CPP metadata complete ([`docs/ANDROID_SECURITY_AUDIT.md`](docs/ANDROID_SECURITY_AUDIT.md)). Next development priority before macOS. |
 | **macOS** | **Not Ready** | **Architecture Defined** | Configured to run via Whisky (GPTK / D3DMetal) and VMware Fusion. Physical hardware testing on Apple Silicon (M1–M4) scheduled after Android. |
 | **iOS** | **Not Ready** | **Feasibility Research** | Requires IL2CPP compilation to Xcode, Apple code signing or AltStore sideloading, and native ARM64 audio plugin integration. |
 

@@ -163,14 +163,14 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 
 	public void Initialize(string infoHolderPath, string urlRoot)
 	{
-		if (UseBundle && (!Application.isEditor || OffServerBundleEmbed.Active))
+		if (UseBundle && (!Application.isEditor || CommunityBundleEmbed.Active))
 		{
-			if (!OffServerBundleEmbed.ProbeDone)
+			if (!CommunityBundleEmbed.ProbeDone)
 			{
 				StartCoroutine(CoInitializeAfterProbe(infoHolderPath, urlRoot));
 				return;
 			}
-			if (OffServerBundleEmbed.Active)
+			if (CommunityBundleEmbed.Active)
 			{
 				StartCoroutine(CoLoadEmbedded(infoHolderPath, urlRoot));
 				return;
@@ -181,7 +181,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 
 	private IEnumerator CoInitializeAfterProbe(string infoHolderPath, string urlRoot)
 	{
-		while (!OffServerBundleEmbed.ProbeDone)
+		while (!CommunityBundleEmbed.ProbeDone)
 		{
 			yield return null;
 		}
@@ -197,7 +197,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 		if (UseBundle)
 		{
 			bool flag = (Application.platform == RuntimePlatform.Android || Application.isEditor) && !string.IsNullOrEmpty(infoHolderPath) && !string.IsNullOrEmpty(urlRoot);
-			OffServerLog.Info("[ABM] Initialize local=" + (!flag && !string.IsNullOrEmpty(_infoHolderName)) + " index='" + infoHolderPath + "' root='" + urlRoot + "'");
+			CommunityLog.Info("[ABM] Initialize local=" + (!flag && !string.IsNullOrEmpty(_infoHolderName)) + " index='" + infoHolderPath + "' root='" + urlRoot + "'");
 			if (!string.IsNullOrEmpty(_infoHolderName) && !flag)
 			{
 				RuntimePlatform platform = Application.platform;
@@ -241,9 +241,9 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 		{
 			AssetBundleItemToLoad assetBundleItemToLoad = _itemToLoad[num];
 			AssetBundleItem item = _itemToLoad[num].Item;
-			if (OffServerBundleFallback.GaveUp(item.Parent.Name))
+			if (CommunityBundleFallback.GaveUp(item.Parent.Name))
 			{
-				UnityEngine.Object obj = OffServerBundleFallback.Load(assetBundleItemToLoad.UniqueName, assetBundleItemToLoad.ReqType);
+				UnityEngine.Object obj = CommunityBundleFallback.Load(assetBundleItemToLoad.UniqueName, assetBundleItemToLoad.ReqType);
 				if (obj != null)
 				{
 					_itemToLoad.RemoveAt(num);
@@ -260,10 +260,10 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 				{
 					UnityEngine.Debug.LogError("[ABM] giving up on " + item.Name + " (parent " + item.Parent.Name + ") after " + assetBundleItemToLoad.RetryCount + " retries");
 					_itemToLoad.RemoveAt(num);
-					UnityEngine.Object obj2 = OffServerBundleFallback.Load(assetBundleItemToLoad.UniqueName, assetBundleItemToLoad.ReqType);
+					UnityEngine.Object obj2 = CommunityBundleFallback.Load(assetBundleItemToLoad.UniqueName, assetBundleItemToLoad.ReqType);
 					if (obj2 != null)
 					{
-						OffServerBundleFallback.MarkGaveUp(item.Parent.Name);
+						CommunityBundleFallback.MarkGaveUp(item.Parent.Name);
 					}
 					assetBundleItemToLoad.Finished(obj2);
 					assetBundleItemToLoad.Finished = null;
@@ -288,7 +288,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 				if (item.Request.isDone)
 				{
 					_itemToLoad.RemoveAt(num);
-					OffServerShaderRemap.Fix(item.Request.asset);
+					CommunityShaderRemap.Fix(item.Request.asset);
 					if (KeepAssets)
 					{
 						item.Asset = item.Request.asset;
@@ -304,7 +304,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 	private IEnumerator CoLoadAssetBundleInfoHolder(string infoHolderPath, bool skipIfCached)
 	{
 		CurrentStatus = Status.LoadInfo;
-		OffServerLog.Info("[ABM] load info holder url='" + infoHolderPath + "' loadPath='" + AssetBundleLoadPath + "'");
+		CommunityLog.Info("[ABM] load info holder url='" + infoHolderPath + "' loadPath='" + AssetBundleLoadPath + "'");
 		UnityWebRequest request = UnityWebRequest.Get(infoHolderPath);
 		request.SetRequestHeader("Accept-Encoding", "gzip");
 		request.SetRequestHeader("Accept", "application/json");
@@ -321,7 +321,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 		ulong num = ComputeHash(data);
 		if (skipIfCached && _infoHolderLoaded && num == _infoHolderHash && _preloadBundle != null)
 		{
-			OffServerLog.Info("[ABM] index unchanged - keeping " + CountOpenBundles() + " open bundles");
+			CommunityLog.Info("[ABM] index unchanged - keeping " + CountOpenBundles() + " open bundles");
 			CurrentStatus = Status.Ready;
 			yield break;
 		}
@@ -344,15 +344,15 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 
 	private IEnumerator CoLoadEmbedded(string infoHolderPath, string urlRoot)
 	{
-		string serverIndexUrl = OffServerBundleEmbed.ServerIndexUrl;
-		string serverRoot = OffServerBundleEmbed.ServerUrlRoot;
+		string serverIndexUrl = CommunityBundleEmbed.ServerIndexUrl;
+		string serverRoot = CommunityBundleEmbed.ServerUrlRoot;
 		string text = "embed|" + (serverIndexUrl ?? "-");
 		bool flag = _prevInfoHolderPath == text;
 		_prevInfoHolderPath = text;
 		bool skipIfCached = flag && (CurrentStatus == Status.Ready || CurrentStatus == Status.Cached);
 		CurrentStatus = Status.LoadInfo;
 		byte[] localData = null;
-		yield return StartCoroutine(OffServerBundleEmbed.CoReadIndex(delegate(byte[] d)
+		yield return StartCoroutine(CommunityBundleEmbed.CoReadIndex(delegate(byte[] d)
 		{
 			localData = d;
 		}));
@@ -367,7 +367,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 		byte[] serverData = null;
 		if (!string.IsNullOrEmpty(serverIndexUrl) && !string.IsNullOrEmpty(serverRoot))
 		{
-			OffServerLog.Info("[ABM] embed: server index url='" + serverIndexUrl + "' root='" + serverRoot + "'");
+			CommunityLog.Info("[ABM] embed: server index url='" + serverIndexUrl + "' root='" + serverRoot + "'");
 			using UnityWebRequest request = UnityWebRequest.Get(serverIndexUrl);
 			request.SetRequestHeader("Accept-Encoding", "gzip");
 			request.SetRequestHeader("Accept", "application/json");
@@ -393,7 +393,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 		ulong num = ((assetBundleInfoHolder != null) ? (ComputeHash(serverData) ^ 0x9E3779B97F4A7C15uL) : ComputeHash(localData));
 		if (skipIfCached && _infoHolderLoaded && num == _infoHolderHash && _preloadBundle != null)
 		{
-			OffServerLog.Info("[ABM] index unchanged - keeping " + CountOpenBundles() + " open bundles");
+			CommunityLog.Info("[ABM] index unchanged - keeping " + CountOpenBundles() + " open bundles");
 			CurrentStatus = Status.Ready;
 			yield break;
 		}
@@ -421,7 +421,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 			{
 				if (file2.Name != null && dictionary.TryGetValue(file2.Name, out var value) && SameText(value.Hash, file2.Hash) && SameText(value.Crc, file2.Crc))
 				{
-					_localFiles[file2.Name] = OffServerBundleEmbed.LocalPath(file2.Name, file2.Crc);
+					_localFiles[file2.Name] = CommunityBundleEmbed.LocalPath(file2.Name, file2.Crc);
 					continue;
 				}
 				num2++;
@@ -432,11 +432,11 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 			}
 			if (SameText(local.PreloadHash, assetBundleInfoHolder.PreloadHash) && SameText(local.PreloadCrc, assetBundleInfoHolder.PreloadCrc))
 			{
-				_localPreloadPath = OffServerBundleEmbed.LocalPath("preload.bundle", assetBundleInfoHolder.PreloadCrc);
+				_localPreloadPath = CommunityBundleEmbed.LocalPath("preload.bundle", assetBundleInfoHolder.PreloadCrc);
 			}
 			_embedRemoteOk = true;
 			AssetBundleLoadPath = serverRoot;
-			OffServerLog.Info("[ABM] embed: in game " + _localFiles.Count + " · from server " + num2 + "/" + assetBundleInfoHolder.FileList.Count + " · preload " + ((_localPreloadPath != null) ? "in game" : "server") + ((num2 > 0) ? (" ·" + stringBuilder?.ToString() + ((num2 > 20) ? " …" : "")) : ""));
+			CommunityLog.Info("[ABM] embed: in game " + _localFiles.Count + " · from server " + num2 + "/" + assetBundleInfoHolder.FileList.Count + " · preload " + ((_localPreloadPath != null) ? "in game" : "server") + ((num2 > 0) ? (" ·" + stringBuilder?.ToString() + ((num2 > 20) ? " …" : "")) : ""));
 		}
 		else
 		{
@@ -444,13 +444,13 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 			{
 				if (file3.Name != null)
 				{
-					_localFiles[file3.Name] = OffServerBundleEmbed.LocalPath(file3.Name, file3.Crc);
+					_localFiles[file3.Name] = CommunityBundleEmbed.LocalPath(file3.Name, file3.Crc);
 				}
 			}
-			_localPreloadPath = OffServerBundleEmbed.LocalPath("preload.bundle", local.PreloadCrc);
+			_localPreloadPath = CommunityBundleEmbed.LocalPath("preload.bundle", local.PreloadCrc);
 			_embedRemoteOk = false;
-			AssetBundleLoadPath = OffServerBundleEmbed.LocalRoot;
-			OffServerLog.Info("[ABM] embed: no server embed index - all " + _localFiles.Count + " bundles from the game");
+			AssetBundleLoadPath = CommunityBundleEmbed.LocalRoot;
+			CommunityLog.Info("[ABM] embed: no server embed index - all " + _localFiles.Count + " bundles from the game");
 		}
 		_infoHolderHash = num;
 		_infoHolderLoaded = true;
@@ -539,7 +539,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 				}
 			}
 		}
-		OffServerLog.Info("[ABM] android sound bank names fixed: " + num);
+		CommunityLog.Info("[ABM] android sound bank names fixed: " + num);
 	}
 
 	private void LoadAssetBundeFiles(AssetBundleInfoHolder holder)
@@ -618,7 +618,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 			_preloadBundle = localRequest.assetBundle;
 			if (_preloadBundle != null)
 			{
-				OffServerBundleEmbed.NoteLoad("preload.bundle", local: true);
+				CommunityBundleEmbed.NoteLoad("preload.bundle", local: true);
 				while (!Caching.ready)
 				{
 					yield return null;
@@ -695,7 +695,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 						file.Bundle.Unload(unloadAllLoadedObjects: false);
 					}
 					file.Bundle = localRequest.assetBundle;
-					OffServerBundleEmbed.NoteLoad(file.Name, local: true);
+					CommunityBundleEmbed.NoteLoad(file.Name, local: true);
 					yield break;
 				}
 				UnityEngine.Debug.LogError("[ABM] embed: bundle in the game did not open: " + localPath + (_embedRemoteOk ? " - trying the server" : ""));
@@ -762,7 +762,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 			}
 			else if (_embedMode)
 			{
-				OffServerBundleEmbed.NoteLoad(file.Name, local: false);
+				CommunityBundleEmbed.NoteLoad(file.Name, local: false);
 			}
 		}
 		finally
@@ -830,7 +830,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 		AssetBundleItem assetBundleItem = _assetBundleItemDict.Get(uniqueName);
 		if (assetBundleItem == null)
 		{
-			UnityEngine.Object obj = OffServerBundleFallback.Load(uniqueName, type);
+			UnityEngine.Object obj = CommunityBundleFallback.Load(uniqueName, type);
 			callback(obj);
 			return obj != null;
 		}
@@ -970,7 +970,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 		}
 		if (num > 0)
 		{
-			OffServerLog.Info("[ABM] released " + num + " kept assets (" + reason + ")");
+			CommunityLog.Info("[ABM] released " + num + " kept assets (" + reason + ")");
 		}
 	}
 

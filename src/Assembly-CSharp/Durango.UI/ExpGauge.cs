@@ -1,6 +1,6 @@
 using Durango.Logic.Clusters;
 using L10N;
-using OffServer;
+using Community;
 using UnityEngine;
 
 namespace Durango.UI;
@@ -25,7 +25,7 @@ public class ExpGauge : ExpGaugeBase
 	protected override void Set(int level, float ratio, bool instant)
 	{
 		base.Set(level, ratio, instant);
-		_label.text = ((OffServerSeasonPass.UseSeasonHud && !SeasonLevelHud.UsesDedicatedHud) ? OffServerSeasonPass.SeasonHudText : T._("[c][257C25]{1:lv:}[-][/c]   {0:p1}", ratio, level));
+		_label.text = ((CommunitySeasonPass.UseSeasonHud && !SeasonLevelHud.UsesDedicatedHud) ? CommunitySeasonPass.SeasonHudText : T._("[c][257C25]{1:lv:}[-][/c]   {0:p1}", ratio, level));
 		_fill.width = _targetWidth;
 		_fill.alpha = Mathf.Clamp01(_targetWidth);
 	}

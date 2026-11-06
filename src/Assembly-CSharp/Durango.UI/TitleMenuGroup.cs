@@ -196,7 +196,7 @@ public class TitleMenuGroup : MonoBehaviour
 				UserControl.Clear();
 				UserControl.IsLoginProcess = IsLoginProcess;
 				_autoSelectCluster = false;
-				OffServerLink.FetchServers(delegate
+				CommunityLink.FetchServers(delegate
 				{
 					try
 					{
@@ -342,7 +342,7 @@ public class TitleMenuGroup : MonoBehaviour
 			}
 			case State.Knock:
 			{
-				OffServerLoadProgress.Begin();
+				CommunityLoadProgress.Begin();
 				StringBuilder stringBuilder = new StringBuilder();
 				stringBuilder.Append("/knock");
 				stringBuilder.Append("?version=");
@@ -436,10 +436,10 @@ public class TitleMenuGroup : MonoBehaviour
 			case State.Error:
 			{
 				OnErrorState(curState);
-				bool loginGate = !string.IsNullOrEmpty(OffServerLink.LoginGateMessage);
+				bool loginGate = !string.IsNullOrEmpty(CommunityLink.LoginGateMessage);
 				if (loginGate && string.IsNullOrEmpty(_errorMsgDetail))
 				{
-					_errorMsgDetail = OffServerLink.LoginGateMessage;
+					_errorMsgDetail = CommunityLink.LoginGateMessage;
 				}
 				if (!string.IsNullOrEmpty(_errorMsgDetail))
 				{
@@ -519,7 +519,7 @@ public class TitleMenuGroup : MonoBehaviour
 	{
 		while (true)
 		{
-			string text = ((!string.IsNullOrEmpty(GameManager.GatewayUrl)) ? GameManager.GatewayUrl : OffServerLink.Gateway);
+			string text = ((!string.IsNullOrEmpty(GameManager.GatewayUrl)) ? GameManager.GatewayUrl : CommunityLink.Gateway);
 			if (string.IsNullOrEmpty(text))
 			{
 				yield return new WaitForSecondsRealtime(3f);
@@ -564,7 +564,7 @@ public class TitleMenuGroup : MonoBehaviour
 				waited += Time.unscaledDeltaTime;
 				yield return null;
 			}
-			OffServerLink.SetServerStatus(up, online);
+			CommunityLink.SetServerStatus(up, online);
 			if (UserControl != null)
 			{
 				UserControl.RefreshVersionInfo();
@@ -576,8 +576,8 @@ public class TitleMenuGroup : MonoBehaviour
 	public void StartGame()
 	{
 		base.gameObject.SetActive(value: true);
-		OffServerLink.ApplyWindowTitle();
-		_ = OffServerLink.LauncherArg;
+		CommunityLink.ApplyWindowTitle();
+		_ = CommunityLink.LauncherArg;
 		StartCoroutine(CoPollServerStatus());
 		SoundManager.ReapplyVolumes();
 		TitleUIRootResizer.AddOnScreenResized(OnScreenResized);
@@ -611,16 +611,16 @@ public class TitleMenuGroup : MonoBehaviour
 
 	private IEnumerator CoRebornTitle()
 	{
-		yield return StartCoroutine(OffServerRebornTitle.CoLoad());
+		yield return StartCoroutine(CommunityRebornTitle.CoLoad());
 		UITexture uITexture = _videoWidget as UITexture;
-		if (OffServerRebornTitle.S02Layout && OffServerRebornTitle.Background != null && uITexture != null)
+		if (CommunityRebornTitle.S02Layout && CommunityRebornTitle.Background != null && uITexture != null)
 		{
 			if (_fallbackVideo != null && _fallbackVideo.isPlaying)
 			{
 				_fallbackVideo.Stop();
 			}
 			uITexture.uvRect = new Rect(0f, 0f, 1f, 1f);
-			uITexture.mainTexture = OffServerRebornTitle.Background;
+			uITexture.mainTexture = CommunityRebornTitle.Background;
 			uITexture.enabled = true;
 		}
 		RefreshRebornTitle();
@@ -629,7 +629,7 @@ public class TitleMenuGroup : MonoBehaviour
 
 	private void RefreshRebornTitle()
 	{
-		OffServerRebornTitle.ApplyTitleLogo(_rebornObjects, _rebornIsTitleVideo, _rebornVideoFailed);
+		CommunityRebornTitle.ApplyTitleLogo(_rebornObjects, _rebornIsTitleVideo, _rebornVideoFailed);
 	}
 
 	private void RebornVideoFailed(string why)
@@ -637,13 +637,13 @@ public class TitleMenuGroup : MonoBehaviour
 		if (!_rebornVideoFailed)
 		{
 			_rebornVideoFailed = true;
-			OffServerLog.Info("[OffServer] reborn title video failed (" + why + ") - logo overlay back");
+			CommunityLog.Info("[Community] reborn title video failed (" + why + ") - logo overlay back");
 			RefreshRebornTitle();
 			UITexture uITexture = _videoWidget as UITexture;
-			if (uITexture != null && OffServerRebornTitle.Background != null)
+			if (uITexture != null && CommunityRebornTitle.Background != null)
 			{
 				uITexture.uvRect = new Rect(0f, 0f, 1f, 1f);
-				uITexture.mainTexture = OffServerRebornTitle.Background;
+				uITexture.mainTexture = CommunityRebornTitle.Background;
 				uITexture.enabled = true;
 			}
 		}
@@ -683,26 +683,26 @@ public class TitleMenuGroup : MonoBehaviour
 				_fallbackVideo.source = VideoSource.Url;
 				_fallbackVideo.errorReceived += delegate(VideoPlayer vp, string message)
 				{
-					UnityEngine.Debug.LogError("[OffServer] title video error: " + message);
+					UnityEngine.Debug.LogError("[Community] title video error: " + message);
 					RebornVideoFailed("VideoPlayer: " + message);
 				};
 				_fallbackVideo.prepareCompleted += delegate(VideoPlayer vp)
 				{
-					if (OffServerRebornTitle.S02Layout && OffServerRebornTitle.Background != null)
+					if (CommunityRebornTitle.S02Layout && CommunityRebornTitle.Background != null)
 					{
 						uITexture.uvRect = new Rect(0f, 0f, 1f, 1f);
-						uITexture.mainTexture = OffServerRebornTitle.Background;
+						uITexture.mainTexture = CommunityRebornTitle.Background;
 						uITexture.enabled = true;
 						return;
 					}
-					if ((Application.isEditor && OffServerShaderRemap.Enabled) || (!Application.isEditor && SystemInfo.graphicsUVStartsAtTop))
+					if ((Application.isEditor && CommunityShaderRemap.Enabled) || (!Application.isEditor && SystemInfo.graphicsUVStartsAtTop))
 					{
 						uITexture.uvRect = new Rect(0f, 1f, 1f, -1f);
 					}
 					uITexture.mainTexture = _fallbackVideoTexture;
 					uITexture.enabled = true;
 					vp.Play();
-					OffServerLog.Info("[OffServer] title video playing: " + vp.url + " " + vp.width + "x" + vp.height);
+					CommunityLog.Info("[Community] title video playing: " + vp.url + " " + vp.width + "x" + vp.height);
 				};
 			}
 			_fallbackVideo.Stop();
@@ -711,7 +711,7 @@ public class TitleMenuGroup : MonoBehaviour
 		}
 		catch (Exception ex)
 		{
-			UnityEngine.Debug.LogError("[OffServer] title video fallback failed: " + ex.Message);
+			UnityEngine.Debug.LogError("[Community] title video fallback failed: " + ex.Message);
 			RebornVideoFailed("VideoPlayer: " + ex.Message);
 		}
 	}
@@ -724,7 +724,7 @@ public class TitleMenuGroup : MonoBehaviour
 			AkAudioListener akAudioListener = UnityEngine.Object.FindObjectOfType<AkAudioListener>();
 			if (akAudioListener == null)
 			{
-				GameObject obj = new GameObject("OffServerTitleEar");
+				GameObject obj = new GameObject("CommunityTitleEar");
 				obj.transform.SetParent(base.transform, worldPositionStays: false);
 				akAudioListener = obj.AddComponent<AkAudioListener>();
 			}
@@ -735,7 +735,7 @@ public class TitleMenuGroup : MonoBehaviour
 				akAudioListener.enabled = true;
 			}
 			SoundManager.SetListenerObject(akAudioListener.gameObject);
-			OffServerLog.Info("[Sound] title listener: " + akAudioListener.gameObject.name + " active=" + akAudioListener.isActiveAndEnabled);
+			CommunityLog.Info("[Sound] title listener: " + akAudioListener.gameObject.name + " active=" + akAudioListener.isActiveAndEnabled);
 			if (_soundInstanceId != 0)
 			{
 				SoundManager.StopEvent(_soundInstanceId);
@@ -743,7 +743,7 @@ public class TitleMenuGroup : MonoBehaviour
 			SoundManager.IgnorePreparedCheck = true;
 			_soundInstanceId = SoundManager.PlayEvent(soundEvent, SoundPosition.Empty, exclusive: true);
 			SoundManager.IgnorePreparedCheck = false;
-			OffServerLog.Info("[Sound] title event posted: " + soundEvent.Path + " id=" + _soundInstanceId);
+			CommunityLog.Info("[Sound] title event posted: " + soundEvent.Path + " id=" + _soundInstanceId);
 		}
 	}
 
@@ -780,7 +780,7 @@ public class TitleMenuGroup : MonoBehaviour
 			}
 		}
 		_rebornObjects = titleOptions.Objects;
-		_rebornIsTitleVideo = OffServerRebornTitleMath.IsTitleVideo(titleOptions.VideoName);
+		_rebornIsTitleVideo = CommunityRebornTitleMath.IsTitleVideo(titleOptions.VideoName);
 		_rebornVideoFailed = false;
 		_rebornMediaPlayer = false;
 		try
@@ -794,7 +794,7 @@ public class TitleMenuGroup : MonoBehaviour
 		}
 		catch (Exception ex)
 		{
-			string message = "[OffServer] MediaPlayerCtrl unavailable (" + ex.Message + ") - using Unity VideoPlayer";
+			string message = "[Community] MediaPlayerCtrl unavailable (" + ex.Message + ") - using Unity VideoPlayer";
 			if (Application.isEditor)
 			{
 				UnityEngine.Debug.Log(message);
@@ -921,7 +921,7 @@ public class TitleMenuGroup : MonoBehaviour
 			UpdateLoadingBar();
 			if (IsDataLoadState(_curState) || _curState == State.Connecting || _curState == State.Welcome || _curState == State.Loading)
 			{
-				UserControl.SetExplainLabel(OffServerLoadProgress.Text());
+				UserControl.SetExplainLabel(CommunityLoadProgress.Text());
 			}
 		}
 	}
@@ -954,8 +954,8 @@ public class TitleMenuGroup : MonoBehaviour
 			}
 			prerequisiteLoader.gameObject.SetActive(value: true);
 		}
-		float value = OffServerLoadProgress.Tick(LoadProgressStage(_curState), num * 0.45f);
-		prerequisiteLoader.SetProgress(value, OffServerLoadProgress.Text());
+		float value = CommunityLoadProgress.Tick(LoadProgressStage(_curState), num * 0.45f);
+		prerequisiteLoader.SetProgress(value, CommunityLoadProgress.Text());
 	}
 
 	private static float LoadProgressTarget(State state)
@@ -965,7 +965,7 @@ public class TitleMenuGroup : MonoBehaviour
 		case State.Knock:
 			return 0.05f;
 		case State.CheckDataLoaded:
-			return 0.1f + 0.45f * OffServerLink.LoadRunProgress();
+			return 0.1f + 0.45f * CommunityLink.LoadRunProgress();
 		case State.CheckSoundManager:
 			return 0.6f;
 		case State.CheckSpriteManager:
@@ -992,7 +992,7 @@ public class TitleMenuGroup : MonoBehaviour
 		}
 	}
 
-	private static OffServerLoadProgress.Stage LoadProgressStage(State state)
+	private static CommunityLoadProgress.Stage LoadProgressStage(State state)
 	{
 		switch (state)
 		{
@@ -1000,12 +1000,12 @@ public class TitleMenuGroup : MonoBehaviour
 		case State.CheckSoundManager:
 		case State.CheckSpriteManager:
 		case State.PostPrerequsite:
-			return OffServerLoadProgress.Stage.Data;
+			return CommunityLoadProgress.Stage.Data;
 		case State.FadeOutLoading:
 		case State.Loading:
-			return OffServerLoadProgress.Stage.Island;
+			return CommunityLoadProgress.Stage.Island;
 		default:
-			return OffServerLoadProgress.Stage.Connect;
+			return CommunityLoadProgress.Stage.Connect;
 		}
 	}
 
@@ -1040,7 +1040,7 @@ public class TitleMenuGroup : MonoBehaviour
 				CurState = State.CheckSpriteManager;
 				break;
 			case SoundBanksLoader.State.LoadFailed:
-				UnityEngine.Debug.LogError("[OffServer] sound banks failed to load - continuing without sound");
+				UnityEngine.Debug.LogError("[Community] sound banks failed to load - continuing without sound");
 				CurState = State.CheckSpriteManager;
 				break;
 			}
@@ -1167,10 +1167,10 @@ public class TitleMenuGroup : MonoBehaviour
 			}
 			string url = jObject.Get<string>("assetbundle_url_root");
 			string url2 = jObject.Get<string>("assetbundle_index_url");
-			url = OffServerLink.RewriteLoopbackHost(url);
-			url2 = OffServerLink.RewriteLoopbackHost(url2);
-			OffServerLog.Info("[OffServer] bundle index=" + url2);
-			OffServerBundleEmbed.SetServer(OffServerLink.RewriteLoopbackHost(jObject.Get<string>("assetbundle_embed_index_url")), OffServerLink.RewriteLoopbackHost(jObject.Get<string>("assetbundle_embed_url_root")));
+			url = CommunityLink.RewriteLoopbackHost(url);
+			url2 = CommunityLink.RewriteLoopbackHost(url2);
+			CommunityLog.Info("[Community] bundle index=" + url2);
+			CommunityBundleEmbed.SetServer(CommunityLink.RewriteLoopbackHost(jObject.Get<string>("assetbundle_embed_index_url")), CommunityLink.RewriteLoopbackHost(jObject.Get<string>("assetbundle_embed_url_root")));
 			Durango.Utils.Singleton<AssetBundleManager>.Instance().Initialize(url2, url);
 			CurState = State.CheckDataLoaded;
 			break;
@@ -1275,7 +1275,7 @@ public class TitleMenuGroup : MonoBehaviour
 				break;
 			}
 			List<KeyValuePair<string, int>> list = ParseAddresses(jObject.Get("frontend_addresses") as JArray);
-			OffServerUdp.ReadEntry(jObject);
+			CommunityUdp.ReadEntry(jObject);
 			if (KUtility.GetSize(list) == 0)
 			{
 				CurState = State.Error;
@@ -1370,7 +1370,7 @@ public class TitleMenuGroup : MonoBehaviour
 			if (jObject2 != null)
 			{
 				_errorMsgDetail = jObject2.Get<string>("message");
-				OffServerLink.NoteLoginGate(response);
+				CommunityLink.NoteLoginGate(response);
 			}
 			else
 			{
@@ -1505,7 +1505,7 @@ public class TitleMenuGroup : MonoBehaviour
 		}
 		else
 		{
-			float x2 = ((!isPortrait && GameManager.Emigrated == GameManager.EmigratedType.None && OffServerRebornTitle.AlignRight) ? OffServerRebornTitleMath.RightAlignShift(_videoWidget.width, TitleUIRootResizer.ScreenWidth) : 0f);
+			float x2 = ((!isPortrait && GameManager.Emigrated == GameManager.EmigratedType.None && CommunityRebornTitle.AlignRight) ? CommunityRebornTitleMath.RightAlignShift(_videoWidget.width, TitleUIRootResizer.ScreenWidth) : 0f);
 			_videoWidget.transform.localPosition = new Vector3(x2, 0f, 0f);
 		}
 	}

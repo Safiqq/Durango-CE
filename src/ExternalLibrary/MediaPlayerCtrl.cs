@@ -1928,7 +1928,7 @@ public class MediaPlayerCtrl : MonoBehaviour
 				}
 				if (audioSource != null && Call_GetDuration() > 0 && listAudioPts.Count > i && listAudioPts[i] >= 0.0)
 				{
-					OffServerSafeSetData(audioClip, listAudio[i], (int)(listAudioPts[i] % (double)((float)pAudioCodecContext->sample_rate * 300f)));
+					CommunitySafeSetData(audioClip, listAudio[i], (int)(listAudioPts[i] % (double)((float)pAudioCodecContext->sample_rate * 300f)));
 				}
 			}
 			if (audioSource != null && audioSource.isPlaying && Call_GetDuration() > 0)
@@ -2079,7 +2079,7 @@ public class MediaPlayerCtrl : MonoBehaviour
 			m_LastAudioPartSetted = j;
 			if (((audioSource != null && Call_GetDuration() > 0) || Call_GetDuration() == 0) && listAudioPts.Count > j && listAudioPts[j] >= 0.0)
 			{
-				OffServerSafeSetData(audioClip, listAudio[j], (int)(listAudioPts[j] % (double)((float)pAudioCodecContext->sample_rate * 300f)));
+				CommunitySafeSetData(audioClip, listAudio[j], (int)(listAudioPts[j] % (double)((float)pAudioCodecContext->sample_rate * 300f)));
 			}
 		}
 	}
@@ -2372,7 +2372,7 @@ public class MediaPlayerCtrl : MonoBehaviour
 		}
 	}
 
-	private static bool OffServerSafeSetData(AudioClip clip, float[] data, int offsetSamples)
+	private static bool CommunitySafeSetData(AudioClip clip, float[] data, int offsetSamples)
 	{
 		if ((object)clip != null && data != null && data.Length != 0)
 		{

@@ -40,9 +40,9 @@ public class UILocalizeWidget : MonoBehaviour
 	{
 		OnLocalize();
 		UISprite component = GetComponent<UISprite>();
-		if (base.isActiveAndEnabled && OffServerRebornTitle.IsLoadingLogo(component))
+		if (base.isActiveAndEnabled && CommunityRebornTitle.IsLoadingLogo(component))
 		{
-			StartCoroutine(OffServerRebornTitle.CoLoadingLogo(component));
+			StartCoroutine(CommunityRebornTitle.CoLoadingLogo(component));
 		}
 	}
 

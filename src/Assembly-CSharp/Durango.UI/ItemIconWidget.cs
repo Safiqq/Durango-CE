@@ -430,7 +430,7 @@ public class ItemIconWidget : MonoBehaviour
 			_multiSelector.Parent.SetActive(value: false);
 		}
 		_selectorUpdateFrame = Time.frameCount;
-		OffServerDyeUI.Badge(this);
+		CommunityDyeUI.Badge(this);
 	}
 
 	public void UpdateTick()

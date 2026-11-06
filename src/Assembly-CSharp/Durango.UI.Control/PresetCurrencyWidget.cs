@@ -198,7 +198,7 @@ public class PresetCurrencyWidget : UIWidget
 
 	private void OnClick()
 	{
-		if (!OffServerTreasury.TryOpenFromCoinSlot(_currencyType) && _extraButton.gameObject.activeSelf)
+		if (!CommunityTreasury.TryOpenFromCoinSlot(_currencyType) && _extraButton.gameObject.activeSelf)
 		{
 			if (_chargeButton.gameObject.activeSelf)
 			{

@@ -1,7 +1,7 @@
 using Durango.Logic.Clusters;
 using Durango.UI.Control;
 using L10N;
-using OffServer;
+using Community;
 using UnityEngine;
 
 namespace Durango.UI;
@@ -85,7 +85,7 @@ public class ExpGauge_PC : ExpGaugeBase
 			_expLabelTweenAlpha.PlayForward();
 		}
 		_updated = true;
-		if (OffServerSeasonPass.UseSeasonHud && !SeasonLevelHud.UsesDedicatedHud)
+		if (CommunitySeasonPass.UseSeasonHud && !SeasonLevelHud.UsesDedicatedHud)
 		{
 			_expLabelTweenAlpha.enabled = false;
 			_expLabelBG.alpha = 1f;
@@ -96,7 +96,7 @@ public class ExpGauge_PC : ExpGaugeBase
 
 	private void UpdateExp()
 	{
-		_expLabel.text = ((OffServerSeasonPass.UseSeasonHud && !SeasonLevelHud.UsesDedicatedHud) ? OffServerSeasonPass.SeasonHudText : T._("{0:p1}", Mathf.Clamp01((float)_currentWidth / (float)(_background.width - (_background.rightAnchor.absolute - _background.leftAnchor.absolute)))));
+		_expLabel.text = ((CommunitySeasonPass.UseSeasonHud && !SeasonLevelHud.UsesDedicatedHud) ? CommunitySeasonPass.SeasonHudText : T._("{0:p1}", Mathf.Clamp01((float)_currentWidth / (float)(_background.width - (_background.rightAnchor.absolute - _background.leftAnchor.absolute)))));
 		_expLabelBG.width = 6 + _expLabel.width + 6;
 	}
 }

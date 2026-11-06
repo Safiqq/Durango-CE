@@ -31,7 +31,7 @@ public class BottomMenuWidget : BottomMenuWidgetBase
 			}, _quickChatSelector.Show);
 			_quickChatSelector.QuickChatClicked += OnClickQuickChat;
 		}
-		OffServerHudLayout.Register("chat_keyboard", _keyboardButton.transform, "พ\u0e34มพ\u0e4cแชท / Keyboard", "social");
+		CommunityHudLayout.Register("chat_keyboard", _keyboardButton.transform, "พ\u0e34มพ\u0e4cแชท / Keyboard", "social");
 		_keyboardButton.Initailize(delegate
 		{
 			UIManager.Open<ChatInputGroup>();
@@ -39,15 +39,15 @@ public class BottomMenuWidget : BottomMenuWidgetBase
 		_keyboardButton.gameObject.SetActive(Application.isMobilePlatform);
 		bool active = Application.isEditor || Application.platform == RuntimePlatform.Android;
 		_sttButton.gameObject.SetActive(active);
-		OffServerVoiceUI.AttachMicButton(_sttButton, delegate
+		CommunityVoiceUI.AttachMicButton(_sttButton, delegate
 		{
 			if (this != null)
 			{
 				OnScreenResize();
 			}
 		});
-		OffServerRunButtonUI.Attach(() => this != null && base.gameObject.activeInHierarchy);
-		if (OffServerHotkeys.Supported)
+		CommunityRunButtonUI.Attach(() => this != null && base.gameObject.activeInHierarchy);
+		if (CommunityHotkeys.Supported)
 		{
 			GameSystem<InputSystem>.Instance().On(InputCommand.CommunicationMenuButtonAction, delegate
 			{

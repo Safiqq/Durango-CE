@@ -103,7 +103,7 @@ public class FullScreenMovieGroupBase : UIBase
 	{
 		if (Application.isEditor)
 		{
-			OffServerLog.Info("[OffServer] editor: skipping fullscreen movie " + url);
+			CommunityLog.Info("[Community] editor: skipping fullscreen movie " + url);
 			onFinished?.Invoke();
 			return;
 		}

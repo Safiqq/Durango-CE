@@ -54,7 +54,7 @@ public class EquipWidget_PC : EquipWidgetBase
 
 	protected override void RefreshEquipSlotContainer()
 	{
-		OffServerNinePresets.RefreshPC(this);
+		CommunityNinePresets.RefreshPC(this);
 	}
 
 	protected override void SetTitle(string title)

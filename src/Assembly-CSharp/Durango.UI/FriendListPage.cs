@@ -264,7 +264,7 @@ public class FriendListPage : MonoBehaviour
 			bool flag = state == SortableColumnWidget<string>.State.Descending;
 			if (sortedKey == _friendHeader.Value)
 			{
-				source = ((!flag) ? infos.OrderBy((Durango.Player.PlayerInfo info) => OffServerEmoji.StripNameTags(info.Name)) : infos.OrderByDescending((Durango.Player.PlayerInfo info) => OffServerEmoji.StripNameTags(info.Name)));
+				source = ((!flag) ? infos.OrderBy((Durango.Player.PlayerInfo info) => CommunityEmoji.StripNameTags(info.Name)) : infos.OrderByDescending((Durango.Player.PlayerInfo info) => CommunityEmoji.StripNameTags(info.Name)));
 			}
 			else if (sortedKey == _clanHeader.Value)
 			{

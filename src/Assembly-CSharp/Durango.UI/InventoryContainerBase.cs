@@ -905,7 +905,7 @@ public class InventoryContainerBase : MonoBehaviour, IUIInitializable
 				break;
 			}
 			case UseType.Share:
-				OffServerItemShare.Share(items.First(), toast: true);
+				CommunityItemShare.Share(items.First(), toast: true);
 				break;
 			case UseType.Taming:
 			case UseType.Drop:

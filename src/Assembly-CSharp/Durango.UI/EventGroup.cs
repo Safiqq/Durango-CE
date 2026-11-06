@@ -42,7 +42,7 @@ public class EventGroup : UIBase, INotificationable
 
 	private EventSystem _calendarSystem;
 
-	private bool HasEventCalendar => OffServerLink.Active;
+	private bool HasEventCalendar => CommunityLink.Active;
 
 	private int CalendarOffset => HasEventCalendar ? 1 : 0;
 
@@ -104,7 +104,7 @@ public class EventGroup : UIBase, INotificationable
 		if (!_isRewardChecked)
 		{
 			_isRewardChecked = true;
-			if (num2.HasValue && !OffServerLink.Active)
+			if (num2.HasValue && !CommunityLink.Active)
 			{
 				_selectedTab = num2.Value;
 				Open();
@@ -157,7 +157,7 @@ public class EventGroup : UIBase, INotificationable
 
 	private void SelectTab(int index)
 	{
-		OffServerEventCalendar.HideEmbedded();
+		CommunityEventCalendar.HideEmbedded();
 		Calendar[] calendars = GameSystem<EventSystem>.Instance().Calendars;
 		if (index >= 0 && index < KUtility.GetSize(calendars))
 		{
@@ -204,7 +204,7 @@ public class EventGroup : UIBase, INotificationable
 		{
 			_attendanceList[i].gameObject.SetActive(value: false);
 		}
-		OffServerEventCalendar.ShowEmbedded(_attendanceList[0]);
+		CommunityEventCalendar.ShowEmbedded(_attendanceList[0]);
 	}
 
 	public bool TryGetCalendarBounds(Transform space, out Rect bounds)

@@ -14,7 +14,7 @@ using InteractionData;
 using JetBrains.Annotations;
 using L10N;
 using Messages;
-using OffServer.ClanPillar;
+using Community.ClanPillar;
 using Shared.Estate;
 using Shared.Region;
 using UnityEngine;

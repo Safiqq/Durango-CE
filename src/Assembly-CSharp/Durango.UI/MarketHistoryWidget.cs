@@ -61,21 +61,21 @@ public class MarketHistoryWidget : AnimationWidget, IUIInitializable, IScreenRes
 
 	private bool _isOpen;
 
-	private bool _offServerAuction;
+	private bool _communityAuction;
 
-	private OffServerAuctionUI.Tab _auctionTab;
+	private CommunityAuctionUI.Tab _auctionTab;
 
 	private string _receiveBarText;
 
 	private string _receiveAllText;
 
-	public bool OffServerAuctionMode
+	public bool CommunityAuctionMode
 	{
 		get
 		{
 			if (_isOpen)
 			{
-				return _offServerAuction;
+				return _communityAuction;
 			}
 			return false;
 		}
@@ -112,11 +112,11 @@ public class MarketHistoryWidget : AnimationWidget, IUIInitializable, IScreenRes
 		LoadMarketTabs();
 		_tabList.Clicked += delegate(int index)
 		{
-			if (_offServerAuction)
+			if (_communityAuction)
 			{
-				if (index >= 0 && index < OffServerAuctionUI.Tabs.Length)
+				if (index >= 0 && index < CommunityAuctionUI.Tabs.Length)
 				{
-					SelectAuctionTab(OffServerAuctionUI.Tabs[index]);
+					SelectAuctionTab(CommunityAuctionUI.Tabs[index]);
 				}
 			}
 			else
@@ -124,12 +124,12 @@ public class MarketHistoryWidget : AnimationWidget, IUIInitializable, IScreenRes
 				SelectTab(ProductTabsOrder[index]);
 			}
 		};
-		OffServerAuctionUI.Updated += OnAuctionUpdated;
+		CommunityAuctionUI.Updated += OnAuctionUpdated;
 	}
 
 	private void OnDestroy()
 	{
-		OffServerAuctionUI.Updated -= OnAuctionUpdated;
+		CommunityAuctionUI.Updated -= OnAuctionUpdated;
 	}
 
 	private void LoadMarketTabs()
@@ -152,33 +152,33 @@ public class MarketHistoryWidget : AnimationWidget, IUIInitializable, IScreenRes
 		_tabList.EndLoadByFixedSize(150);
 	}
 
-	public void OpenAuction(OffServerAuctionUI.Tab tab)
+	public void OpenAuction(CommunityAuctionUI.Tab tab)
 	{
 		_isOpen = true;
 		SetAlpha(1f);
 		base.gameObject.SetActive(value: true);
-		if (!_offServerAuction)
+		if (!_communityAuction)
 		{
-			_offServerAuction = true;
+			_communityAuction = true;
 			_tabList.BeginLoad();
-			for (int i = 0; i < OffServerAuctionUI.Tabs.Length; i++)
+			for (int i = 0; i < CommunityAuctionUI.Tabs.Length; i++)
 			{
-				_tabList.AddText(OffServerAuctionUI.TabName(OffServerAuctionUI.Tabs[i]));
+				_tabList.AddText(CommunityAuctionUI.TabName(CommunityAuctionUI.Tabs[i]));
 			}
 			_tabList.EndLoadByFixedSize(150);
 			UISpriteLabel componentInChildren = _receiveButtonBar.GetComponentInChildren<UISpriteLabel>(includeInactive: true);
 			_receiveBarText = ((componentInChildren != null) ? componentInChildren.text : null);
 			_receiveAllText = _receiveAllButton.Text;
-			_receiveAllButton.Text = OffServerAuctionUI.Text("claim_all");
+			_receiveAllButton.Text = CommunityAuctionUI.Text("claim_all");
 		}
 		SelectAuctionTab(tab);
 	}
 
 	private void LeaveAuction()
 	{
-		if (_offServerAuction)
+		if (_communityAuction)
 		{
-			_offServerAuction = false;
+			_communityAuction = false;
 			LoadMarketTabs();
 			UISpriteLabel componentInChildren = _receiveButtonBar.GetComponentInChildren<UISpriteLabel>(includeInactive: true);
 			if (componentInChildren != null && _receiveBarText != null)
@@ -195,39 +195,39 @@ public class MarketHistoryWidget : AnimationWidget, IUIInitializable, IScreenRes
 		}
 	}
 
-	private void SelectAuctionTab(OffServerAuctionUI.Tab tab)
+	private void SelectAuctionTab(CommunityAuctionUI.Tab tab)
 	{
 		_auctionTab = tab;
-		_tabList.Select(Array.IndexOf(OffServerAuctionUI.Tabs, tab));
+		_tabList.Select(Array.IndexOf(CommunityAuctionUI.Tabs, tab));
 		RefreshReceiveButtonBar();
 		_commodityList.SetLoading();
-		_commodityList.SetAuctionProductType(OffServerAuctionUI.ProductTypeOf(tab));
-		OffServerAuctionUI.Load(tab);
+		_commodityList.SetAuctionProductType(CommunityAuctionUI.ProductTypeOf(tab));
+		CommunityAuctionUI.Load(tab);
 	}
 
 	public void ReloadAuction()
 	{
-		if (OffServerAuctionMode)
+		if (CommunityAuctionMode)
 		{
-			OffServerAuctionUI.Load(_auctionTab);
+			CommunityAuctionUI.Load(_auctionTab);
 		}
 	}
 
 	private void OnAuctionUpdated()
 	{
-		if (!(this == null) && _isOpen && _offServerAuction)
+		if (!(this == null) && _isOpen && _communityAuction)
 		{
-			if (OffServerAuctionUI.IsLoading)
+			if (CommunityAuctionUI.IsLoading)
 			{
 				_commodityList.SetLoading();
 			}
 			else
 			{
-				_commodityList.SetOffServer(OffServerAuctionUI.Data);
+				_commodityList.SetCommunity(CommunityAuctionUI.Data);
 			}
 			OnCommoditySelected(_commodityList.Selected);
 			RefreshReceiveButtonBar();
-			_tabList.SetNotification(Array.IndexOf(OffServerAuctionUI.Tabs, OffServerAuctionUI.Tab.Claims), OffServerAuctionUI.MoneyWaiting > 0 || OffServerAuctionUI.ItemClaims > 0, Durango.Logic.Notification.Type.Important);
+			_tabList.SetNotification(Array.IndexOf(CommunityAuctionUI.Tabs, CommunityAuctionUI.Tab.Claims), CommunityAuctionUI.MoneyWaiting > 0 || CommunityAuctionUI.ItemClaims > 0, Durango.Logic.Notification.Type.Important);
 		}
 	}
 
@@ -271,9 +271,9 @@ public class MarketHistoryWidget : AnimationWidget, IUIInitializable, IScreenRes
 
 	public void RefreshReceiveButtonBar()
 	{
-		if (_offServerAuction)
+		if (_communityAuction)
 		{
-			bool flag = _auctionTab == OffServerAuctionUI.Tab.Claims;
+			bool flag = _auctionTab == CommunityAuctionUI.Tab.Claims;
 			if (flag != _receiveButtonBar.activeSelf)
 			{
 				_receiveButtonBar.SetActive(flag);
@@ -285,9 +285,9 @@ public class MarketHistoryWidget : AnimationWidget, IUIInitializable, IScreenRes
 				UISpriteLabel componentInChildren = _receiveButtonBar.GetComponentInChildren<UISpriteLabel>(includeInactive: true);
 				if (componentInChildren != null)
 				{
-					componentInChildren.text = OffServerAuctionUI.Text("money_wait", OffServerExchange.TStoneText(OffServerAuctionUI.MoneyWaiting), OffServerAuctionUI.ItemClaims);
+					componentInChildren.text = CommunityAuctionUI.Text("money_wait", CommunityExchange.TStoneText(CommunityAuctionUI.MoneyWaiting), CommunityAuctionUI.ItemClaims);
 				}
-				_receiveAllButton.Disabled = OffServerAuctionUI.IsLoading || OffServerAuctionUI.IsBusy || (OffServerAuctionUI.MoneyWaiting <= 0 && OffServerAuctionUI.ItemClaims <= 0);
+				_receiveAllButton.Disabled = CommunityAuctionUI.IsLoading || CommunityAuctionUI.IsBusy || (CommunityAuctionUI.MoneyWaiting <= 0 && CommunityAuctionUI.ItemClaims <= 0);
 				_searchButtonInReceiveBar.Disabled = true;
 			}
 		}
@@ -309,7 +309,7 @@ public class MarketHistoryWidget : AnimationWidget, IUIInitializable, IScreenRes
 
 	public void SetNotification(ProductType type, bool on, Durango.Logic.Notification.Type notificationType)
 	{
-		if (!_offServerAuction)
+		if (!_communityAuction)
 		{
 			int num = ProductTabsOrder.IndexOf(type);
 			if (num != -1)
@@ -327,7 +327,7 @@ public class MarketHistoryWidget : AnimationWidget, IUIInitializable, IScreenRes
 
 	private void OnUpdateGoodsList()
 	{
-		if (_isOpen && !_offServerAuction)
+		if (_isOpen && !_communityAuction)
 		{
 			_commodityList.Set(_commodities);
 			OnCommoditySelected(_commodityList.Selected);
@@ -336,17 +336,17 @@ public class MarketHistoryWidget : AnimationWidget, IUIInitializable, IScreenRes
 
 	private void OnCommoditySelected(Commodity commodity)
 	{
-		if (_offServerAuction)
+		if (_communityAuction)
 		{
-			string text = (OffServerAuctionUI.IsLoading ? null : OffServerAuctionUI.ActionText(commodity));
-			_actionButton.Disabled = OffServerAuctionUI.IsLoading || OffServerAuctionUI.IsBusy;
-			ShowButton(_auctionTab != OffServerAuctionUI.Tab.Claims);
+			string text = (CommunityAuctionUI.IsLoading ? null : CommunityAuctionUI.ActionText(commodity));
+			_actionButton.Disabled = CommunityAuctionUI.IsLoading || CommunityAuctionUI.IsBusy;
+			ShowButton(_auctionTab != CommunityAuctionUI.Tab.Claims);
 			_actionButton.gameObject.SetActive(text != null);
 			if (text != null)
 			{
 				_actionButton.Text = text;
 			}
-			_searchButton.gameObject.SetActive(_auctionTab == OffServerAuctionUI.Tab.Browse);
+			_searchButton.gameObject.SetActive(_auctionTab == CommunityAuctionUI.Tab.Browse);
 			_favoritesButton.Set(null, _commodityList.UpdateCommodity);
 			return;
 		}
@@ -398,9 +398,9 @@ public class MarketHistoryWidget : AnimationWidget, IUIInitializable, IScreenRes
 
 	private void OnActionButtonClicked()
 	{
-		if (_offServerAuction)
+		if (_communityAuction)
 		{
-			OffServerAuctionUI.DoAction(_commodityList.Selected);
+			CommunityAuctionUI.DoAction(_commodityList.Selected);
 			return;
 		}
 		Commodity selected = _commodityList.Selected;
@@ -436,9 +436,9 @@ public class MarketHistoryWidget : AnimationWidget, IUIInitializable, IScreenRes
 
 	private void OnSearchButtonClicked()
 	{
-		if (_offServerAuction)
+		if (_communityAuction)
 		{
-			OffServerAuctionUI.AskSearch(_searchButton.gameObject);
+			CommunityAuctionUI.AskSearch(_searchButton.gameObject);
 			return;
 		}
 		Commodity selected = _commodityList.Selected;
@@ -456,9 +456,9 @@ public class MarketHistoryWidget : AnimationWidget, IUIInitializable, IScreenRes
 
 	private void OnReceiveAllButtonClicked()
 	{
-		if (_offServerAuction)
+		if (_communityAuction)
 		{
-			OffServerAuctionUI.ClaimAll();
+			CommunityAuctionUI.ClaimAll();
 			return;
 		}
 		MarketSystem.Send(default(MarketCollectAllPayments)).On<Products>(delegate

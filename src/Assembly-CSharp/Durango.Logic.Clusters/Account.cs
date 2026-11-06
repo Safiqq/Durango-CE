@@ -23,14 +23,14 @@ public class Account
 	{
 		get
 		{
-			return OffServerLink.ServerAccountId;
+			return CommunityLink.ServerAccountId;
 		}
 		set
 		{
 			if (!string.IsNullOrEmpty(value))
 			{
-				UnityEngine.Debug.Log("[OffServer] /accounts → account_id=" + value);
-				OffServerLink.ServerAccountId = value;
+				UnityEngine.Debug.Log("[Community] /accounts → account_id=" + value);
+				CommunityLink.ServerAccountId = value;
 			}
 		}
 	}
@@ -40,11 +40,11 @@ public class Account
 	{
 		get
 		{
-			return OffServerLink.DiscordName;
+			return CommunityLink.DiscordName;
 		}
 		set
 		{
-			OffServerLink.DiscordName = value ?? string.Empty;
+			CommunityLink.DiscordName = value ?? string.Empty;
 		}
 	}
 

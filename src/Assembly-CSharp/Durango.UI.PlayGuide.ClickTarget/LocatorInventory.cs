@@ -27,7 +27,7 @@ public class LocatorInventory : LocatorMenu
 			}
 			return "item_select";
 		}
-		if (!(OffServerHudLayout.InventoryShortcutTransform != null))
+		if (!(CommunityHudLayout.InventoryShortcutTransform != null))
 		{
 			return base.SelectPhase();
 		}
@@ -37,9 +37,9 @@ public class LocatorInventory : LocatorMenu
 	protected override void UpdateTargetTransform()
 	{
 		string currentPhase = base.CurrentPhase;
-		if (currentPhase == "select_menu" && OffServerHudLayout.InventoryShortcutTransform != null)
+		if (currentPhase == "select_menu" && CommunityHudLayout.InventoryShortcutTransform != null)
 		{
-			base.TargetTransform = OffServerHudLayout.InventoryShortcutTransform;
+			base.TargetTransform = CommunityHudLayout.InventoryShortcutTransform;
 			return;
 		}
 		if (!(currentPhase == "item_select"))

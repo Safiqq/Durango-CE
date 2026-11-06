@@ -55,10 +55,10 @@ public abstract class MenuListWidgetBase : UIWidget
 		MenuWidget menuWidget = Selectable.Current as MenuWidget;
 		if (!(menuWidget == null))
 		{
-			if (menuWidget.OffServerRanked)
+			if (menuWidget.CommunityRanked)
 			{
 				UIBase.CloseAllUI();
-				OffServerRankedUI.OpenLobby();
+				CommunityRankedUI.OpenLobby();
 			}
 			else
 			{

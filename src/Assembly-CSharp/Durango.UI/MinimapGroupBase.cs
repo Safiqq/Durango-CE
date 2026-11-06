@@ -20,7 +20,7 @@ public class MinimapGroupBase : UIBase
 
 	protected virtual void Start()
 	{
-		OffServerHudLayout.Register("map", _minimapTouchBox.transform, "แผนท\u0e35\u0e48 / Map", "map");
+		CommunityHudLayout.Register("map", _minimapTouchBox.transform, "แผนท\u0e35\u0e48 / Map", "map");
 		UIEventListener uIEventListener = UIEventListener.Get(_minimapTouchBox);
 		uIEventListener.onClick = (UIEventListener.VoidDelegate)Delegate.Combine(uIEventListener.onClick, (UIEventListener.VoidDelegate)delegate
 		{

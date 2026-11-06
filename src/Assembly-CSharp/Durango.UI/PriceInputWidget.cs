@@ -41,7 +41,7 @@ public class PriceInputWidget : MonoBehaviour
 		{
 			_marketFeeText = _taxTooltipLabel.text;
 		}
-		_taxTooltipLabel.text = (auction ? OffServerAuctionUI.Text("auction_fee", (OffServerExchange.ListFeeRatio * 100.0).ToString("0.##"), (OffServerExchange.TaxRate * 100.0).ToString("0.##")) : _marketFeeText);
+		_taxTooltipLabel.text = (auction ? CommunityAuctionUI.Text("auction_fee", (CommunityExchange.ListFeeRatio * 100.0).ToString("0.##"), (CommunityExchange.TaxRate * 100.0).ToString("0.##")) : _marketFeeText);
 	}
 
 	public void Init()
@@ -57,7 +57,7 @@ public class PriceInputWidget : MonoBehaviour
 
 	private void OnClickPriceInput(GameObject obj)
 	{
-		UIManager.Popup.Tooltip<NumberInputPopup>().Show(_price, Currency.TStone, _auction ? OffServerAuctionUI.Text("start_price") : T._("가격 설정"), SetPrice);
+		UIManager.Popup.Tooltip<NumberInputPopup>().Show(_price, Currency.TStone, _auction ? CommunityAuctionUI.Text("start_price") : T._("가격 설정"), SetPrice);
 	}
 
 	private void UpdatePrice()

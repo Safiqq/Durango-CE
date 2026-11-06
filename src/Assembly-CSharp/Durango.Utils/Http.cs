@@ -14,13 +14,13 @@ public static class Http
 		{
 			return null;
 		}
-		OffServerLink.NoteRequestStart();
-		OffServerLink.EnsureCacheRoots();
+		CommunityLink.NoteRequestStart();
+		CommunityLink.EnsureCacheRoots();
 		HTTPRequest hTTPRequest = new HTTPRequest(new Uri(url), method, delegate(HTTPRequest originalRequest, HTTPResponse response)
 		{
 			bool isCached;
 			byte[] array = ProcessResult(originalRequest, out isCached);
-			OffServerLink.NoteRequestDone((array != null) ? array.Length : 0);
+			CommunityLink.NoteRequestDone((array != null) ? array.Length : 0);
 			if (callback != null)
 			{
 				callback(array, response);
@@ -35,11 +35,11 @@ public static class Http
 		hTTPRequest.AddHeader("Accept-Language", LocalizeSystem.Locale);
 		hTTPRequest.AddHeader("X-K1-System-Language", LocalizeSystem.SystemLanguage);
 		hTTPRequest.AddHeader("cache-control", "max-age=0");
-		hTTPRequest.AddHeader("X-OffServer-Client", OffServerLink.ClientVersion);
-		hTTPRequest.AddHeader("X-OffServer-Caps", "nametag-emoji, item-link, server-popup, voice-chat, i18n-keys, pet-scale, pvp-ranked, pvp-duel, gather-check, rift-coin, rift-scope");
-		if (!string.IsNullOrEmpty(OffServerLink.LauncherArg))
+		hTTPRequest.AddHeader("X-Community-Client", CommunityLink.ClientVersion);
+		hTTPRequest.AddHeader("X-Community-Caps", "nametag-emoji, item-link, server-popup, voice-chat, i18n-keys, pet-scale, pvp-ranked, pvp-duel, gather-check, rift-coin, rift-scope");
+		if (!string.IsNullOrEmpty(CommunityLink.LauncherArg))
 		{
-			hTTPRequest.AddHeader("X-OffServer-Launcher", OffServerLink.LauncherArg);
+			hTTPRequest.AddHeader("X-Community-Launcher", CommunityLink.LauncherArg);
 		}
 		if (addSession)
 		{
@@ -47,7 +47,7 @@ public static class Http
 		}
 		if (method == HTTPMethods.Post && (new Uri(url).AbsolutePath.TrimEnd('/') == "/accounts" || new Uri(url).AbsolutePath.TrimEnd('/') == "/sessions"))
 		{
-			OffServerHardwareId.AddTo(hTTPRequest);
+			CommunityHardwareId.AddTo(hTTPRequest);
 		}
 		if (fields != null)
 		{

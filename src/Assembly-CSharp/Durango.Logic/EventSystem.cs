@@ -22,7 +22,7 @@ public class EventSystem : GameSystem<EventSystem>
 
 	private void OnCalendarsUpdated()
 	{
-		GameSystem<MenuSystem>.Instance().EnableMenu(MenuType.Event, KUtility.GetSize(Calendars) > 0 || OffServerLink.Active);
+		GameSystem<MenuSystem>.Instance().EnableMenu(MenuType.Event, KUtility.GetSize(Calendars) > 0 || CommunityLink.Active);
 		if (this.CalendarUpdated != null)
 		{
 			this.CalendarUpdated();

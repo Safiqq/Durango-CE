@@ -554,7 +554,7 @@ public class TextBuilder : IDisposable
 			if (char.IsSurrogate(c))
 			{
 				int cell;
-				int num5 = OffServerEmoji.Match(text, i, out cell);
+				int num5 = CommunityEmoji.Match(text, i, out cell);
 				ITextRectLayout textRectLayout = ((cell >= 0 && EmojiOwner != null) ? EmojiOwner.GetEmojiLink(cell) : null);
 				if (textRectLayout != null)
 				{

@@ -71,7 +71,7 @@ public class JoystickGroup : UIBase
 
 	public Rect GetFixedModeContainerRect()
 	{
-		if (OffServerHudLayout.HasPlacement("joystick"))
+		if (CommunityHudLayout.HasPlacement("joystick"))
 		{
 			Camera camera = NGUITools.FindCameraForLayer(_fixedModeContainer.gameObject.layer);
 			Vector3[] worldCorners = _fixedModeContainer.worldCorners;
@@ -109,8 +109,8 @@ public class JoystickGroup : UIBase
 		}
 		_fixedModeContainer.gameObject.SetActive(value: false);
 		SetFixedMode(drawMode: false);
-		OffServerHudLayout.Register("joystick", _fixedModeContainer.transform, "จอยเด\u0e34น / Joystick", "movement");
-		OffServerHudLayout.RegisterVisibilityWidgets("joystick", _widgetsToFade);
+		CommunityHudLayout.Register("joystick", _fixedModeContainer.transform, "จอยเด\u0e34น / Joystick", "movement");
+		CommunityHudLayout.RegisterVisibilityWidgets("joystick", _widgetsToFade);
 	}
 
 	private IEnumerator FadeOutJoystick()
@@ -121,7 +121,7 @@ public class JoystickGroup : UIBase
 		{
 			UIWidget obj = _widgetsToFade[i];
 			Color color = obj.color;
-			color.a = _fadeOutAlpha * OffServerHudLayout.AlphaFor("joystick");
+			color.a = _fadeOutAlpha * CommunityHudLayout.AlphaFor("joystick");
 			TweenColor.Begin(obj.gameObject, 0.5f, color).method = UITweener.Method.EaseOut;
 		}
 		yield return new WaitForSeconds(0.5f);
@@ -144,7 +144,7 @@ public class JoystickGroup : UIBase
 			{
 				UIWidget obj = _widgetsToFade[j];
 				Color color = obj.color;
-				color.a = OffServerHudLayout.AlphaFor("joystick");
+				color.a = CommunityHudLayout.AlphaFor("joystick");
 				obj.color = color;
 			}
 		}
@@ -156,13 +156,13 @@ public class JoystickGroup : UIBase
 
 	public void Press(Vector3 currentPos)
 	{
-		if (!OffServerHudLayout.BlocksInput && !OffServerHudLayout.IsHidden("joystick") && (!OffServerHudLayout.HasPlacement("joystick") || GetFixedModeContainerRect().Contains(currentPos)) && !(_target == null) && !(UICamera.currentCamera == null))
+		if (!CommunityHudLayout.BlocksInput && !CommunityHudLayout.IsHidden("joystick") && (!CommunityHudLayout.HasPlacement("joystick") || GetFixedModeContainerRect().Contains(currentPos)) && !(_target == null) && !(UICamera.currentCamera == null))
 		{
 			Pressed = true;
 			currentPos = UICamera.currentCamera.ScreenPointToRay(currentPos).GetPoint(0f);
 			currentPos.z = 0f;
 			_userInitTouchPos = currentPos;
-			if (_fixedMode || OffServerHudLayout.HasPlacement("joystick"))
+			if (_fixedMode || CommunityHudLayout.HasPlacement("joystick"))
 			{
 				currentPos = _fixedModeContainer.transform.position;
 			}
@@ -185,14 +185,14 @@ public class JoystickGroup : UIBase
 
 	private void LateUpdate()
 	{
-		bool flag = OffServerHudLayout.HasPlacement("joystick") || OffServerHudLayout.Editing;
+		bool flag = CommunityHudLayout.HasPlacement("joystick") || CommunityHudLayout.Editing;
 		if (!flag && !_hudCustomized)
 		{
 			return;
 		}
 		bool flag2 = !flag && _hudCustomized;
-		bool flag3 = _hudWasEditing && !OffServerHudLayout.Editing;
-		_hudWasEditing = OffServerHudLayout.Editing;
+		bool flag3 = _hudWasEditing && !CommunityHudLayout.Editing;
+		_hudWasEditing = CommunityHudLayout.Editing;
 		if (_hudOriginalScales == null)
 		{
 			_hudOriginalScales = new Vector3[_widgetsToCenter.Length];
@@ -216,27 +216,27 @@ public class JoystickGroup : UIBase
 			}
 			if (!flag4)
 			{
-				_widgetsToCenter[j].localScale = _hudOriginalScales[j] * (flag ? OffServerHudLayout.ScaleFor("joystick") : 1f);
+				_widgetsToCenter[j].localScale = _hudOriginalScales[j] * (flag ? CommunityHudLayout.ScaleFor("joystick") : 1f);
 			}
 			if (flag && !Pressed)
 			{
 				_widgetsToCenter[j].position = _fixedModeContainer.transform.position;
 			}
 		}
-		if (OffServerHudLayout.Editing || flag2 || flag3)
+		if (CommunityHudLayout.Editing || flag2 || flag3)
 		{
 			StopAllCoroutines();
 			UIWidget[] widgetsToFade = _widgetsToFade;
 			for (int l = 0; l < widgetsToFade.Length; l++)
 			{
-				widgetsToFade[l].alpha = OffServerHudLayout.AlphaFor("joystick");
+				widgetsToFade[l].alpha = CommunityHudLayout.AlphaFor("joystick");
 			}
 		}
 	}
 
 	public bool Drag(Vector3 currentPos)
 	{
-		if (OffServerHudLayout.BlocksInput || OffServerHudLayout.IsHidden("joystick"))
+		if (CommunityHudLayout.BlocksInput || CommunityHudLayout.IsHidden("joystick"))
 		{
 			return false;
 		}
@@ -249,7 +249,7 @@ public class JoystickGroup : UIBase
 		currentPos = ray.GetPoint(distance);
 		currentPos.z = 0f;
 		Vector3 vector = currentPos - _userInitTouchPos;
-		if (_fixedMode || OffServerHudLayout.HasPlacement("joystick"))
+		if (_fixedMode || CommunityHudLayout.HasPlacement("joystick"))
 		{
 			if (!(Math.Abs(vector.x) > float.Epsilon) && !(Math.Abs(vector.y) > float.Epsilon))
 			{
@@ -274,7 +274,7 @@ public class JoystickGroup : UIBase
 		}
 		else
 		{
-			if (((_followBeginRadius > 0f && magnitude > _followBeginRadius) || _followBegin) && !_fixedMode && !OffServerHudLayout.HasPlacement("joystick"))
+			if (((_followBeginRadius > 0f && magnitude > _followBeginRadius) || _followBegin) && !_fixedMode && !CommunityHudLayout.HasPlacement("joystick"))
 			{
 				float num = Mathf.Clamp(Mathf.Max(0f, magnitude - _followBeginRadius) / 10f, 1f, 3f);
 				Vector3 vector2 = vector;

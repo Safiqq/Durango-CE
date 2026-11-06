@@ -36,7 +36,7 @@ public struct PetStats
 
 	public double? GrazedAt;
 
-	public int OffServerScale;
+	public int CommunityScale;
 
 	public static void Pack(Packer packer, PetStats val, bool hint = false)
 	{
@@ -195,7 +195,7 @@ public struct PetStats
 		if (num > 14)
 		{
 			unpacker.Read();
-			result.OffServerScale = unpacker.LastReadData.AsInt32();
+			result.CommunityScale = unpacker.LastReadData.AsInt32();
 		}
 		return result;
 	}

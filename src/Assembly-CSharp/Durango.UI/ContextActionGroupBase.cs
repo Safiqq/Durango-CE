@@ -30,7 +30,7 @@ public class ContextActionGroupBase : UIBase
 
 	protected virtual void Start()
 	{
-		OffServerHudLayout.Register("context_actions", _actionButtons.transform, "คำส\u0e31\u0e48ง / Actions", "context");
+		CommunityHudLayout.Register("context_actions", _actionButtons.transform, "คำส\u0e31\u0e48ง / Actions", "context");
 		_actionButtons.MenuClicked += OnClickMenuButton;
 		PlayerBehavior.LocalPlayer.TileChanged += delegate
 		{

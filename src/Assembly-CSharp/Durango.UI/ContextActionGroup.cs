@@ -20,6 +20,6 @@ public class ContextActionGroup : ContextActionGroupBase
 		Vector3 baseActionPos = _baseActionPos;
 		baseActionPos.x -= (1f - ratio) * (float)ToDoListGroupBase.Width;
 		_actionButtons.transform.localPosition = baseActionPos;
-		OffServerHudLayout.Reapply(_actionButtons.transform);
+		CommunityHudLayout.Reapply(_actionButtons.transform);
 	}
 }

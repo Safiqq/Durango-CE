@@ -14,9 +14,9 @@ public class Platform_PC : Platform
 	{
 		get
 		{
-			if (OffServerLink.Active)
+			if (CommunityLink.Active)
 			{
-				return OffServerLink.AccountId;
+				return CommunityLink.AccountId;
 			}
 			return string.Empty;
 		}
@@ -26,9 +26,9 @@ public class Platform_PC : Platform
 	{
 		get
 		{
-			if (!string.IsNullOrEmpty(OffServerLink.DiscordName))
+			if (!string.IsNullOrEmpty(CommunityLink.DiscordName))
 			{
-				return "Discord: " + OffServerLink.DiscordName;
+				return "Discord: " + CommunityLink.DiscordName;
 			}
 			return "Guest / Unlinked";
 		}
@@ -60,7 +60,7 @@ public class Platform_PC : Platform
 
 	public override void ShowAccountMenu()
 	{
-		UnityEngine.Debug.Log("[OffServer] ShowAccountMenu — Open Account Transfer (Key=" + OffServerLink.AccountId + " · Discord=" + OffServerLink.DiscordName + ")");
+		UnityEngine.Debug.Log("[Community] ShowAccountMenu — Open Account Transfer (Key=" + CommunityLink.AccountId + " · Discord=" + CommunityLink.DiscordName + ")");
 		UIManager.Popup.Tooltip<TextInputPopup>().Show(delegate(string step1)
 		{
 			step1 = (step1 ?? string.Empty).Trim();
@@ -74,7 +74,7 @@ public class Platform_PC : Platform
 						Connections.Frontend.Send(new AcceptTENCoupon
 						{
 							CouponNum = step1 + " " + text3,
-							ToyToken = OffServerLink.AccountId
+							ToyToken = CommunityLink.AccountId
 						}).On<OK>(delegate
 						{
 							UIManager.Alarm.ShowNotify("Success — Return to Title to load characters for this account", "icon_mainhud_shop", major: false);

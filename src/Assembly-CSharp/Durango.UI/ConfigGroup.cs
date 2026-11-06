@@ -95,7 +95,7 @@ public class ConfigGroup : UIBase
 
 	private void ConfigGroup_OnCloseSucceed()
 	{
-		OffServerCouponUI.Close();
+		CommunityCouponUI.Close();
 		KUtility.DelayedCall(this, delegate
 		{
 			_mainWidget.ApplyChangedLocale();
@@ -110,7 +110,7 @@ public class ConfigGroup : UIBase
 
 	private void TabClicked(string category)
 	{
-		OffServerCouponUI.Close();
+		CommunityCouponUI.Close();
 		_mainWidget.SetConfigLayout(category);
 	}
 

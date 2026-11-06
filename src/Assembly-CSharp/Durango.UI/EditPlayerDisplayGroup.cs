@@ -219,11 +219,11 @@ public class EditPlayerDisplayGroup : UIBase
 		_display.SelectStarterOutfit((int)job.Value);
 		_display.RandomVoice();
 		_costumePage.CanEditCostumeColor = true;
-		_costumePage.CanEditGender = OffServerLink.Active;
-		_costumePage.CanEditStarterOutfit = OffServerLink.Active;
+		_costumePage.CanEditGender = CommunityLink.Active;
+		_costumePage.CanEditStarterOutfit = CommunityLink.Active;
 		base.Open();
 		_pages.Clear();
-		if (!OffServerLink.Active)
+		if (!CommunityLink.Active)
 		{
 			_pages.Add(new Page
 			{
@@ -234,7 +234,7 @@ public class EditPlayerDisplayGroup : UIBase
 			_pages.Add(new Page
 			{
 				State = State.Preset,
-				Title = (OffServerLink.Active ? "เพศและร\u0e39ปล\u0e31กษณ\u0e4cเร\u0e34\u0e48มต\u0e49น" : T._("성별과 직업")),
+				Title = (CommunityLink.Active ? "เพศและร\u0e39ปล\u0e31กษณ\u0e4cเร\u0e34\u0e48มต\u0e49น" : T._("성별과 직업")),
 				CanBack = true
 			});
 		}
@@ -242,7 +242,7 @@ public class EditPlayerDisplayGroup : UIBase
 		{
 			State = State.Costume,
 			Title = T._("캐릭터 생성"),
-			CanBack = !OffServerLink.Active
+			CanBack = !CommunityLink.Active
 		});
 		_pages.Add(new Page
 		{
@@ -351,7 +351,7 @@ public class EditPlayerDisplayGroup : UIBase
 				p.WaitForLoading(loading: true);
 			}
 			string arg2 = _selectRegionPage.SelectedRegionid;
-			if (OffServerLink.Active)
+			if (CommunityLink.Active)
 			{
 				List<string> regionTemplateIds = Yaml.Util.Singleton<Constants>.Instance.PersonalRegion.RegionTemplateIds;
 				arg2 = ((KUtility.GetSize(regionTemplateIds) > 0) ? regionTemplateIds[0] : string.Empty);

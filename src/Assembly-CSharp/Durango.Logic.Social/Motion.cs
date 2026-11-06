@@ -85,7 +85,7 @@ public class Motion : EmotionBase, IComparable<Motion>
 		bool? byEquipments = _byEquipments;
 		if (!byEquipments.HasValue)
 		{
-			_byEquipments = IsEquipmentsMotion(GameSystem<EquipSystem>.Instance().GetEquipPreset(GameSystem<EquipSystem>.Instance().CurrentEquipPreset)) || IsEquipmentsMotion(GameSystem<EquipSystem>.Instance().GetEquipPreset(OffServerNinePresets.CurrentFashion));
+			_byEquipments = IsEquipmentsMotion(GameSystem<EquipSystem>.Instance().GetEquipPreset(GameSystem<EquipSystem>.Instance().CurrentEquipPreset)) || IsEquipmentsMotion(GameSystem<EquipSystem>.Instance().GetEquipPreset(CommunityNinePresets.CurrentFashion));
 		}
 		return _byEquipments.Value;
 	}

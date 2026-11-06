@@ -87,7 +87,7 @@ public class EquipSlotsWidget : UIWidget, IUIInitializable
 
 	public void RefreshSlots(EquipSlotType presetType)
 	{
-		OffServerFashionFlagSlot.Attach(this, presetType);
+		CommunityFashionFlagSlot.Attach(this, presetType);
 		int i = 0;
 		for (int count = _equipSlots.Count; i < count; i++)
 		{

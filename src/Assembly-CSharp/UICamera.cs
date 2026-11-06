@@ -1184,7 +1184,7 @@ public class UICamera : MonoBehaviour
 
 	private static bool IsVisible(Vector3 worldPoint, GameObject go)
 	{
-		if (OffServerHudLayout.IsHidden(go.transform))
+		if (CommunityHudLayout.IsHidden(go.transform))
 		{
 			return false;
 		}
@@ -1202,7 +1202,7 @@ public class UICamera : MonoBehaviour
 
 	private static bool IsVisible(ref DepthEntry de)
 	{
-		if (OffServerHudLayout.IsHidden(de.go.transform))
+		if (CommunityHudLayout.IsHidden(de.go.transform))
 		{
 			return false;
 		}

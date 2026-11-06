@@ -172,7 +172,7 @@ public class UILabel : UIWidget, RectLayout.ICompatible
 	private readonly TextBuilder.TextTokens _processedTokens = new TextBuilder.TextTokens();
 
 	[NonSerialized]
-	private OffServerEmojiLinks _emojiLinks;
+	private CommunityEmojiLinks _emojiLinks;
 
 	private bool _emojiOrphansChecked;
 
@@ -1009,7 +1009,7 @@ public class UILabel : UIWidget, RectLayout.ICompatible
 		if (!_emojiOrphansChecked)
 		{
 			_emojiOrphansChecked = true;
-			OffServerEmojiLinks.DestroyOrphans(this, _emojiLinks);
+			CommunityEmojiLinks.DestroyOrphans(this, _emojiLinks);
 		}
 		if (_emojiLinks != null)
 		{
@@ -1038,7 +1038,7 @@ public class UILabel : UIWidget, RectLayout.ICompatible
 		}
 		if (_emojiLinks == null)
 		{
-			_emojiLinks = new OffServerEmojiLinks();
+			_emojiLinks = new CommunityEmojiLinks();
 		}
 		return _emojiLinks.Get(this, cell);
 	}

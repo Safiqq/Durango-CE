@@ -233,7 +233,7 @@ public class TitleMenuUserControlBase : MonoBehaviour
 
 	public void RefreshVersionInfo()
 	{
-		UpdateVersionInfo(OffServerLink.LastServerVersion);
+		UpdateVersionInfo(CommunityLink.LastServerVersion);
 	}
 
 	private void ApplyCopyrightDisclaimer()
@@ -257,8 +257,8 @@ public class TitleMenuUserControlBase : MonoBehaviour
 	public void UpdateVersionInfo(string serverVersion = "")
 	{
 		ApplyCopyrightDisclaimer();
-		OffServerLink.LastServerVersion = serverVersion ?? string.Empty;
-		string clientVersion = OffServerLink.ClientVersion;
+		CommunityLink.LastServerVersion = serverVersion ?? string.Empty;
+		string clientVersion = CommunityLink.ClientVersion;
 		string text = "* Client: " + (string.IsNullOrEmpty(clientVersion) ? CurrentBundleVersion.GetClientVersion() : clientVersion);
 		Cluster selectedCluster = null;
 		try
@@ -290,7 +290,7 @@ public class TitleMenuUserControlBase : MonoBehaviour
 		{
 			text = text + " / NPA: " + nPA;
 		}
-		text += OffServerLink.ServerStatusSuffix;
+		text += CommunityLink.ServerStatusSuffix;
 		if (_versionInfoLabel != null)
 		{
 			_versionInfoLabel.supportEncoding = true;

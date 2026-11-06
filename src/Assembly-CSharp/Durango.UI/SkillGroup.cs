@@ -11,7 +11,7 @@ using Durango.Utils;
 using Durango.Utils.Extensions;
 using JetBrains.Annotations;
 using L10N;
-using OffServer.WeaponMastery;
+using Community.WeaponMastery;
 using Shared.Skill;
 using UnityEngine;
 using Yaml;
@@ -140,7 +140,7 @@ public class SkillGroup : UIBase, INotificationable
 
 	private void OnOpened()
 	{
-		if (OffServerLink.CombatLoadout)
+		if (CommunityLink.CombatLoadout)
 		{
 			CombatLoadoutEditor.Attach(this, _titleWidget.Object, _mainScroll, _guideMainInfoLabel);
 		}

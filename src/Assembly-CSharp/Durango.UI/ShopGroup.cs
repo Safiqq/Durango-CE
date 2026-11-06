@@ -12,7 +12,7 @@ using Durango.Utils;
 using Durango.Utils.Extensions;
 using L10N;
 using Messages;
-using OffServer.Rift;
+using Community.Rift;
 using Shared.Economy;
 using Shared.Purchaser;
 using UnityEngine;
@@ -106,7 +106,7 @@ public class ShopGroup : UIBase, INotificationable
 
 	public void OpenSeasonShop()
 	{
-		if (OffServerSeasonPass.ShowSeasonUi)
+		if (CommunitySeasonPass.ShowSeasonUi)
 		{
 			ShopCategory shopCategory = ShopCategories.FindCategory("RiftCoin");
 			if (shopCategory == null)
@@ -126,7 +126,7 @@ public class ShopGroup : UIBase, INotificationable
 		{
 			return;
 		}
-		_titleWidget.Object.SetTitle(OffServerSeasonPass.HasSeasonLevel ? OffServerSeasonPass.SeasonTitle(OffServerSeasonPass.Current) : OffServerSeasonPass.Text("title"));
+		_titleWidget.Object.SetTitle(CommunitySeasonPass.HasSeasonLevel ? CommunitySeasonPass.SeasonTitle(CommunitySeasonPass.Current) : CommunitySeasonPass.Text("title"));
 		_tabList.SetSeasonTabs(delegate(int index)
 		{
 			if (index == 0)
@@ -163,7 +163,7 @@ public class ShopGroup : UIBase, INotificationable
 		UpdatePurchaseNotification();
 		base.OnOpenSucceed += OnOpened;
 		base.OnCloseSucceed += OnClosed;
-		OffServerSeasonPass.Updated += OnSeasonVisibilityChanged;
+		CommunitySeasonPass.Updated += OnSeasonVisibilityChanged;
 		GameSystem<ShopSystem>.Instance().PurchasesUpdated += OnUpdatePurchases;
 		GameSystem<ShopSystem>.Instance().AcceptableSubPurchasesUpdated += OnAcceptableSubPurchasesUpdated;
 		GameSystem<ShopSystem>.Instance().UserFirstPurchaseHistoryUpdated += OnUserFirstPurchaseHistoryUpdated;
@@ -300,7 +300,7 @@ public class ShopGroup : UIBase, INotificationable
 
 	private void OnSeasonVisibilityChanged()
 	{
-		if (IsSeasonShop && !OffServerSeasonPass.ShowSeasonUi)
+		if (IsSeasonShop && !CommunitySeasonPass.ShowSeasonUi)
 		{
 			Close();
 		}

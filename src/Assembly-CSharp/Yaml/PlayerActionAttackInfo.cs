@@ -32,8 +32,8 @@ public class PlayerActionAttackInfo
 	[JsonProperty(PropertyName = "use_target_origin")]
 	public bool UseTargetOrigin;
 
-	[JsonProperty(PropertyName = "offserver_preview")]
-	public PlayerActionAttackInfo OffServerPreview;
+	[JsonProperty(PropertyName = "community_preview")]
+	public PlayerActionAttackInfo CommunityPreview;
 
 	public AttackAlerted? MakeAlerted(Vector2 pos, float yaw, double usedAt)
 	{

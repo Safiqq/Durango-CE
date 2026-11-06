@@ -112,7 +112,7 @@ public class SoundManager : Singleton<SoundManager>
 			if (array != null && array.Length != 0)
 			{
 				MemorySoundBank memorySoundBank = new MemorySoundBank(array);
-				OffServerLog.Info("[Sound] " + bankFile + " from APK: " + array.Length + " bytes -> valid=" + memorySoundBank.IsValid);
+				CommunityLog.Info("[Sound] " + bankFile + " from APK: " + array.Length + " bytes -> valid=" + memorySoundBank.IsValid);
 				if (memorySoundBank.IsValid)
 				{
 					_streamingBanks[bankFile] = memorySoundBank;
@@ -199,15 +199,15 @@ public class SoundManager : Singleton<SoundManager>
 			bool flag = AkSoundEngine.IsInitialized();
 			AkInitializer akInitializer = UnityEngine.Object.FindAnyObjectByType<AkInitializer>();
 			AkTerminator akTerminator = UnityEngine.Object.FindAnyObjectByType<AkTerminator>();
-			OffServerLog.Info("[Sound] engine initialized=" + flag + " AkInitializer=" + ((akInitializer == null) ? "none" : (akInitializer.gameObject.name + " active=" + akInitializer.isActiveAndEnabled)) + " AkTerminator=" + ((akTerminator == null) ? "none" : akTerminator.gameObject.name) + " platform=" + AkBasePathGetter.GetPlatformName() + " bankPath=" + AkBasePathGetter.GetSoundbankBasePath());
+			CommunityLog.Info("[Sound] engine initialized=" + flag + " AkInitializer=" + ((akInitializer == null) ? "none" : (akInitializer.gameObject.name + " active=" + akInitializer.isActiveAndEnabled)) + " AkTerminator=" + ((akTerminator == null) ? "none" : akTerminator.gameObject.name) + " platform=" + AkBasePathGetter.GetPlatformName() + " bankPath=" + AkBasePathGetter.GetSoundbankBasePath());
 			if (!flag)
 			{
-				OffServerLog.Info("[Sound] InitializeSoundEngine() -> " + AkWwiseInitializationSettings.InitializeSoundEngine() + " initialized=" + AkSoundEngine.IsInitialized());
+				CommunityLog.Info("[Sound] InitializeSoundEngine() -> " + AkWwiseInitializationSettings.InitializeSoundEngine() + " initialized=" + AkSoundEngine.IsInitialized());
 			}
 			if (AkSoundEngine.IsInitialized() && (akInitializer == null || !akInitializer.isActiveAndEnabled) && !_selfDriven)
 			{
 				_selfDriven = true;
-				OffServerLog.Info("[Sound] AkInitializer inactive -> SoundManager drives RenderAudio every frame");
+				CommunityLog.Info("[Sound] AkInitializer inactive -> SoundManager drives RenderAudio every frame");
 			}
 			if (Application.platform == RuntimePlatform.Android && AkSoundEngine.IsInitialized() && !_androidBanksReady)
 			{
@@ -215,8 +215,8 @@ public class SoundManager : Singleton<SoundManager>
 				AKRESULT aKRESULT = AkSoundEngine.SetBasePath("Audio/GeneratedSoundBanks/Android/");
 				AKRESULT aKRESULT2 = AkSoundEngine.AddBasePath("Audio/GeneratedSoundBanks/Android/");
 				AKRESULT aKRESULT3 = AkSoundEngine.SetCurrentLanguage(LocalizeSystem.VoiceLocale);
-				OffServerLog.Info("[Sound] SetBasePath=" + aKRESULT.ToString() + " AddBasePath=" + aKRESULT2.ToString() + " SetCurrentLanguage=" + aKRESULT3);
-				OffServerSoundDiagnostics.OnEngineReady();
+				CommunityLog.Info("[Sound] SetBasePath=" + aKRESULT.ToString() + " AddBasePath=" + aKRESULT2.ToString() + " SetCurrentLanguage=" + aKRESULT3);
+				CommunitySoundDiagnostics.OnEngineReady();
 			}
 		}
 		catch (Exception ex)

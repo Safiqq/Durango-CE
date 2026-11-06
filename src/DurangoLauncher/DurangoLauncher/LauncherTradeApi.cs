@@ -13,7 +13,7 @@ namespace DurangoLauncher;
 
 public sealed class LauncherTradeApi
 {
-	public const string ApiHeader = "X-OffServer-Launcher-Api";
+	public const string ApiHeader = "X-Community-Launcher-Api";
 
 	public const string ApiVersion = "5";
 
@@ -51,7 +51,7 @@ public sealed class LauncherTradeApi
 		httpClient.Timeout = TimeSpan.FromSeconds(15L);
 		httpClient.DefaultRequestHeaders.UserAgent.ParseAdd(userAgent ?? ("DurangoLauncher/" + (typeof(LauncherTradeApi).Assembly.GetName().Version?.ToString(3) ?? "0")));
 		httpClient.DefaultRequestHeaders.Accept.ParseAdd("application/json");
-		httpClient.DefaultRequestHeaders.Add("X-OffServer-Launcher-Api", "5");
+		httpClient.DefaultRequestHeaders.Add("X-Community-Launcher-Api", "5");
 		return httpClient;
 	}
 

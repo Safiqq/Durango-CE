@@ -31,7 +31,7 @@ public class QuestMenuTabs : NestedPrefabLinker<IconTabList>
 
 	private static bool ShowCategory(Category category)
 	{
-		if (!OffServerLink.Active || !category.HasLoadedQuestList)
+		if (!CommunityLink.Active || !category.HasLoadedQuestList)
 		{
 			return true;
 		}
@@ -51,7 +51,7 @@ public class QuestMenuTabs : NestedPrefabLinker<IconTabList>
 
 	private void Update()
 	{
-		if (!OffServerLink.Active || Time.realtimeSinceStartup < _nextVisibilityCheck)
+		if (!CommunityLink.Active || Time.realtimeSinceStartup < _nextVisibilityCheck)
 		{
 			return;
 		}
