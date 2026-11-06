@@ -1,0 +1,19 @@
+# Large / regenerable / untrusted artefacts - recreate with scripts/restructure.py
+/release/
+/build/
+/quarantine/
+/assets/*
+!/assets/branding/
+!/assets/streaming/
+/assets/streaming/*
+!/assets/streaming/Reborn/
+/lib/engine/
+/lib/native/
+/lib/managed/
+/layout_map.json
+__pycache__/
+*.pyc
+/src/**/bin/
+/src/**/obj/
+/build/decompile/
+/screenshots/

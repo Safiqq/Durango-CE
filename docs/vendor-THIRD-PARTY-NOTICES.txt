@@ -1,0 +1,43 @@
+Durango:Reborn - third-party notices
+
+Twemoji (flag and device emoji shown in front of player names)
+  Graphics Copyright 2020 Twitter, Inc and other contributors
+  Source: https://github.com/jdecked/twemoji (v17.0.3)
+  License: CC BY 4.0 - https://creativecommons.org/licenses/by/4.0/
+  Changes: the 72x72 images were resized to 48x48 and packed into one texture.
+
+DB-IP (country of a player's connection, looked up on the game server)
+  IP Geolocation by DB-IP - https://db-ip.com
+  License: CC BY 4.0 - https://creativecommons.org/licenses/by/4.0/
+
+GeoNames
+  This game uses the GeoNames database from https://www.geonames.org licensed under CC BY 4.0
+
+Concentus 1.1.7 (Opus audio codec in C#, used for proximity voice chat)
+  Copyright (c) Xiph.Org Foundation, Skype Limited, CSIRO, Microsoft Corp. and Logan Stromberg
+  Source: https://github.com/lostromb/concentus (NuGet package Concentus 1.1.7)
+  License: BSD 3-Clause (the Opus license) - https://opus-codec.org/license/
+  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
+  following conditions are met: redistributions of source code must retain the copyright notice, this list of
+  conditions and the following disclaimer; redistributions in binary form must reproduce the copyright notice, this
+  list of conditions and the following disclaimer in the documentation and/or other materials provided with the
+  distribution; neither the name of Internet Society, IETF or IETF Trust, nor the names of specific contributors, may
+  be used to endorse or promote products derived from this software without specific prior written permission.
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+  INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE.
+
+LiteNetLib 2.1.4 (reliable UDP transport of the game connection, source in Assets/Plugins/LiteNetLib)
+  Copyright (c) 2025 Ruslan Pyrch
+  Source: https://github.com/RevenantX/LiteNetLib (tag 2.1.4, commit 4d3de1e)
+  License: MIT - https://github.com/RevenantX/LiteNetLib/blob/master/LICENSE.txt
+  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
+  files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
+  modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+  Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice
+  shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY
+  OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+  PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
+  THE USE OR OTHER DEALINGS IN THE SOFTWARE.
