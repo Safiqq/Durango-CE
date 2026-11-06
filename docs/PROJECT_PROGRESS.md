@@ -49,7 +49,9 @@ The repository is a fork of an unmaintained private server client for *Durango: 
 | **M8: Embedded Local Gateway & Self-Contained Execution** | **COMPLETED** | Built `LocalGatewayServer.cs` directly into `Assembly-CSharp.dll` (`[RuntimeInitializeOnLoadMethod]`). Auto-starts loopback gateway on `127.0.0.1:8190/8290`, resolves 24% load screen hang (`Yaml.Util.Loader`), and serves all handshake routes. `Durango.exe` runs completely standalone without external Python or batch scripts. |
 | **M8.1: Cleanroom Community Launcher** | **COMPLETED** | Decompiled and hardened launcher in `src/DurangoLauncher/`. Neutralized `DeleteExtras` file wiping and `LauncherSelfUpdate` unsigned remote execution. Compiles to `build/launcher-dist/DurangoLauncher.exe`. |
 | **M8.2: Authentic Icon & PE Metadata Branding** | **COMPLETED** | Extracted authentic 432x432 claw emblem from APK, generated `assets/branding/durango.ico`, and injected into `Durango.exe` and `DurangoLauncher.exe`. Set official PE metadata (`Durango: Community Edition`). |
+| **M8.3: Custom PE DIB Icon & Character Slot Bypass** | **COMPLETED** | High-DPI dinosaur icon injected into `Durango.exe` PE resources. Integrated `config.json` system and bypassed cash-shop character slot purchase restrictions. |
 | **M9: Android Clean Rebuild** | *DEFERRED* | Out of scope while PC-first verification is in progress; rebuild only from reviewed C# source. |
+| **M10: Modular Server Architecture (Dedicated & Listen)** | **IN PROGRESS** | Decoupling local emulator into standalone headless server (`DurangoServer`) and embedded listen server. Reference: `docs/MODULAR_SERVER_ARCHITECTURE.md`. |
 
 ---
 
