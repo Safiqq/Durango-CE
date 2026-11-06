@@ -1,0 +1,6 @@
+public enum DWARF_MOUSE_BTN_TYPE
+{
+	BTN_LEFT,
+	BTN_MIDDLE,
+	BTN_RIGHT
+}

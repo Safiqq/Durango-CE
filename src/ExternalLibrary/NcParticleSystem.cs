@@ -1,0 +1,467 @@
+using System.Reflection;
+using UnityEngine;
+
+public class NcParticleSystem : NcEffectBehaviour
+{
+	public enum ParticleDestruct
+	{
+		NONE,
+		COLLISION,
+		WORLD_Y
+	}
+
+	protected bool m_bDisabledEmit;
+
+	public float m_fStartDelayTime;
+
+	public bool m_bBurst;
+
+	public float m_fBurstRepeatTime = 0.5f;
+
+	public int m_nBurstRepeatCount;
+
+	public int m_fBurstEmissionCount = 10;
+
+	public float m_fEmitTime;
+
+	public float m_fSleepTime;
+
+	public bool m_bScaleWithTransform;
+
+	public bool m_bWorldSpace = true;
+
+	public float m_fStartSizeRate = 1f;
+
+	public float m_fStartLifeTimeRate = 1f;
+
+	public float m_fStartEmissionRate = 1f;
+
+	public float m_fStartSpeedRate = 1f;
+
+	public float m_fShurikenSpeedRate = 1f;
+
+	protected bool m_bStart;
+
+	protected Vector3 m_OldPos = Vector3.zero;
+
+	public ParticleDestruct m_ParticleDestruct;
+
+	public LayerMask m_CollisionLayer = -1;
+
+	public float m_fCollisionRadius = 0.3f;
+
+	public float m_fDestructPosY = 0.2f;
+
+	public GameObject m_AttachPrefab;
+
+	public float m_fPrefabScale = 1f;
+
+	public float m_fPrefabSpeed = 1f;
+
+	public float m_fPrefabLifeTime = 2f;
+
+	protected bool m_bSleep;
+
+	protected float m_fStartTime;
+
+	protected float m_fDurationStartTime;
+
+	protected float m_fEmitStartTime;
+
+	protected int m_nCreateCount;
+
+	protected bool m_bScalePreRender;
+
+	protected ParticleSystem m_ps;
+
+	protected ParticleSystem.Particle[] m_BufPsParts;
+
+	protected ParticleSystem.Particle[] m_BufColliderOriParts;
+
+	protected ParticleSystem.Particle[] m_BufColliderConParts;
+
+	protected const int m_nAllocBufCount = 50;
+
+	public void SetDisableEmit()
+	{
+		m_bDisabledEmit = true;
+	}
+
+	public override int GetAnimationState()
+	{
+		if (!base.enabled || !NcEffectBehaviour.IsActive(base.gameObject))
+		{
+			return -1;
+		}
+		if (m_bBurst)
+		{
+			if (0 < m_nBurstRepeatCount)
+			{
+				if (m_nCreateCount < m_nBurstRepeatCount)
+				{
+					return 1;
+				}
+				return 0;
+			}
+			return 1;
+		}
+		if (0f < m_fStartDelayTime)
+		{
+			return 1;
+		}
+		if (0f < m_fEmitTime && m_fSleepTime <= 0f)
+		{
+			if (m_nCreateCount < 1)
+			{
+				return 1;
+			}
+			return 0;
+		}
+		return -1;
+	}
+
+	public void ResetParticleEmit(bool bClearOldParticle)
+	{
+		m_bDisabledEmit = false;
+		m_OldPos = base.transform.position;
+		Init();
+		if (m_bBurst || 0f < m_fStartDelayTime)
+		{
+			SetEnableParticle(bEnable: false);
+		}
+		else
+		{
+			SetEnableParticle(bEnable: true);
+		}
+	}
+
+	private void Awake()
+	{
+		m_ps = GetComponent<ParticleSystem>();
+	}
+
+	private void OnEnable()
+	{
+		if (m_bScaleWithTransform)
+		{
+			AddRenderEventCall();
+		}
+		m_OldPos = base.transform.position;
+	}
+
+	private void OnDisable()
+	{
+		if (m_bScaleWithTransform)
+		{
+			RemoveRenderEventCall();
+		}
+	}
+
+	private void Init()
+	{
+		m_bSleep = false;
+		m_nCreateCount = 0;
+		m_fStartTime = GetEngineTime();
+		m_fEmitStartTime = 0f;
+	}
+
+	private void Start()
+	{
+		if (!m_bDisabledEmit)
+		{
+			m_bStart = true;
+			Init();
+			ShurikenInitParticle();
+			if (m_bBurst || 0f < m_fStartDelayTime)
+			{
+				SetEnableParticle(bEnable: false);
+			}
+		}
+	}
+
+	private void Update()
+	{
+		if (m_bDisabledEmit)
+		{
+			return;
+		}
+		if (m_fEmitStartTime == 0f)
+		{
+			if (0f < m_fStartDelayTime)
+			{
+				if (m_fStartTime + m_fStartDelayTime <= GetEngineTime())
+				{
+					m_fEmitStartTime = GetEngineTime();
+					m_fDurationStartTime = GetEngineTime();
+					SetEnableParticle(bEnable: true);
+				}
+				return;
+			}
+			m_fEmitStartTime = GetEngineTime();
+			m_fDurationStartTime = GetEngineTime();
+		}
+		if (m_bBurst)
+		{
+			if (m_fDurationStartTime <= GetEngineTime() && (m_nBurstRepeatCount == 0 || m_nCreateCount < m_nBurstRepeatCount))
+			{
+				m_fDurationStartTime = m_fBurstRepeatTime + GetEngineTime();
+				m_nCreateCount++;
+				if (m_ps != null)
+				{
+					m_ps.Emit(m_fBurstEmissionCount);
+				}
+			}
+		}
+		else if (m_bSleep)
+		{
+			if (m_fEmitStartTime + m_fEmitTime + m_fSleepTime < GetEngineTime())
+			{
+				SetEnableParticle(bEnable: true);
+				m_fEmitStartTime = GetEngineTime();
+				m_bSleep = false;
+			}
+		}
+		else if (0f < m_fEmitTime && m_fEmitStartTime + m_fEmitTime < GetEngineTime())
+		{
+			m_nCreateCount++;
+			SetEnableParticle(bEnable: false);
+			if (0f < m_fSleepTime)
+			{
+				m_bSleep = true;
+			}
+			else
+			{
+				SetDisableEmit();
+			}
+		}
+	}
+
+	private void FixedUpdate()
+	{
+		if (m_ParticleDestruct == ParticleDestruct.NONE)
+		{
+			return;
+		}
+		bool flag = false;
+		if (m_ps == null)
+		{
+			return;
+		}
+		AllocateParticleSystem(ref m_BufColliderOriParts);
+		AllocateParticleSystem(ref m_BufColliderConParts);
+		m_ps.GetParticles(m_BufColliderOriParts);
+		m_ps.GetParticles(m_BufColliderConParts);
+		ShurikenScaleParticle(m_BufColliderConParts, m_ps.particleCount, m_bScaleWithTransform, bPosUpdate: true);
+		for (int i = 0; i < m_ps.particleCount; i++)
+		{
+			bool flag2 = false;
+			Vector3 position = ((!m_bWorldSpace) ? base.transform.TransformPoint(m_BufColliderConParts[i].position) : m_BufColliderConParts[i].position);
+			if (m_ParticleDestruct == ParticleDestruct.COLLISION)
+			{
+				if (Physics.CheckSphere(position, m_fCollisionRadius, m_CollisionLayer))
+				{
+					flag2 = true;
+				}
+			}
+			else if (m_ParticleDestruct == ParticleDestruct.WORLD_Y && position.y <= m_fDestructPosY)
+			{
+				flag2 = true;
+			}
+			if (flag2 && 0f < m_BufColliderOriParts[i].remainingLifetime)
+			{
+				m_BufColliderOriParts[i].remainingLifetime = 0f;
+				flag = true;
+				CreateAttachPrefab(position, m_BufColliderConParts[i].size * m_fPrefabScale);
+			}
+		}
+		if (flag)
+		{
+			m_ps.SetParticles(m_BufColliderOriParts, m_ps.particleCount);
+		}
+	}
+
+	private void OnPreRender()
+	{
+		if (m_bStart && m_bScaleWithTransform)
+		{
+			m_bScalePreRender = true;
+			ShurikenSetRuntimeParticleScale(bScale: true);
+		}
+	}
+
+	private void OnPostRender()
+	{
+		if (m_bStart)
+		{
+			if (m_bScalePreRender)
+			{
+				ShurikenSetRuntimeParticleScale(bScale: false);
+			}
+			m_OldPos = base.transform.position;
+			m_bScalePreRender = false;
+		}
+	}
+
+	private void CreateAttachPrefab(Vector3 position, float size)
+	{
+		if (m_AttachPrefab == null)
+		{
+			return;
+		}
+		GameObject gameObject = CreateGameObject(m_AttachPrefab, m_AttachPrefab.transform.position + position, m_AttachPrefab.transform.rotation);
+		if (gameObject == null)
+		{
+			return;
+		}
+		ChangeParent(NcEffectBehaviour.GetRootInstanceEffect().transform, gameObject.transform, bKeepingLocalTransform: false, null);
+		NcTransformTool.CopyLossyToLocalScale(gameObject.transform.lossyScale * size, gameObject.transform);
+		NsEffectManager.AdjustSpeedRuntime(gameObject, m_fPrefabSpeed);
+		if (0f < m_fPrefabLifeTime)
+		{
+			NcAutoDestruct ncAutoDestruct = gameObject.GetComponent<NcAutoDestruct>();
+			if (ncAutoDestruct == null)
+			{
+				ncAutoDestruct = gameObject.AddComponent<NcAutoDestruct>();
+			}
+			ncAutoDestruct.m_fLifeTime = m_fPrefabLifeTime;
+		}
+	}
+
+	private void AddRenderEventCall()
+	{
+		Camera[] allCameras = Camera.allCameras;
+		foreach (Camera camera in allCameras)
+		{
+			NsRenderManager nsRenderManager = camera.GetComponent<NsRenderManager>();
+			if (nsRenderManager == null)
+			{
+				nsRenderManager = camera.gameObject.AddComponent<NsRenderManager>();
+			}
+			nsRenderManager.AddRenderEventCall(this);
+		}
+	}
+
+	private void RemoveRenderEventCall()
+	{
+		Camera[] allCameras = Camera.allCameras;
+		foreach (Camera camera in allCameras)
+		{
+			NsRenderManager component = camera.GetComponent<NsRenderManager>();
+			if (component != null)
+			{
+				component.RemoveRenderEventCall(this);
+			}
+		}
+	}
+
+	private void SetEnableParticle(bool bEnable)
+	{
+		if (m_ps != null)
+		{
+			m_ps.enableEmission = bEnable;
+		}
+	}
+
+	private void ClearParticle()
+	{
+		if (m_ps != null)
+		{
+			m_ps.Clear(withChildren: false);
+		}
+	}
+
+	private void ShurikenInitParticle()
+	{
+		if (!(m_ps == null))
+		{
+			m_ps.startSize *= m_fStartSizeRate;
+			m_ps.startLifetime *= m_fStartLifeTimeRate;
+			m_ps.emissionRate *= m_fStartEmissionRate;
+			m_ps.startSpeed *= m_fStartSpeedRate;
+		}
+	}
+
+	private void AllocateParticleSystem(ref ParticleSystem.Particle[] tmpPsParts)
+	{
+		if (tmpPsParts == null || tmpPsParts.Length < m_ps.particleCount)
+		{
+			tmpPsParts = new ParticleSystem.Particle[m_ps.particleCount + 50];
+		}
+	}
+
+	private void ShurikenSetRuntimeParticleScale(bool bScale)
+	{
+		if (m_ps != null)
+		{
+			AllocateParticleSystem(ref m_BufPsParts);
+			m_ps.GetParticles(m_BufPsParts);
+			m_BufPsParts = ShurikenScaleParticle(m_BufPsParts, m_ps.particleCount, bScale, bPosUpdate: true);
+			m_ps.SetParticles(m_BufPsParts, m_ps.particleCount);
+		}
+	}
+
+	public ParticleSystem.Particle[] ShurikenScaleParticle(ParticleSystem.Particle[] parts, int nCount, bool bScale, bool bPosUpdate)
+	{
+		float num = ((!bScale) ? (1f / NcTransformTool.GetTransformScaleMeanValue(base.transform)) : NcTransformTool.GetTransformScaleMeanValue(base.transform));
+		for (int i = 0; i < nCount; i++)
+		{
+			if (m_bWorldSpace)
+			{
+				if (bPosUpdate)
+				{
+					Vector3 vector = m_OldPos - base.transform.position;
+					if (bScale)
+					{
+						parts[i].position -= vector * (1f - 1f / num);
+					}
+				}
+				parts[i].position -= base.transform.position;
+				parts[i].position *= num;
+				parts[i].position += base.transform.position;
+			}
+			else
+			{
+				parts[i].position *= num;
+			}
+			parts[i].size *= num;
+		}
+		return parts;
+	}
+
+	public override void OnUpdateEffectSpeed(float fSpeedRate, bool bRuntime)
+	{
+		m_fStartDelayTime /= fSpeedRate;
+		m_fBurstRepeatTime /= fSpeedRate;
+		m_fEmitTime /= fSpeedRate;
+		m_fSleepTime /= fSpeedRate;
+		m_fShurikenSpeedRate *= fSpeedRate;
+		m_fPrefabLifeTime /= fSpeedRate;
+		m_fPrefabSpeed *= fSpeedRate;
+	}
+
+	public override void OnResetReplayStage(bool bClearOldParticle)
+	{
+		base.OnResetReplayStage(bClearOldParticle);
+		ResetParticleEmit(bClearOldParticle);
+	}
+
+	public static void Ng_SetProperty(object srcObj, string fieldName, object newValue)
+	{
+		PropertyInfo property = srcObj.GetType().GetProperty(fieldName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+		if ((object)property != null && property.CanWrite)
+		{
+			property.SetValue(srcObj, newValue, null);
+		}
+	}
+
+	public static object Ng_GetProperty(object srcObj, string fieldName)
+	{
+		object result = null;
+		PropertyInfo property = srcObj.GetType().GetProperty(fieldName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+		if ((object)property != null && property.CanRead && property.GetIndexParameters().Length == 0)
+		{
+			result = property.GetValue(srcObj, null);
+		}
+		return result;
+	}
+}

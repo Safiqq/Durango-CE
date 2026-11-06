@@ -1,0 +1,133 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <LangVersion>12.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.AnimationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="ExternalLibrary">
+      <HintPath>../../lib/managed/game/ExternalLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.AssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.UnityWebRequestModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>../../lib/managed/engine/System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MsgPack">
+      <HintPath>../../lib/managed/third-party/MsgPack.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="Wwise">
+      <HintPath>../../lib/managed/third-party/Wwise.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.AudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.Physics2DModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.ParticleSystemModule.dll</HintPath>
+    </Reference>
+    <Reference Include="Concentus">
+      <HintPath>../../lib/managed/third-party/Concentus.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>../../lib/managed/third-party/ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.IMGUIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="Vectrosity">
+      <HintPath>../../lib/managed/third-party/Vectrosity.dll</HintPath>
+    </Reference>
+    <Reference Include="NCalc">
+      <HintPath>../../lib/managed/third-party/NCalc.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VideoModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.VideoModule.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>../../lib/managed/game/Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <Reference Include="LiteNetLib">
+      <HintPath>../../lib/managed/third-party/LiteNetLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <HintPath>../../lib/managed/engine/System.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AndroidJNIModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.AndroidJNIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.JSONSerializeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.UnityAnalyticsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsCommonModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>../../lib/managed/engine/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ScreenCaptureModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.ScreenCaptureModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ScriptingModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.ScriptingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib">
+      <HintPath>../../lib/managed/engine/mscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>../../lib/managed/engine/System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime">
+      <HintPath>../../lib/managed/engine/System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="netstandard">
+      <HintPath>../../lib/managed/engine/netstandard.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory">
+      <HintPath>../../lib/managed/engine/System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>../../lib/managed/engine/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Durango.Localization.Overrides</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <LangVersion>12.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>../../lib/managed/engine/UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib">
+      <HintPath>../../lib/managed/engine/mscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>../../lib/managed/engine/System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>../../lib/managed/engine/System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime">
+      <HintPath>../../lib/managed/engine/System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="netstandard">
+      <HintPath>../../lib/managed/engine/netstandard.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory">
+      <HintPath>../../lib/managed/engine/System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>../../lib/managed/engine/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <HintPath>../../lib/managed/engine/System.Xml.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
