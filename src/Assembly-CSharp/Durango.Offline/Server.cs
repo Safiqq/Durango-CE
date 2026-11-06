@@ -54,8 +54,8 @@ public class Server
 				playerInfo.OfflineFunc = () => new Pair<PortraitBuilder.Argument, int>(player.AppearPlayer.Display.GetPortraitArgument(player.AppearPlayer.EntityId, player.AppearPlayer.IsMale()), player.AppearPlayer.Freq);
 				account.Players.Add(playerInfo);
 			}
-			account.MaxPlayerSlotCount = Mathf.Max(2, (server.Cluster.Mode != Mode.Editable) ? account.Players.Count : 7);
-			account.PlayerSlotCount = ((server.Cluster.Mode != Mode.Editable) ? account.Players.Count : 7);
+			account.MaxPlayerSlotCount = CommunityConfig.BypassCharacterSlotPurchase ? CommunityConfig.MaxCharacterSlots : Mathf.Max(2, (server.Cluster.Mode != Mode.Editable) ? account.Players.Count : 7);
+			account.PlayerSlotCount = CommunityConfig.BypassCharacterSlotPurchase ? account.MaxPlayerSlotCount : ((server.Cluster.Mode != Mode.Editable) ? account.Players.Count : 7);
 			action?.Invoke(account);
 		};
 		Cluster.OnDeletePlayer = delegate(string entityId)
@@ -278,8 +278,8 @@ public class Server
 		cluster.OnRequestAccount = delegate(Action<Account> action)
 		{
 			Account account = new Account();
-			account.MaxPlayerSlotCount = 7;
-			account.PlayerSlotCount = 1;
+			account.MaxPlayerSlotCount = CommunityConfig.BypassCharacterSlotPurchase ? CommunityConfig.MaxCharacterSlots : 7;
+			account.PlayerSlotCount = CommunityConfig.BypassCharacterSlotPurchase ? account.MaxPlayerSlotCount : 1;
 			account.Players = new List<PlayerInfo>();
 			account.Players.Add(_localPlayer.PlayerInfo);
 			action?.Invoke(account);

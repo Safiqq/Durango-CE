@@ -1,0 +1,20 @@
+{
+  "$schema_description": "Durango: Community Edition - Client Configuration",
+  "character_slots": {
+    "bypass_purchase": true,
+    "max_slots": 7,
+    "unlocked_slots": 7,
+    "description": "Bypasses the 'Must Purchase Character Slot' restriction, unlocking all slots for free."
+  },
+  "network": {
+    "gateway": "http://127.0.0.1:8190",
+    "server_name": "Local Server"
+  },
+  "features": {
+    "combat_loadout": false,
+    "mh_hit_stop": false,
+    "mh_animal_emotes": false,
+    "mh_part_labels": false
+  },
+  "custom": {}
+}

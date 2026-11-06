@@ -159,6 +159,15 @@ def assemble(out_dir):
         except OSError:
             shutil.copy2(server_config_src, dst)
         n += 1
+    config_json_src = os.path.join(ROOT, "config", "config.json")
+    if os.path.exists(config_json_src):
+        dst = os.path.join(out_dir, "config.json")
+        try:
+            os.link(config_json_src, dst)
+        except OSError:
+            shutil.copy2(config_json_src, dst)
+        n += 1
+
     print(f"assembled {n} files -> {out_dir}")
 
 

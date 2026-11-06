@@ -69,7 +69,7 @@ public class TitlePlayerSelectionGroupBase : MonoBehaviour
 		Pair<string, int> recommendedPlayer = account.GetRecommendedPlayer();
 		List<PlayerInfo> list = ((account.Players == null) ? new List<PlayerInfo>() : account.Players);
 		_serverLabel.text = serverName;
-		bool flag = list.Count > availableSlotCount;
+		bool flag = !CommunityConfig.BypassCharacterSlotPurchase && list.Count > availableSlotCount;
 		_playerCountExceededIcon.gameObject.SetActive(flag);
 		_playerCountLabel.text = string.Format("{0}/{1}", flag ? list.Count.ToString().ToEncodedColor(NGUIText.ParseColor("BA2E2DFF")) : list.Count.ToString(), availableSlotCount.ToString().ToEncodedColor(new Color(1f, 1f, 1f, 0.5f)));
 		if (flag)
@@ -94,11 +94,11 @@ public class TitlePlayerSelectionGroupBase : MonoBehaviour
 				bool wantClicked = list[num].PlayerEntityId == recommendedPlayer.Item1;
 				CreateExistingCharacterButton(_scroll.Nodes, list[num], num, startWithExistingId, deleteClicked, wantClicked);
 			}
-			else if (num < availableSlotCount)
+			else if (num < availableSlotCount || CommunityConfig.BypassCharacterSlotPurchase)
 			{
 				bool wantClicked2 = !flag2 && string.IsNullOrEmpty(recommendedPlayer.Item1);
 				flag2 = true;
-				CreateNewCharacterButton(_scroll.Nodes, list.Count, startPrlogue, wantClicked2);
+				CreateNewCharacterButton(_scroll.Nodes, num, startPrlogue, wantClicked2);
 			}
 			else
 			{

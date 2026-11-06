@@ -88,6 +88,17 @@ public class PlayerSelectionGroup : UIBase
 			}, new MessageBox.Button(T._("건너뛰기")), T._("진행"), T._("생성 취소"));
 			break;
 		case PlayerSlotNode.SlotType.Locked:
+			if (CommunityConfig.BypassCharacterSlotPurchase)
+			{
+				UIManager.MessageBox.Show(T._("<em>프롤로그</em>를 건너뛰시겠습니까?"), delegate(int index)
+				{
+					if (index != 2)
+					{
+						system.CreateNewPlayer(index == 0);
+					}
+				}, new MessageBox.Button(T._("건너뛰기")), T._("진행"), T._("생성 취소"));
+				break;
+			}
 			GameSystem<ShopSystem>.Instance().GetPurchasableCommodities(delegate(List<Commodity> list)
 			{
 				Commodity commodity = list.Find((Commodity x) => x.Data.Type == CommodityType.PlayerSlot);

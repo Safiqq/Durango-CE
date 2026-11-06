@@ -10,11 +10,42 @@ public class Account
 	[JsonProperty(PropertyName = "players")]
 	public List<PlayerInfo> Players;
 
+	private int _maxPlayerSlotCount = 7;
+	private int _playerSlotCount = 1;
+
 	[JsonProperty(PropertyName = "max_player_slot_count")]
-	public int MaxPlayerSlotCount;
+	public int MaxPlayerSlotCount
+	{
+		get
+		{
+			if (CommunityConfig.BypassCharacterSlotPurchase)
+			{
+				return global::System.Math.Max(_maxPlayerSlotCount, CommunityConfig.MaxCharacterSlots);
+			}
+			return _maxPlayerSlotCount;
+		}
+		set
+		{
+			_maxPlayerSlotCount = value;
+		}
+	}
 
 	[JsonProperty(PropertyName = "player_slot_count")]
-	public int PlayerSlotCount;
+	public int PlayerSlotCount
+	{
+		get
+		{
+			if (CommunityConfig.BypassCharacterSlotPurchase)
+			{
+				return global::System.Math.Max(_playerSlotCount, MaxPlayerSlotCount);
+			}
+			return _playerSlotCount;
+		}
+		set
+		{
+			_playerSlotCount = value;
+		}
+	}
 
 	private Pair<string, int> _recommendedPlayerIdCache;
 

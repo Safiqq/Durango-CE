@@ -1,4 +1,9 @@
 # Local development link - used by `scripts/restructure.py assemble`.
 gateway=http://127.0.0.1:8190
 name=Local Server
+
+# Character Slot Configuration
+bypass_character_slot_purchase=true
+max_character_slots=7
+
 # servers_url=https://raw.githubusercontent.com/<you>/<fork>/main/servers.json

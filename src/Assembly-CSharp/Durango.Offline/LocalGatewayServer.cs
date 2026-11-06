@@ -325,15 +325,17 @@ public static class LocalGatewayServer
 			if (path == "/accounts")
 			{
 				Server.EnsureLocalServer();
+				int maxSlots = CommunityConfig.BypassCharacterSlotPurchase ? CommunityConfig.MaxCharacterSlots : 4;
+				int playerSlots = CommunityConfig.BypassCharacterSlotPurchase ? maxSlots : 1;
 				string json;
 				if (Server.CurrentPlayer != null && Server.CurrentPlayer.PlayerInfo != null && !string.IsNullOrEmpty(Server.CurrentPlayer.PlayerInfo.PlayerName))
 				{
 					PlayerInfo p = Server.CurrentPlayer.PlayerInfo;
-					json = "{\"players\":[{\"player_level\":" + p.PlayerLevel + ",\"disconnected_at\":0.0,\"player_name\":\"" + p.PlayerName + "\",\"player_entity_id\":\"" + p.PlayerEntityId + "\",\"deletes_at\":null}],\"max_player_slot_count\":4,\"player_slot_count\":1,\"account_id\":\"local_player\",\"discord_name\":\"LocalPlayer\"}";
+					json = "{\"players\":[{\"player_level\":" + p.PlayerLevel + ",\"disconnected_at\":0.0,\"player_name\":\"" + p.PlayerName + "\",\"player_entity_id\":\"" + p.PlayerEntityId + "\",\"deletes_at\":null}],\"max_player_slot_count\":" + maxSlots + ",\"player_slot_count\":" + playerSlots + ",\"account_id\":\"local_player\",\"discord_name\":\"LocalPlayer\"}";
 				}
 				else
 				{
-					json = "{\"players\":[],\"max_player_slot_count\":4,\"player_slot_count\":1,\"account_id\":\"local_player\",\"discord_name\":\"LocalPlayer\"}";
+					json = "{\"players\":[],\"max_player_slot_count\":" + maxSlots + ",\"player_slot_count\":" + playerSlots + ",\"account_id\":\"local_player\",\"discord_name\":\"LocalPlayer\"}";
 				}
 				SendJsonResponse(stream, 200, json);
 				return;

@@ -38,11 +38,21 @@ public class PlayerSelectionSystem : GameSystem<PlayerSelectionSystem>
 			{
 				_players = account.Players;
 				int size = KUtility.GetSize(account.Players);
-				PlayerSlotExceeded = account.PlayerSlotCount < size;
-				PlayerSlotCount = account.PlayerSlotCount;
-				EmptySlotCount = Mathf.Max(account.PlayerSlotCount - size, 0);
-				int num = Mathf.Max(account.PlayerSlotCount, size);
-				LockedSlotCount = Mathf.Max(account.MaxPlayerSlotCount - num, 0);
+				if (CommunityConfig.BypassCharacterSlotPurchase)
+				{
+					PlayerSlotExceeded = false;
+					PlayerSlotCount = global::System.Math.Max(account.PlayerSlotCount, CommunityConfig.MaxCharacterSlots);
+					EmptySlotCount = Mathf.Max(PlayerSlotCount - size, 0);
+					LockedSlotCount = 0;
+				}
+				else
+				{
+					PlayerSlotExceeded = account.PlayerSlotCount < size;
+					PlayerSlotCount = account.PlayerSlotCount;
+					EmptySlotCount = Mathf.Max(account.PlayerSlotCount - size, 0);
+					int num = Mathf.Max(account.PlayerSlotCount, size);
+					LockedSlotCount = Mathf.Max(account.MaxPlayerSlotCount - num, 0);
+				}
 				if (this.AccountsUpdated != null)
 				{
 					this.AccountsUpdated(account.Players);
