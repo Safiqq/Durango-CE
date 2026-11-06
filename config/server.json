@@ -1,0 +1,15 @@
+{
+  "$schema_description": "Durango: Community Edition - Dedicated / Headless Server Configuration",
+  "server_name": "Local Server",
+  "gateway_port": 8190,
+  "game_port": 8191,
+  "public_host": "127.0.0.1",
+  "max_players": 200,
+  "ticks_per_second": 120,
+  "cluster_mode": "Offline",
+  "data_dir": "data",
+  "admins": "",
+  "admin_token": "",
+  "min_client_version": null,
+  "download_url": null
+}

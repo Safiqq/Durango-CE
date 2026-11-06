@@ -251,3 +251,11 @@ Repository commits follow strict Conventional Commits:
 - [ ] Open project in Unity with Android Build Support.
 - [ ] Set `usesCleartextTraffic="false"` and configure custom domain network security config.
 - [ ] Build a self-signed, clean `DurangoReborn.apk`.
+
+### Phase 5: Modular Server Architecture (Milestone M10)
+- [x] **Reference Analysis & Architecture Spec**: Formulated Minecraft-style dual-mode server plan ([`docs/MODULAR_SERVER_ARCHITECTURE.md`](file:///home/safiqq/Durango-CE/docs/MODULAR_SERVER_ARCHITECTURE.md)) based on `Durango-CustomServer` and `ProjectDoorango`.
+- [x] **Standalone Server Engine (`src/Durango.Server/`)**: Ported headless server engine into repository with zero `UnityEngine.dll` dependency (using `Shims/`). Builds cleanly on `.NET 9.0` with 0 errors.
+- [x] **Configurable Server Network & Config (`server.json`)**: Implemented `server.json` configuration system with CLI overrides for ports (8190/8191), bind IP (`0.0.0.0`), max players, and cluster mode.
+- [x] **Server Build Tooling**: Added `scripts/build-server.sh` producing ready-to-run headless server in `build/server/`.
+- [ ] **Client Listen Adapter**: Embed server engine on background thread for solo offline / LAN hosting.
+- [ ] **Multi-Session Synchronization**: Multi-client player lifecycle and broadcast relay verification.

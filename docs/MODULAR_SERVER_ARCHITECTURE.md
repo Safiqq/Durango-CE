@@ -89,25 +89,27 @@ sequenceDiagram
 ### Phase 1: Decoupling & Headless Architecture
 - [x] **Analysis of Current Emulator**: Identified Unity lifecycle coupling (`GameManager.Update`, `UnityEngine.Random`, `Debug.Log`).
 - [x] **Inspection of Reference Codebases**: Cloned and analyzed `Durango-CustomServer` and `ProjectDoorango`.
-- [ ] **Extract `src/Durango.ServerEngine`**:
-  - [ ] Implement `Shims/Mathf.cs`, `Shims/Vector.cs`, `Shims/Random.cs`, `Shims/Debug.cs`.
-  - [ ] Port `Messages/` protocol definitions and MsgPack serialization codecs.
-  - [ ] Decouple `World.cs`, `Player.cs` (modular partials: Combat, Crafting, Building, Inventory, Animals).
-  - [ ] Port `DataStore.cs` and `RegionCatalog.cs` to load JSON/YAML assets from a `data/` folder without `Resources.Load`.
-- [ ] **Build `src/Durango.ServerHost`**:
-  - [ ] Create `Program.cs` CLI host with options (`--name`, `--bind-ip`, `--game-port`, `--gateway-port`, `--data`, `--max-players`).
-  - [ ] Implement fixed 120 TPS tick loop with CPU stopwatch telemetry.
-  - [ ] Implement `ShutdownSafely` on `SIGINT` / `SIGTERM` / `ProcessExit` with world autosave.
+- [x] **Port Standalone Server (`src/Durango.Server/`)**:
+  - [x] Integrated zero-dependency `Shims/` layer (`Mathf.cs`, `Vector2.cs`, `Vector3.cs`, `Random.cs`, `Debug.cs`).
+  - [x] Ported `Messages/` protocol definitions and MsgPack serialization codecs.
+  - [x] Decoupled `World.cs`, `Player.cs` (modular partials: Combat, Crafting, Building, Inventory, Animals).
+  - [x] Standalone `DataStore.cs` and `RegionCatalog.cs` loading JSON/YAML assets directly from disk without Unity's `Resources.Load`.
+  - [x] Configured `DurangoServer.csproj` targeting `.NET 9.0` (builds cleanly with 0 errors).
+  - [x] Implemented fixed 120 TPS tick loop with CPU stopwatch telemetry and safe shutdown (`ShutdownSafely` on `SIGINT` / `SIGTERM` / `ProcessExit`).
+- [x] **Build Script Integration**:
+  - [x] Created `scripts/build-server.sh` compiling server binaries directly to `build/server/`.
 - [ ] **Create Client Listen Adapter (`ListenServerBridge.cs`)**:
   - [ ] Embed server engine inside client to spin up on a background worker thread only when offline/hosting.
 
 ### Phase 2: Network Configuration & IP Binding
-- [ ] **Configurable Server Network Binding**:
-  - [ ] Update `Listener.cs` to bind to `IPAddress.Any` (`0.0.0.0`) or configurable interface.
-  - [ ] Support `--public-host` to advertise external IP/FQDN in `/entry` packet.
+- [x] **Configurable Server Network Binding & `server.json`**:
+  - [x] Implemented `server.json` configuration loader in `src/Durango.Server/Program.cs`.
+  - [x] Created template `config/server.json` with `server_name`, `gateway_port`, `game_port`, `public_host`, `max_players`, `cluster_mode`, and admin settings.
+  - [x] TCP `Listener.cs` binds to `IPAddress.Any` (`0.0.0.0`) for local and external connections.
+  - [x] HTTP `WebServer.cs` binds wildcard `*` with automatic loopback fallback.
 - [ ] **Client Connection Overhaul**:
-  - [ ] Support custom remote IPs and ports in [`config.json`](file:///home/safiqq/Durango-CE/config/config.json).
-  - [ ] Update `CommunityLink.cs` and `Clusters.cs` to dynamically configure endpoints for remote dedicated servers.
+  - [x] Support custom remote IPs and ports in [`config.json`](file:///home/safiqq/Durango-CE/config/config.json) via `CommunityConfig.cs`.
+  - [x] `CommunityLink.cs` and `Clusters.cs` dynamically configure endpoints for remote dedicated servers.
   - [ ] Add direct-connect UI entry in the "Select Server" dialog.
 
 ### Phase 3: Multi-Session Handling & State Synchronization
