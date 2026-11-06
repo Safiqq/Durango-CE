@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <AssemblyName>DurangoLauncher</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <OutputType>WinExe</OutputType>
+    <UseWindowsForms>True</UseWindowsForms>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>12.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="cal_act_Craft.png" />
+    <None Remove="cal_Icon_battle_emblem.png" />
+    <None Remove="cal_icon_mainhud_pet.png" />
+    <None Remove="cal_icon_mainhud_pvpisland.png" />
+    <None Remove="cal_icon_mainhud_shop.png" />
+    <None Remove="cal_icon_mainhud_warprush.png" />
+    <None Remove="logo.png" />
+    <None Remove="hero.jpg" />
+    <None Remove="Kanit-Medium.ttf" />
+    <None Remove="Kanit-Regular.ttf" />
+    <None Remove="Kanit-OFL.txt" />
+    <None Remove="tabler-icons-LICENSE.txt" />
+    <EmbeddedResource Include="cal_act_Craft.png" LogicalName="cal_act_Craft.png" />
+    <EmbeddedResource Include="cal_Icon_battle_emblem.png" LogicalName="cal_Icon_battle_emblem.png" />
+    <EmbeddedResource Include="cal_icon_mainhud_pet.png" LogicalName="cal_icon_mainhud_pet.png" />
+    <EmbeddedResource Include="cal_icon_mainhud_pvpisland.png" LogicalName="cal_icon_mainhud_pvpisland.png" />
+    <EmbeddedResource Include="cal_icon_mainhud_shop.png" LogicalName="cal_icon_mainhud_shop.png" />
+    <EmbeddedResource Include="cal_icon_mainhud_warprush.png" LogicalName="cal_icon_mainhud_warprush.png" />
+    <EmbeddedResource Include="logo.png" LogicalName="logo.png" />
+    <EmbeddedResource Include="hero.jpg" LogicalName="hero.jpg" />
+    <EmbeddedResource Include="Kanit-Medium.ttf" LogicalName="Kanit-Medium.ttf" />
+    <EmbeddedResource Include="Kanit-Regular.ttf" LogicalName="Kanit-Regular.ttf" />
+    <EmbeddedResource Include="Kanit-OFL.txt" LogicalName="Kanit-OFL.txt" />
+    <EmbeddedResource Include="tabler-icons-LICENSE.txt" LogicalName="tabler-icons-LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Drawing.Common" />
+    <Reference Include="System.Windows.Forms.Primitives" />
+  </ItemGroup>
+</Project>
