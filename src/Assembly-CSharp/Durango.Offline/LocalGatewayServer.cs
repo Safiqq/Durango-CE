@@ -340,8 +340,29 @@ public static class LocalGatewayServer
 			}
 			if (path == "/sessions")
 			{
-				string userId = (Server.CurrentPlayer != null && !string.IsNullOrEmpty(Server.CurrentPlayer.EntityId)) ? Server.CurrentPlayer.EntityId : "1";
-				string json = "{\"user_id\":\"" + userId + "\",\"session_token\":\"local-session-token-01\"}";
+				Server.EnsureLocalServer();
+				PlayerContext playerContext = null;
+				string playerJson = formFields.Get("player");
+				if (!string.IsNullOrEmpty(playerJson))
+				{
+					try
+					{
+						playerContext = Json.Read<PlayerContext>(playerJson);
+						if (Server.CurrentGameServer != null && !Server.CurrentGameServer.Register(playerContext))
+						{
+							playerContext = null;
+						}
+					}
+					catch
+					{
+					}
+				}
+				if (playerContext == null)
+				{
+					playerContext = Server.CurrentPlayer;
+				}
+				string userId = (playerContext != null && !string.IsNullOrEmpty(playerContext.EntityId)) ? playerContext.EntityId : "1";
+				string json = "{\"user_id\":\"" + userId + "\",\"session_token\":\"" + userId + "\"}";
 				SendJsonResponse(stream, 200, json);
 				return;
 			}
