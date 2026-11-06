@@ -8,20 +8,20 @@
     "min_sdk": 26,
     "builds": {
       "arm64-v8a": {
-        "url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.6/DurangoReborn.apk",
+        "url": "",
         "mirrors": [],
         "size": 842937129,
         "sha256": "c7c504753744cc703f16b661aee6bf80e3764e91c2b0744c35b61e316f494c37",
-        "layout_url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.6/DurangoReborn.apk.layout.json.gz",
+        "layout_url": "",
         "layout_sha256": "13a5c36f2616e5212db6c73513747519111bdf693b0e1a8bdbbbfb90d405faf2",
         "version_code": 336
       },
       "armeabi-v7a": {
-        "url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.6/DurangoReborn.apk",
+        "url": "",
         "mirrors": [],
         "size": 842937129,
         "sha256": "c7c504753744cc703f16b661aee6bf80e3764e91c2b0744c35b61e316f494c37",
-        "layout_url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.6/DurangoReborn.apk.layout.json.gz",
+        "layout_url": "",
         "layout_sha256": "13a5c36f2616e5212db6c73513747519111bdf693b0e1a8bdbbbfb90d405faf2",
         "version_code": 336
       }
@@ -35,20 +35,20 @@
       "min_sdk": 26,
       "builds": {
         "arm64-v8a": {
-          "url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.5/DurangoReborn.apk",
+          "url": "",
           "mirrors": [],
           "size": 843783677,
           "sha256": "e684940bb21c8e2e09a060b688b28d62fc5b62c4afe22fb07bb3743cf082bfad",
-          "layout_url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.5/DurangoReborn.apk.layout.json.gz",
+          "layout_url": "",
           "layout_sha256": "c8d908dde0f6a12bf8387407fc8cd2547b8c5093a31fdeb4924e8f6b0e8381d6",
           "version_code": 335
         },
         "armeabi-v7a": {
-          "url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.5/DurangoReborn.apk",
+          "url": "",
           "mirrors": [],
           "size": 843783677,
           "sha256": "e684940bb21c8e2e09a060b688b28d62fc5b62c4afe22fb07bb3743cf082bfad",
-          "layout_url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.5/DurangoReborn.apk.layout.json.gz",
+          "layout_url": "",
           "layout_sha256": "c8d908dde0f6a12bf8387407fc8cd2547b8c5093a31fdeb4924e8f6b0e8381d6",
           "version_code": 335
         }
@@ -61,20 +61,20 @@
       "min_sdk": 26,
       "builds": {
         "arm64-v8a": {
-          "url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.4/DurangoReborn.apk",
+          "url": "",
           "mirrors": [],
           "size": 843777693,
           "sha256": "279559cd82dc61ff59bfb9c71b7c0cb1bf5e49e661c743cb43935fa6ac7cbb55",
-          "layout_url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.4/DurangoReborn.apk.layout.json.gz",
+          "layout_url": "",
           "layout_sha256": "53ba1d695482fa79fa450aa66300b377b632e6c89fd84d858cb39589033fed36",
           "version_code": 334
         },
         "armeabi-v7a": {
-          "url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.4/DurangoReborn.apk",
+          "url": "",
           "mirrors": [],
           "size": 843777693,
           "sha256": "279559cd82dc61ff59bfb9c71b7c0cb1bf5e49e661c743cb43935fa6ac7cbb55",
-          "layout_url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.4/DurangoReborn.apk.layout.json.gz",
+          "layout_url": "",
           "layout_sha256": "53ba1d695482fa79fa450aa66300b377b632e6c89fd84d858cb39589033fed36",
           "version_code": 334
         }
@@ -87,20 +87,20 @@
       "min_sdk": 26,
       "builds": {
         "arm64-v8a": {
-          "url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.3/DurangoReborn.apk",
+          "url": "",
           "mirrors": [],
           "size": 838691779,
           "sha256": "6a811dc5765c55e5a4f1ce09b025b7fc59edc88accb1074f9bccfbc68f950731",
-          "layout_url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.3/DurangoReborn.apk.layout.json.gz",
+          "layout_url": "",
           "layout_sha256": "58b4afe64ed8d01685cdce4fa579ec7389f2e508daa94e8b6f4f551f2d079a11",
           "version_code": 333
         },
         "armeabi-v7a": {
-          "url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.3/DurangoReborn.apk",
+          "url": "",
           "mirrors": [],
           "size": 838691779,
           "sha256": "6a811dc5765c55e5a4f1ce09b025b7fc59edc88accb1074f9bccfbc68f950731",
-          "layout_url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.3/DurangoReborn.apk.layout.json.gz",
+          "layout_url": "",
           "layout_sha256": "58b4afe64ed8d01685cdce4fa579ec7389f2e508daa94e8b6f4f551f2d079a11",
           "version_code": 333
         }
@@ -113,14 +113,14 @@
       "min_sdk": 26,
       "builds": {
         "arm64-v8a": {
-          "url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.1/DurangoReborn.apk",
+          "url": "",
           "mirrors": [],
           "size": 829660353,
           "sha256": "abf5fc7275bdd881b4598301d4b0eff2a546b0cd21f2a32e196912e8623210e7",
           "version_code": 0
         },
         "armeabi-v7a": {
-          "url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.1/DurangoReborn.apk",
+          "url": "",
           "mirrors": [],
           "size": 829660353,
           "sha256": "abf5fc7275bdd881b4598301d4b0eff2a546b0cd21f2a32e196912e8623210e7",
@@ -135,14 +135,14 @@
       "min_sdk": 26,
       "builds": {
         "arm64-v8a": {
-          "url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.0/DurangoReborn.apk",
+          "url": "",
           "mirrors": [],
           "size": 829530145,
           "sha256": "7b49f9bf539bd69ba622e31bc174265e9d23a2e54169b4e905a769b44ce39c09",
           "version_code": 0
         },
         "armeabi-v7a": {
-          "url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.3.0/DurangoReborn.apk",
+          "url": "",
           "mirrors": [],
           "size": 829530145,
           "sha256": "7b49f9bf539bd69ba622e31bc174265e9d23a2e54169b4e905a769b44ce39c09",
@@ -157,14 +157,14 @@
       "min_sdk": 26,
       "builds": {
         "arm64-v8a": {
-          "url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.2.5/DurangoReborn.apk",
+          "url": "",
           "mirrors": [],
           "size": 828985121,
           "sha256": "948ad3a24f028ffc1e47b164c9e8156167db2c925129ac0c2b71992c7b786293",
           "version_code": 0
         },
         "armeabi-v7a": {
-          "url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/v3.2.5/DurangoReborn.apk",
+          "url": "",
           "mirrors": [],
           "size": 828985121,
           "sha256": "948ad3a24f028ffc1e47b164c9e8156167db2c925129ac0c2b71992c7b786293",
@@ -264,118 +264,118 @@
       "title": "Durango:Renewal 3.3.6",
       "title_en": "Durango:Renewal 3.3.6",
       "date": "2026-11-04",
-      "body": "ตั้งค่าล็อกเป้าได้ 3 โหมด จำค่าเสียงหลังเปิดเกมใหม่ ดูตารางอันดับ 1v1 และ 3v3 ได้ ซ่อนหน้าซีซั่นและแถบ Season EXP ไว้ก่อน",
+      "body": "\u0e15\u0e31\u0e49\u0e07\u0e04\u0e48\u0e32\u0e25\u0e47\u0e2d\u0e01\u0e40\u0e1b\u0e49\u0e32\u0e44\u0e14\u0e49 3 \u0e42\u0e2b\u0e21\u0e14 \u0e08\u0e33\u0e04\u0e48\u0e32\u0e40\u0e2a\u0e35\u0e22\u0e07\u0e2b\u0e25\u0e31\u0e07\u0e40\u0e1b\u0e34\u0e14\u0e40\u0e01\u0e21\u0e43\u0e2b\u0e21\u0e48 \u0e14\u0e39\u0e15\u0e32\u0e23\u0e32\u0e07\u0e2d\u0e31\u0e19\u0e14\u0e31\u0e1a 1v1 \u0e41\u0e25\u0e30 3v3 \u0e44\u0e14\u0e49 \u0e0b\u0e48\u0e2d\u0e19\u0e2b\u0e19\u0e49\u0e32\u0e0b\u0e35\u0e0b\u0e31\u0e48\u0e19\u0e41\u0e25\u0e30\u0e41\u0e16\u0e1a Season EXP \u0e44\u0e27\u0e49\u0e01\u0e48\u0e2d\u0e19",
       "body_en": "Three target lock modes, saved audio settings and separate 1v1 and 3v3 standings. The Season menu and HUD are hidden for now."
     },
     {
       "date": "2026-11-01",
       "title": "Durango:Renewal 3.3.5",
-      "body": "ไม่บังคับอัปเดต · ซ่อนปุ่มสกิลพิเศษเมื่อเซิร์ฟเวอร์ยังไม่เปิดระบบ · จัดปุ่มบนหน้าสกิลของ Android ให้พ้นช่องสกิล · PC เปิด DurangoLauncher เกมอัปเดตเอง · Android อัปเดตผ่าน Durango Launcher",
+      "body": "\u0e44\u0e21\u0e48\u0e1a\u0e31\u0e07\u0e04\u0e31\u0e1a\u0e2d\u0e31\u0e1b\u0e40\u0e14\u0e15 \u00b7 \u0e0b\u0e48\u0e2d\u0e19\u0e1b\u0e38\u0e48\u0e21\u0e2a\u0e01\u0e34\u0e25\u0e1e\u0e34\u0e40\u0e28\u0e29\u0e40\u0e21\u0e37\u0e48\u0e2d\u0e40\u0e0b\u0e34\u0e23\u0e4c\u0e1f\u0e40\u0e27\u0e2d\u0e23\u0e4c\u0e22\u0e31\u0e07\u0e44\u0e21\u0e48\u0e40\u0e1b\u0e34\u0e14\u0e23\u0e30\u0e1a\u0e1a \u00b7 \u0e08\u0e31\u0e14\u0e1b\u0e38\u0e48\u0e21\u0e1a\u0e19\u0e2b\u0e19\u0e49\u0e32\u0e2a\u0e01\u0e34\u0e25\u0e02\u0e2d\u0e07 Android \u0e43\u0e2b\u0e49\u0e1e\u0e49\u0e19\u0e0a\u0e48\u0e2d\u0e07\u0e2a\u0e01\u0e34\u0e25 \u00b7 PC \u0e40\u0e1b\u0e34\u0e14 DurangoLauncher \u0e40\u0e01\u0e21\u0e2d\u0e31\u0e1b\u0e40\u0e14\u0e15\u0e40\u0e2d\u0e07 \u00b7 Android \u0e2d\u0e31\u0e1b\u0e40\u0e14\u0e15\u0e1c\u0e48\u0e32\u0e19 Durango Launcher",
       "title_en": "Durango:Renewal 3.3.5",
-      "body_en": "Optional update · hide the special skills button until the server enables the system · the Android skill screen button now sits beside the title, clear of the skill slots · PC: open DurangoLauncher and the game updates itself · Android: update through Durango Launcher"
+      "body_en": "Optional update \u00b7 hide the special skills button until the server enables the system \u00b7 the Android skill screen button now sits beside the title, clear of the skill slots \u00b7 PC: open DurangoLauncher and the game updates itself \u00b7 Android: update through Durango Launcher"
     },
     {
       "date": "2026-11-01",
       "title": "Durango:Renewal 3.3.4",
-      "body": "ต้องอัปเดต · หน้า Title ใหม่ · เตรียมระบบซีซั่น 2 แดนรอยแยก (ประตูรอยแยก · ร้าน K · กล้องส่องสัตว์ · เข็มทิศวาร์ป · ซีซั่นเลเวล) และศึกเสาแคลน — เปิดใช้เมื่อเซิร์ฟเปิดระบบ · แก้เกจเก็บของไม่ขึ้นหลังล็อกอินใหม่ · PC เปิด DurangoLauncher เกมอัปเดตเอง · Android อัปเดตผ่าน Durango Launcher",
+      "body": "\u0e15\u0e49\u0e2d\u0e07\u0e2d\u0e31\u0e1b\u0e40\u0e14\u0e15 \u00b7 \u0e2b\u0e19\u0e49\u0e32 Title \u0e43\u0e2b\u0e21\u0e48 \u00b7 \u0e40\u0e15\u0e23\u0e35\u0e22\u0e21\u0e23\u0e30\u0e1a\u0e1a\u0e0b\u0e35\u0e0b\u0e31\u0e48\u0e19 2 \u0e41\u0e14\u0e19\u0e23\u0e2d\u0e22\u0e41\u0e22\u0e01 (\u0e1b\u0e23\u0e30\u0e15\u0e39\u0e23\u0e2d\u0e22\u0e41\u0e22\u0e01 \u00b7 \u0e23\u0e49\u0e32\u0e19 K \u00b7 \u0e01\u0e25\u0e49\u0e2d\u0e07\u0e2a\u0e48\u0e2d\u0e07\u0e2a\u0e31\u0e15\u0e27\u0e4c \u00b7 \u0e40\u0e02\u0e47\u0e21\u0e17\u0e34\u0e28\u0e27\u0e32\u0e23\u0e4c\u0e1b \u00b7 \u0e0b\u0e35\u0e0b\u0e31\u0e48\u0e19\u0e40\u0e25\u0e40\u0e27\u0e25) \u0e41\u0e25\u0e30\u0e28\u0e36\u0e01\u0e40\u0e2a\u0e32\u0e41\u0e04\u0e25\u0e19 \u2014 \u0e40\u0e1b\u0e34\u0e14\u0e43\u0e0a\u0e49\u0e40\u0e21\u0e37\u0e48\u0e2d\u0e40\u0e0b\u0e34\u0e23\u0e4c\u0e1f\u0e40\u0e1b\u0e34\u0e14\u0e23\u0e30\u0e1a\u0e1a \u00b7 \u0e41\u0e01\u0e49\u0e40\u0e01\u0e08\u0e40\u0e01\u0e47\u0e1a\u0e02\u0e2d\u0e07\u0e44\u0e21\u0e48\u0e02\u0e36\u0e49\u0e19\u0e2b\u0e25\u0e31\u0e07\u0e25\u0e47\u0e2d\u0e01\u0e2d\u0e34\u0e19\u0e43\u0e2b\u0e21\u0e48 \u00b7 PC \u0e40\u0e1b\u0e34\u0e14 DurangoLauncher \u0e40\u0e01\u0e21\u0e2d\u0e31\u0e1b\u0e40\u0e14\u0e15\u0e40\u0e2d\u0e07 \u00b7 Android \u0e2d\u0e31\u0e1b\u0e40\u0e14\u0e15\u0e1c\u0e48\u0e32\u0e19 Durango Launcher",
       "title_en": "Durango:Renewal 3.3.4",
-      "body_en": "Update required · new title screen · groundwork for Season 2, the Rift (rift gate, K shop, creature scope, warp compass, season level) and clan pillar sieges — these turn on when the server enables them · fixed the gathering gauge missing after logging in again · PC: open DurangoLauncher and the game updates itself · Android: update through Durango Launcher"
+      "body_en": "Update required \u00b7 new title screen \u00b7 groundwork for Season 2, the Rift (rift gate, K shop, creature scope, warp compass, season level) and clan pillar sieges \u2014 these turn on when the server enables them \u00b7 fixed the gathering gauge missing after logging in again \u00b7 PC: open DurangoLauncher and the game updates itself \u00b7 Android: update through Durango Launcher"
     },
     {
       "date": "2026-10-20",
-      "title": "Dorangu:Renewal 3.2.4 · เปิด OBT",
-      "body": "ต้องอัปเดต · โลกใหม่ เปิด 20 ต.ค. 00:00 · เข้าเกมด้วย Durango ID ผ่านรันเช่อ (สมัครด้วย Discord) · อัปเดตรันเช่อเป็น 1.3.0 ก่อน · ขนาด UI บนมือถือ 5 ระดับ",
-      "title_en": "Dorangu:Renewal 3.2.4 · OBT",
-      "body_en": "Update required · new world opens 20 Oct 00:00 · log in with a Durango ID in the launcher (sign up with Discord) · update the launcher to 1.3.0 first · mobile UI size (5 steps)"
+      "title": "Dorangu:Renewal 3.2.4 \u00b7 \u0e40\u0e1b\u0e34\u0e14 OBT",
+      "body": "\u0e15\u0e49\u0e2d\u0e07\u0e2d\u0e31\u0e1b\u0e40\u0e14\u0e15 \u00b7 \u0e42\u0e25\u0e01\u0e43\u0e2b\u0e21\u0e48 \u0e40\u0e1b\u0e34\u0e14 20 \u0e15.\u0e04. 00:00 \u00b7 \u0e40\u0e02\u0e49\u0e32\u0e40\u0e01\u0e21\u0e14\u0e49\u0e27\u0e22 Durango ID \u0e1c\u0e48\u0e32\u0e19\u0e23\u0e31\u0e19\u0e40\u0e0a\u0e48\u0e2d (\u0e2a\u0e21\u0e31\u0e04\u0e23\u0e14\u0e49\u0e27\u0e22 Discord) \u00b7 \u0e2d\u0e31\u0e1b\u0e40\u0e14\u0e15\u0e23\u0e31\u0e19\u0e40\u0e0a\u0e48\u0e2d\u0e40\u0e1b\u0e47\u0e19 1.3.0 \u0e01\u0e48\u0e2d\u0e19 \u00b7 \u0e02\u0e19\u0e32\u0e14 UI \u0e1a\u0e19\u0e21\u0e37\u0e2d\u0e16\u0e37\u0e2d 5 \u0e23\u0e30\u0e14\u0e31\u0e1a",
+      "title_en": "Dorangu:Renewal 3.2.4 \u00b7 OBT",
+      "body_en": "Update required \u00b7 new world opens 20 Oct 00:00 \u00b7 log in with a Durango ID in the launcher (sign up with Discord) \u00b7 update the launcher to 1.3.0 first \u00b7 mobile UI size (5 steps)"
     },
     {
       "date": "2026-10-18",
       "title": "Dorangu:Renewal 3.2.3",
-      "body": "แนะนำให้อัปเดต (ไม่บังคับ) · เลือดสาดหนักขึ้น + คราบเลือดติดพื้น (ตั้งค่าปริมาณ/เวลา/สีได้) · โล่ลาวาตอนวาร์ป (เปิดในตั้งค่า)",
+      "body": "\u0e41\u0e19\u0e30\u0e19\u0e33\u0e43\u0e2b\u0e49\u0e2d\u0e31\u0e1b\u0e40\u0e14\u0e15 (\u0e44\u0e21\u0e48\u0e1a\u0e31\u0e07\u0e04\u0e31\u0e1a) \u00b7 \u0e40\u0e25\u0e37\u0e2d\u0e14\u0e2a\u0e32\u0e14\u0e2b\u0e19\u0e31\u0e01\u0e02\u0e36\u0e49\u0e19 + \u0e04\u0e23\u0e32\u0e1a\u0e40\u0e25\u0e37\u0e2d\u0e14\u0e15\u0e34\u0e14\u0e1e\u0e37\u0e49\u0e19 (\u0e15\u0e31\u0e49\u0e07\u0e04\u0e48\u0e32\u0e1b\u0e23\u0e34\u0e21\u0e32\u0e13/\u0e40\u0e27\u0e25\u0e32/\u0e2a\u0e35\u0e44\u0e14\u0e49) \u00b7 \u0e42\u0e25\u0e48\u0e25\u0e32\u0e27\u0e32\u0e15\u0e2d\u0e19\u0e27\u0e32\u0e23\u0e4c\u0e1b (\u0e40\u0e1b\u0e34\u0e14\u0e43\u0e19\u0e15\u0e31\u0e49\u0e07\u0e04\u0e48\u0e32)",
       "title_en": "Dorangu:Renewal 3.2.3",
-      "body_en": "Update recommended (not required) · heavier blood splash + blood stains on the ground (amount/time/color in settings) · lava shield on warp (turn on in settings)"
+      "body_en": "Update recommended (not required) \u00b7 heavier blood splash + blood stains on the ground (amount/time/color in settings) \u00b7 lava shield on warp (turn on in settings)"
     },
     {
       "date": "2026-10-17",
       "title": "Dorangu:Renewal 3.2.2",
-      "body": "ต้องอัปเดต · เลือกอาชีพก่อนออกจากเซฟเฮาส์ · ข้ามบทเรียนฟรี (Ancora/ภารกิจบริษัท/K) · เซฟเฮาส์แบบต้นฉบับ · ชื่อเป็นอังกฤษ ไม่มีเกาหลี",
+      "body": "\u0e15\u0e49\u0e2d\u0e07\u0e2d\u0e31\u0e1b\u0e40\u0e14\u0e15 \u00b7 \u0e40\u0e25\u0e37\u0e2d\u0e01\u0e2d\u0e32\u0e0a\u0e35\u0e1e\u0e01\u0e48\u0e2d\u0e19\u0e2d\u0e2d\u0e01\u0e08\u0e32\u0e01\u0e40\u0e0b\u0e1f\u0e40\u0e2e\u0e32\u0e2a\u0e4c \u00b7 \u0e02\u0e49\u0e32\u0e21\u0e1a\u0e17\u0e40\u0e23\u0e35\u0e22\u0e19\u0e1f\u0e23\u0e35 (Ancora/\u0e20\u0e32\u0e23\u0e01\u0e34\u0e08\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17/K) \u00b7 \u0e40\u0e0b\u0e1f\u0e40\u0e2e\u0e32\u0e2a\u0e4c\u0e41\u0e1a\u0e1a\u0e15\u0e49\u0e19\u0e09\u0e1a\u0e31\u0e1a \u00b7 \u0e0a\u0e37\u0e48\u0e2d\u0e40\u0e1b\u0e47\u0e19\u0e2d\u0e31\u0e07\u0e01\u0e24\u0e29 \u0e44\u0e21\u0e48\u0e21\u0e35\u0e40\u0e01\u0e32\u0e2b\u0e25\u0e35",
       "title_en": "Dorangu:Renewal 3.2.2",
-      "body_en": "Update required · pick a job before leaving the safehouse · free tutorial skip (Ancora/company missions/K) · original safehouse · English names, no Korean"
+      "body_en": "Update required \u00b7 pick a job before leaving the safehouse \u00b7 free tutorial skip (Ancora/company missions/K) \u00b7 original safehouse \u00b7 English names, no Korean"
     },
     {
       "date": "2026-10-15",
       "title": "Dorangu:Renewal 3.2.0",
-      "body": "โฉมใหม่ DORANGU RENEWAL · มือถือเลือกวิธีเดิน คลิก/จอยสติ๊ก/ทั้งสองแบบ (ตั้งค่า ▸ พื้นฐาน) · เดินแล้วปิดหน้าต่างให้เอง",
+      "body": "\u0e42\u0e09\u0e21\u0e43\u0e2b\u0e21\u0e48 DORANGU RENEWAL \u00b7 \u0e21\u0e37\u0e2d\u0e16\u0e37\u0e2d\u0e40\u0e25\u0e37\u0e2d\u0e01\u0e27\u0e34\u0e18\u0e35\u0e40\u0e14\u0e34\u0e19 \u0e04\u0e25\u0e34\u0e01/\u0e08\u0e2d\u0e22\u0e2a\u0e15\u0e34\u0e4a\u0e01/\u0e17\u0e31\u0e49\u0e07\u0e2a\u0e2d\u0e07\u0e41\u0e1a\u0e1a (\u0e15\u0e31\u0e49\u0e07\u0e04\u0e48\u0e32 \u25b8 \u0e1e\u0e37\u0e49\u0e19\u0e10\u0e32\u0e19) \u00b7 \u0e40\u0e14\u0e34\u0e19\u0e41\u0e25\u0e49\u0e27\u0e1b\u0e34\u0e14\u0e2b\u0e19\u0e49\u0e32\u0e15\u0e48\u0e32\u0e07\u0e43\u0e2b\u0e49\u0e40\u0e2d\u0e07",
       "title_en": "Dorangu:Renewal 3.2.0",
-      "body_en": "New look DORANGU RENEWAL · choose mobile movement: tap / joystick / both (Settings ▸ Basic) · walking closes open windows"
+      "body_en": "New look DORANGU RENEWAL \u00b7 choose mobile movement: tap / joystick / both (Settings \u25b8 Basic) \u00b7 walking closes open windows"
     },
     {
       "date": "2026-10-12",
-      "title": "อัปเดต 3.1.9 — ไมค์พูดตามระยะ + แพ็กภาษา",
-      "body": "คุยด้วยเสียงกับคนใกล้ตัว (กดค้างปุ่มไมค์ซ้ายล่าง · ตั้งค่า ▸ ไมค์) · ตั้งค่า ▸ แพ็กภาษา โหลด/แปลภาษาเอง",
-      "title_en": "Update 3.1.9 — proximity voice chat + language packs",
-      "body_en": "Talk to nearby players (hold the mic button at the bottom left · Settings ▸ Voice chat) · Settings ▸ Language packs to download or translate languages"
+      "title": "\u0e2d\u0e31\u0e1b\u0e40\u0e14\u0e15 3.1.9 \u2014 \u0e44\u0e21\u0e04\u0e4c\u0e1e\u0e39\u0e14\u0e15\u0e32\u0e21\u0e23\u0e30\u0e22\u0e30 + \u0e41\u0e1e\u0e47\u0e01\u0e20\u0e32\u0e29\u0e32",
+      "body": "\u0e04\u0e38\u0e22\u0e14\u0e49\u0e27\u0e22\u0e40\u0e2a\u0e35\u0e22\u0e07\u0e01\u0e31\u0e1a\u0e04\u0e19\u0e43\u0e01\u0e25\u0e49\u0e15\u0e31\u0e27 (\u0e01\u0e14\u0e04\u0e49\u0e32\u0e07\u0e1b\u0e38\u0e48\u0e21\u0e44\u0e21\u0e04\u0e4c\u0e0b\u0e49\u0e32\u0e22\u0e25\u0e48\u0e32\u0e07 \u00b7 \u0e15\u0e31\u0e49\u0e07\u0e04\u0e48\u0e32 \u25b8 \u0e44\u0e21\u0e04\u0e4c) \u00b7 \u0e15\u0e31\u0e49\u0e07\u0e04\u0e48\u0e32 \u25b8 \u0e41\u0e1e\u0e47\u0e01\u0e20\u0e32\u0e29\u0e32 \u0e42\u0e2b\u0e25\u0e14/\u0e41\u0e1b\u0e25\u0e20\u0e32\u0e29\u0e32\u0e40\u0e2d\u0e07",
+      "title_en": "Update 3.1.9 \u2014 proximity voice chat + language packs",
+      "body_en": "Talk to nearby players (hold the mic button at the bottom left \u00b7 Settings \u25b8 Voice chat) \u00b7 Settings \u25b8 Language packs to download or translate languages"
     },
     {
       "date": "2026-10-12",
       "title": "Durango:Reborn 3.1.8",
-      "body": "ครเตอร์ภูเขาไฟสงบใช้ทีสโตน (ปุ่ม «ฝังทีสโตน») · ขี่สัตว์ใช้สกิลท่าถูกต้อง · ย้อมสีเลือกทีละช่อง · ความทนแสดง % · แก้ข้อความไทย",
+      "body": "\u0e04\u0e23\u0e40\u0e15\u0e2d\u0e23\u0e4c\u0e20\u0e39\u0e40\u0e02\u0e32\u0e44\u0e1f\u0e2a\u0e07\u0e1a\u0e43\u0e0a\u0e49\u0e17\u0e35\u0e2a\u0e42\u0e15\u0e19 (\u0e1b\u0e38\u0e48\u0e21 \u00ab\u0e1d\u0e31\u0e07\u0e17\u0e35\u0e2a\u0e42\u0e15\u0e19\u00bb) \u00b7 \u0e02\u0e35\u0e48\u0e2a\u0e31\u0e15\u0e27\u0e4c\u0e43\u0e0a\u0e49\u0e2a\u0e01\u0e34\u0e25\u0e17\u0e48\u0e32\u0e16\u0e39\u0e01\u0e15\u0e49\u0e2d\u0e07 \u00b7 \u0e22\u0e49\u0e2d\u0e21\u0e2a\u0e35\u0e40\u0e25\u0e37\u0e2d\u0e01\u0e17\u0e35\u0e25\u0e30\u0e0a\u0e48\u0e2d\u0e07 \u00b7 \u0e04\u0e27\u0e32\u0e21\u0e17\u0e19\u0e41\u0e2a\u0e14\u0e07 % \u00b7 \u0e41\u0e01\u0e49\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21\u0e44\u0e17\u0e22",
       "title_en": "Durango:Reborn 3.1.8",
-      "body_en": "Dormant volcano craters use T Stone (\"Insert T Stone\") · correct pet skill animation while riding · per-channel dye picker · durability shown in % · Thai text fixes"
+      "body_en": "Dormant volcano craters use T Stone (\"Insert T Stone\") \u00b7 correct pet skill animation while riding \u00b7 per-channel dye picker \u00b7 durability shown in % \u00b7 Thai text fixes"
     },
     {
       "date": "2026-10-05",
       "title": "Durango:Reborn 3.1.7",
-      "body": "โมเดล/สัตว์ครบในตัวเกม · เสียงบนมือถือ · ตาบอสเรืองแสง · แชร์ไอเทมในแชท · ชื่อไอเทมไทยแปลใหม่ · ถามก่อนรื้อสิ่งก่อสร้าง · ลาวาหลุมวาร์ปกลับมา",
+      "body": "\u0e42\u0e21\u0e40\u0e14\u0e25/\u0e2a\u0e31\u0e15\u0e27\u0e4c\u0e04\u0e23\u0e1a\u0e43\u0e19\u0e15\u0e31\u0e27\u0e40\u0e01\u0e21 \u00b7 \u0e40\u0e2a\u0e35\u0e22\u0e07\u0e1a\u0e19\u0e21\u0e37\u0e2d\u0e16\u0e37\u0e2d \u00b7 \u0e15\u0e32\u0e1a\u0e2d\u0e2a\u0e40\u0e23\u0e37\u0e2d\u0e07\u0e41\u0e2a\u0e07 \u00b7 \u0e41\u0e0a\u0e23\u0e4c\u0e44\u0e2d\u0e40\u0e17\u0e21\u0e43\u0e19\u0e41\u0e0a\u0e17 \u00b7 \u0e0a\u0e37\u0e48\u0e2d\u0e44\u0e2d\u0e40\u0e17\u0e21\u0e44\u0e17\u0e22\u0e41\u0e1b\u0e25\u0e43\u0e2b\u0e21\u0e48 \u00b7 \u0e16\u0e32\u0e21\u0e01\u0e48\u0e2d\u0e19\u0e23\u0e37\u0e49\u0e2d\u0e2a\u0e34\u0e48\u0e07\u0e01\u0e48\u0e2d\u0e2a\u0e23\u0e49\u0e32\u0e07 \u00b7 \u0e25\u0e32\u0e27\u0e32\u0e2b\u0e25\u0e38\u0e21\u0e27\u0e32\u0e23\u0e4c\u0e1b\u0e01\u0e25\u0e31\u0e1a\u0e21\u0e32",
       "title_en": "Durango:Reborn 3.1.7",
-      "body_en": "All models and animals built into the game · sound on mobile · glowing boss eyes · share items in chat · new Thai item names · confirm before removing buildings · warp-hole lava is back"
+      "body_en": "All models and animals built into the game \u00b7 sound on mobile \u00b7 glowing boss eyes \u00b7 share items in chat \u00b7 new Thai item names \u00b7 confirm before removing buildings \u00b7 warp-hole lava is back"
     },
     {
       "date": "2026-10-03",
-      "title": "อัปเดต 3.1.5 (บังคับ)",
-      "body": "ต้องอัปเดตเป็น 3.1.5 ถึงจะเข้าเกมได้ · พื้นใต้สิ่งก่อสร้างแบบต้นฉบับ · แก้ค้าง 41%",
+      "title": "\u0e2d\u0e31\u0e1b\u0e40\u0e14\u0e15 3.1.5 (\u0e1a\u0e31\u0e07\u0e04\u0e31\u0e1a)",
+      "body": "\u0e15\u0e49\u0e2d\u0e07\u0e2d\u0e31\u0e1b\u0e40\u0e14\u0e15\u0e40\u0e1b\u0e47\u0e19 3.1.5 \u0e16\u0e36\u0e07\u0e08\u0e30\u0e40\u0e02\u0e49\u0e32\u0e40\u0e01\u0e21\u0e44\u0e14\u0e49 \u00b7 \u0e1e\u0e37\u0e49\u0e19\u0e43\u0e15\u0e49\u0e2a\u0e34\u0e48\u0e07\u0e01\u0e48\u0e2d\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e41\u0e1a\u0e1a\u0e15\u0e49\u0e19\u0e09\u0e1a\u0e31\u0e1a \u00b7 \u0e41\u0e01\u0e49\u0e04\u0e49\u0e32\u0e07 41%",
       "title_en": "Update 3.1.5 (required)",
-      "body_en": "3.1.5 is required to log in · original-style ground under buildings · fixed loading stuck at 41%"
+      "body_en": "3.1.5 is required to log in \u00b7 original-style ground under buildings \u00b7 fixed loading stuck at 41%"
     },
     {
       "date": "2026-10-02",
       "title": "Durango:Reborn 3.1.3",
-      "body": "Gem แยกจาก T Stone (แตะยอด Gem เพื่อแลก 10:1) · เติม Coin ด้วยโค้ดจากแอดมินในช่องคูปอง · คลิกเดินแบบต้นฉบับ · รอยแยก/วาร์ปโฮลแสดงแล้ว",
+      "body": "Gem \u0e41\u0e22\u0e01\u0e08\u0e32\u0e01 T Stone (\u0e41\u0e15\u0e30\u0e22\u0e2d\u0e14 Gem \u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e41\u0e25\u0e01 10:1) \u00b7 \u0e40\u0e15\u0e34\u0e21 Coin \u0e14\u0e49\u0e27\u0e22\u0e42\u0e04\u0e49\u0e14\u0e08\u0e32\u0e01\u0e41\u0e2d\u0e14\u0e21\u0e34\u0e19\u0e43\u0e19\u0e0a\u0e48\u0e2d\u0e07\u0e04\u0e39\u0e1b\u0e2d\u0e07 \u00b7 \u0e04\u0e25\u0e34\u0e01\u0e40\u0e14\u0e34\u0e19\u0e41\u0e1a\u0e1a\u0e15\u0e49\u0e19\u0e09\u0e1a\u0e31\u0e1a \u00b7 \u0e23\u0e2d\u0e22\u0e41\u0e22\u0e01/\u0e27\u0e32\u0e23\u0e4c\u0e1b\u0e42\u0e2e\u0e25\u0e41\u0e2a\u0e14\u0e07\u0e41\u0e25\u0e49\u0e27",
       "title_en": "Durango:Reborn 3.1.3",
-      "body_en": "Gem is separate from T Stone (tap Gem to exchange 10:1) · top up Coin with an admin code in Coupon · original click-to-move · cracks/warp holes now show"
+      "body_en": "Gem is separate from T Stone (tap Gem to exchange 10:1) \u00b7 top up Coin with an admin code in Coupon \u00b7 original click-to-move \u00b7 cracks/warp holes now show"
     },
     {
       "date": "2026-10-02",
-      "title": "Durango:Reborn 3.1.2 (แก้ด่วน)",
-      "body": "แก้แมพเป็นสีชมพูหลังย้ายเกาะใน 3.1.1 — กรุณาอัปเดต",
+      "title": "Durango:Reborn 3.1.2 (\u0e41\u0e01\u0e49\u0e14\u0e48\u0e27\u0e19)",
+      "body": "\u0e41\u0e01\u0e49\u0e41\u0e21\u0e1e\u0e40\u0e1b\u0e47\u0e19\u0e2a\u0e35\u0e0a\u0e21\u0e1e\u0e39\u0e2b\u0e25\u0e31\u0e07\u0e22\u0e49\u0e32\u0e22\u0e40\u0e01\u0e32\u0e30\u0e43\u0e19 3.1.1 \u2014 \u0e01\u0e23\u0e38\u0e13\u0e32\u0e2d\u0e31\u0e1b\u0e40\u0e14\u0e15",
       "title_en": "Durango:Reborn 3.1.2 (hotfix)",
-      "body_en": "Fixes maps turning pink after changing islands in 3.1.1 — please update"
+      "body_en": "Fixes maps turning pink after changing islands in 3.1.1 \u2014 please update"
     },
     {
       "date": "2026-10-02",
       "title": "Durango:Reborn 3.1.1",
-      "body": "ย้ายเกาะโหลดเร็วขึ้น · แถบโหลดใหม่ · ตั้งค่าแสดงระยะโจมตีและจำนวนผู้เล่นที่แสดง",
+      "body": "\u0e22\u0e49\u0e32\u0e22\u0e40\u0e01\u0e32\u0e30\u0e42\u0e2b\u0e25\u0e14\u0e40\u0e23\u0e47\u0e27\u0e02\u0e36\u0e49\u0e19 \u00b7 \u0e41\u0e16\u0e1a\u0e42\u0e2b\u0e25\u0e14\u0e43\u0e2b\u0e21\u0e48 \u00b7 \u0e15\u0e31\u0e49\u0e07\u0e04\u0e48\u0e32\u0e41\u0e2a\u0e14\u0e07\u0e23\u0e30\u0e22\u0e30\u0e42\u0e08\u0e21\u0e15\u0e35\u0e41\u0e25\u0e30\u0e08\u0e33\u0e19\u0e27\u0e19\u0e1c\u0e39\u0e49\u0e40\u0e25\u0e48\u0e19\u0e17\u0e35\u0e48\u0e41\u0e2a\u0e14\u0e07",
       "title_en": "Durango:Reborn 3.1.1",
       "body_en": "Faster island changes, a new loading bar, and settings for attack range and how many players are shown"
     },
     {
       "date": "2026-09-30",
-      "title": "Durango:Reborn 3.0.1 บนมือถือ",
-      "body": "โหลด/อัปเดตเกมผ่าน Durango Launcher ได้แล้ว — ใช้ได้กับ Android 8.0 ขึ้นไป",
+      "title": "Durango:Reborn 3.0.1 \u0e1a\u0e19\u0e21\u0e37\u0e2d\u0e16\u0e37\u0e2d",
+      "body": "\u0e42\u0e2b\u0e25\u0e14/\u0e2d\u0e31\u0e1b\u0e40\u0e14\u0e15\u0e40\u0e01\u0e21\u0e1c\u0e48\u0e32\u0e19 Durango Launcher \u0e44\u0e14\u0e49\u0e41\u0e25\u0e49\u0e27 \u2014 \u0e43\u0e0a\u0e49\u0e44\u0e14\u0e49\u0e01\u0e31\u0e1a Android 8.0 \u0e02\u0e36\u0e49\u0e19\u0e44\u0e1b",
       "title_en": "Durango:Reborn 3.0.1 on mobile",
-      "body_en": "Download and update the game with Durango Launcher — Android 8.0 or newer"
+      "body_en": "Download and update the game with Durango Launcher \u2014 Android 8.0 or newer"
     }
   ],
   "launcher": {
     "version": "1.6.0",
     "version_code": 8,
-    "url": "https://github.com/SoloCode228/Durango-OffServer-Client/releases/download/android-launcher-v1.0.0/DurangoLauncher-android-1.6.0.apk",
+    "url": "",
     "mirrors": [],
     "size": 930383,
     "sha256": "f560a2a3388f5c6f424bdc6640c7e406ee9f9100fc83057f71c56f1f82fda4bd"
   },
   "min_launcher": 4,
-  "servers_url": "https://raw.githubusercontent.com/ShuuuuShi/Durango-OffServer-Client/main/servers.json",
+  "servers_url": "https://raw.githubusercontent.com/Safiqq/Durango-CE/main/servers.json",
   "links": {
     "discord": "https://discord.gg/RMfeg6Drbu",
     "facebook": "https://www.facebook.com/share/g/1BZp6apPM8/"
@@ -384,15 +384,15 @@
   "manifest_mirrors": [],
   "countdown": {
     "at": "2026-10-20T00:00:00+07:00",
-    "label": "เปิด OBT ใน",
+    "label": "\u0e40\u0e1b\u0e34\u0e14 OBT \u0e43\u0e19",
     "label_en": "OBT opens in",
-    "done": "เปิดแล้ว",
+    "done": "\u0e40\u0e1b\u0e34\u0e14\u0e41\u0e25\u0e49\u0e27",
     "done_en": "Live now",
     "hide_after_hours": 72,
     "tag": "Open beta",
-    "title": "โลกใหม่ เปิดให้ทุกคน",
+    "title": "\u0e42\u0e25\u0e01\u0e43\u0e2b\u0e21\u0e48 \u0e40\u0e1b\u0e34\u0e14\u0e43\u0e2b\u0e49\u0e17\u0e38\u0e01\u0e04\u0e19",
     "title_en": "A new world, open to all",
-    "title_done": "เปิดให้เล่นแล้ว เข้าเกมได้เลย",
-    "title_done_en": "Open now — jump in"
+    "title_done": "\u0e40\u0e1b\u0e34\u0e14\u0e43\u0e2b\u0e49\u0e40\u0e25\u0e48\u0e19\u0e41\u0e25\u0e49\u0e27 \u0e40\u0e02\u0e49\u0e32\u0e40\u0e01\u0e21\u0e44\u0e14\u0e49\u0e40\u0e25\u0e22",
+    "title_done_en": "Open now \u2014 jump in"
   }
 }
