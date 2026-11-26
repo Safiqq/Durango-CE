@@ -1,0 +1,20 @@
+# Local workspace, upstream archives, build artifacts & backups (never commit)
+/.work/
+/release/
+/target/
+/_backup_2026-11-19/
+/_rust_archive_2026-11-20/
+__pycache__/
+*.pyc
+*.log
+*.db
+*.sqlite
+
+# Private commercial / CA / ops / internal QA tooling (stay local only)
+/private/
+/.handoff.md
+/client-mod/AutoPlaytestMod.cs
+/scripts/playtest-e2e.sh
+/scripts/playtest-interactive.sh
+/scripts/deploy-vps.sh
+/scripts/deploy-grafana-vps.sh

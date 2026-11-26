@@ -1,0 +1,10 @@
+[package]
+name = "durango-wire"
+version = "0.1.0"
+edition = "2021"
+description = "Exact Durango v3.3.6 TCP 24-byte header + Snappy + MessagePack wire codec"
+
+[dependencies]
+rmp = "0.8"
+snap = "1"
+thiserror = "2"

@@ -1,0 +1,7 @@
+[workspace]
+members = [
+    "crates/durango-wire",
+    "crates/durango-gateway",
+    "crates/durango-server",
+]
+resolver = "2"
